@@ -1,0 +1,168 @@
+.footerPage {
+  position: sticky;
+  min-height: 40vh !important;
+  bottom: 0;
+  /* background-color: aliceblue !important; */
+  /* margin: 5rem !important; */
+}
+
+.footerHead {
+  /* background-color: green; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.6rem;
+  color: steelblue;
+  opacity: 10;
+  text-shadow: 5px 2px 10px lightcyan;
+}
+
+.codeIcon {
+  /* size: 10rem; */
+  font-size: 5rem;
+  font-weight: bold;
+  color: steelblue;
+
+}
+
+.codeIcon:hover {
+  color: aqua;
+}
+
+.contactIcons span {
+  margin: 1rem;
+  /* border-right: 5px solid slategray; */
+  padding: 10px;
+  font-size: 1.5rem;
+  color: steelblue;
+  transition: transform 0.5s;
+
+  object-fit: cover;
+  overflow: inherit;
+
+}
+
+.contactIcons span:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  color: aqua;
+  /* font-size: 1.7rem; */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .codeIcon {
+    animation: codeIcon-spin infinite 10s linear;
+  }
+}
+
+@keyframes codeIcon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.footerWrapper {
+  padding: 2.5rem 1rem 1.5rem 1rem !important;
+  background-color: #1b1f2b;
+  color: #e2e8f0;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.footerWrapper.light {
+  background-color: #f7fafc;
+  color: #2d3748;
+}
+
+.footerMainRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+  margin-bottom: 1.5rem;
+  color: #2c5183;
+  transition: color 0.3s ease;
+}
+
+.footerTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #4c6af0;
+  /* align-self: flex-start; */
+}
+
+.footerText {
+  font-size: 0.6rem;
+  line-height: 1.7;
+  justify-content: space-evenly;
+}
+
+.footerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerList li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footerList li:hover {
+  color: #4fd1c5;
+}
+
+.footerListIcon {
+  margin-right: 0.6rem;
+  color: #4184cb;
+}
+
+.footerIcons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footerIconLink {
+  font-size: 1.4rem;
+  color: #247edd;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footerIconLink:hover {
+  color: #4fd1c5;
+  transform: scale(1.1);
+}
+
+.footerBottomRow {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.footerBottomRow.light {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footerCopyright {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}

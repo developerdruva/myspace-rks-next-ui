@@ -1,0 +1,124 @@
+.box {
+  margin: 15px;
+  margin-top: 50px;
+  /* box-shadow: 10px 10px 20px rgba(244,241,241,1) ; */
+  border-radius: 6px;
+  /* animation-name: text;
+    animation-duration: 7s;
+    animation-timing-function: ease-out; */
+}
+
+.Skill {
+  /* background-color:rgba(220, 220,220, 0.3); */
+  border-radius: 3px;
+  margin-left: 20px;
+  margin-top: 2px;
+  padding: 30px;
+  display: flexbox;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+}
+
+.head {
+  display: inline-block;
+  padding: 0px 12px;
+  color: rgb(85, 85, 85);
+  margin-bottom: 10px;
+  margin-left: 30px;
+  letter-spacing: 5px;
+  font-size: 1.2rem;
+}
+
+.heading {
+  padding: 0px 12px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 30px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  line-height: 1.8;
+}
+
+/* div>h3 {
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 20px 0 30px 0;
+} */
+
+.card1 h5 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.card1 {
+  border-left: 3px solid blueviolet;
+  border-radius: 10px;
+  border-style: dotted;
+  transition: 0.5s;
+  transform-box: 0.5s;
+  box-shadow: 1px 2px 5px 1px aliceblue;
+  height: 100%;
+  margin: 0px;
+  padding: 5px;
+  transition: transform 0.5s;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.card1 p {
+  font-size: 11px;
+}
+
+.card1:hover {
+  /* background-color: rgb(94, 138, 173); */
+  transform: scale(1.1);
+  z-index: 2;
+  background-image: linear-gradient(to right, aliceblue, white);
+  /* background-color: green; */
+}
+
+.skillCardItem {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  text-align: start;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.skillCardItem span {
+  font-size: 0.6rem;
+  color: #666;
+}
+
+@keyframes text {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+}
+
+/*///////// Media Query //////////////*/
+@media (max-width: 1027px) {
+  .Skill {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 769px) {
+  .box {
+    text-align: center;
+  }
+
+  .Skill {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 392px) {
+  .Skill {
+    grid-template-columns: 1fr;
+  }
+}

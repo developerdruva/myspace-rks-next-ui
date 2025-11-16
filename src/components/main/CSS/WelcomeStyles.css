@@ -1,0 +1,137 @@
+.headerText {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.subHeadText {
+    /* border: 1px solid green; */
+    font-family: "", cursive;
+    animation-name: text;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-out;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    position: relative;
+    /* top: -100px; */
+    /* left: 100px !important; */
+    color: rgba(9, 82, 131, 0.8);
+}
+
+.subHeadText h1 {
+    font-size: calc(5rem + 1.5vw) !important;
+
+}
+
+.titleCol {
+    display: block;
+    height: calc(10rem + 50vh);
+    align-items: center;
+    justify-content: center;
+    padding-top: 6rem;
+}
+
+.designationText {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* font-weight: 200; */
+}
+
+.personPhoto img {
+    display: inline-block;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+
+.developmentsCard {
+    font-size: 0.7rem;
+}
+
+.eachCard {
+    transition: transform 0.5s;
+    overflow: hidden;
+    object-fit: cover;
+
+}
+
+.eachCard:hover {
+    background-color: rgb(94, 138, 173);
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.card-title {
+    font-size: 1rem;
+    padding: 1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.card-title a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.card-title a:hover {
+    text-decoration: none;
+    color: darkslategrey;
+
+}
+
+
+@keyframes text {
+    from {
+        transform: translateY(20px);
+        opacity: 0.2;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+.welcometext span {
+    /* border: 4px solid green; */
+    animation: right_to_left 3s ease;
+    color: steelblue;
+    font-family: cursive;
+}
+
+@keyframes right_to_left {
+    from {
+        margin-left: 100%;
+    }
+
+    to {
+        margin-left: 0;
+    }
+}
+
+#scrollToTopFloatBtn {
+    border-radius: 100rem;
+    padding: 1rem;
+    display: none;
+    width: 4rem;
+    height: 4rem;
+    align-content: stretch;
+    border: none;
+    text-align: center;
+    font-size: 0.75rem;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    background-color: lightblue;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+#scrollToTopFloatBtn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    z-index: 2;
+    background-image: linear-gradient(to right, aliceblue, steelblue);
+}

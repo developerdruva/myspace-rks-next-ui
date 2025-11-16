@@ -1,0 +1,51 @@
+.pocCard {
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.pocCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pocImageContainer {
+    cursor: pointer;
+    padding: 8px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.pocImage {
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pocImageHint {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.pocMetaText {
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.pocLink {
+    font-size: 12px;
+    display: inline-block;
+    margin-top: 6px;
+    color: #1890ff;
+}
+
+.pocLink:hover {
+    text-decoration: underline;
+}
+
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+
+}

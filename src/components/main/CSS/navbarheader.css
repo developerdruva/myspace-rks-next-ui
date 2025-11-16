@@ -1,0 +1,111 @@
+.mui-navbar {
+    backdrop-filter: blur(10px) !important;
+    transition: all 0.3s ease-in-out !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    z-index: 1200 !important;
+}
+
+.light-theme {
+    background-color: rgb(255, 255, 255) !important;
+    color: #051943 !important;
+    border-color: #e0e0e0 !important;
+}
+
+.dark-theme {
+    background-color: rgba(3, 16, 28, 0.9) !important;
+    color: #9dbadf !important;
+    /* border-color: #444 !important; */
+}
+
+.mui-toolbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: 0.5rem 1.2rem !important;
+}
+
+.mui-logo {
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+    letter-spacing: 0.2px !important;
+    color: inherit !important;
+}
+
+.mui-nav-items {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+}
+
+.mui-link {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    padding: 6px 0px !important;
+    margin: 0 1px !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer !important;
+    position: relative !important;
+    transition: all 0.2s ease !important;
+}
+
+.mui-link::after {
+    content: "" !important;
+    display: block !important;
+    height: 2px !important;
+    width: 0% !important;
+    background: currentColor !important;
+    margin: auto !important;
+    transition: width 0.3s ease-in-out !important;
+}
+
+.mui-link:hover::after {
+    width: 100% !important;
+    background-color: currentColor !important;
+}
+
+.mui-link:hover {
+    color: #1976d2 !important;
+}
+
+.light-theme .mui-link.active {
+    color: #1976d2 !important;
+}
+
+.dark-theme .mui-link.active {
+    color: #64b5f6 !important;
+}
+
+.mui-link.active::after {
+    width: 100% !important;
+}
+
+.mui-theme-toggle {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    margin-left: 10px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    transition: transform 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.mui-theme-toggle:hover {
+    transform: scale(1.1) !important;
+    background-color: rgba(25, 118, 210, 0.1) !important;
+}
+
+.mui-admin-icon {
+    margin-left: 10px !important;
+    color: inherit !important;
+    transition: transform 0.2s ease !important;
+}
+
+.mui-admin-icon:hover {
+    transform: scale(1.1) !important;
+    color: #2196f3 !important;
+}

@@ -1,0 +1,28 @@
+.title {
+    font-size: 2rem;
+    /* margin-inline: 0rem; */
+    margin-top: 5rem !important;
+    /* padding: auto; */
+    letter-spacing: 0.1rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* border: 1px solid green; */
+    color: black;
+    font-weight: 100;
+}
+.titleDesc{
+    font-size: 1rem;
+    /* margin-inline: 0rem; */
+    /* margin: 0 !important; */
+    /* padding: auto; */
+    letter-spacing: 0.1rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* border: 1px solid green; */
+    color: gray;
+    /* width: 50rem; */
+    font-weight: 100;
+    display: block;
+    
+}
+.aboutmediv{
+    margin: 10rem !important;
+}
