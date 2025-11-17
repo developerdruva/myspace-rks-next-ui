@@ -1,4 +1,4 @@
-import InitialProvider, { geistMono, geistSans } from "@/metadata/InitialData";
+import GlobalProvider, { geistMono, geistSans } from "@/global/InitialData";
 import "@/styles/globals.css";
 
 export const metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <InitialProvider>{children}</InitialProvider>
+        <GlobalProvider>{children}</GlobalProvider>
       </body>
     </html>
   );

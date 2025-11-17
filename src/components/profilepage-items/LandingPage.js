@@ -5,11 +5,11 @@ import "./CSS/WelcomeStyles.css";
 import FooterPage from "./FooterPage";
 import NavbarHeader from "./NavbarHeader";
 import { navbarItemsUtils } from "./NavUtils";
-import FeedbackModel from '@/common/CommonModels/FeedbackModel'
+import FeedbackModel from "@/common/CommonModels/FeedbackModel";
 import BlogFeedback from "@/components/elements/BlogFeedback";
-import LoadingSpinner from "@/common/commonComps/LoadingSpinner"
+import LoadingSpinner from "@/common/commonComps/LoadingSpinner";
 import { Container } from "@mui/material";
-import HomePage from "@/components/elements/HomePage"
+import HomePage from "@/components/elements/HomePage";
 import Experience from "@/components/elements/Experience";
 import Skills from "@/components/elements/Skills";
 import Certify from "@/components/elements/Certify";
@@ -20,7 +20,6 @@ import Interest from "@/components/elements/Interest";
 const LandingPage = () => {
   const portfolioDetails =
     useSelector((state) => state?.portfolioState) || null;
-  const themeMode = useSelector((state) => state.themeModeState.themeMode);
   const [isShow, setIsShow] = useState(false);
   const [activeSection, setActiveSection] = useState("home"); // Default section to home
 
@@ -40,12 +39,6 @@ const LandingPage = () => {
       setActiveSection(currentSection);
     }
   };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeSection]);
-
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
@@ -59,18 +52,20 @@ const LandingPage = () => {
       });
     }
   };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [activeSection]);
+
   return (
     <div>
       <NavbarHeader
         navbarItems={navbarItemsUtils}
-        logoTitle={"PERSONAL BLOG"}
+        logoTitle={"myspace.developerprofile"}
         scrollTo={scrollTo}
         activeSection={activeSection}
       />
-      <div
-
-      >
-
+      <div>
         <Container>
           {portfolioDetails?.personDetails[0]?.welcome_text && (
             <div className="m-0 p-0 welcometext">
@@ -106,8 +101,7 @@ const LandingPage = () => {
               </section>
             </>
           ) : (
-            <LoadingSpinner
-              stateFronLocal={true} />
+            <LoadingSpinner stateFronLocal={true} />
           )}
 
           <div>

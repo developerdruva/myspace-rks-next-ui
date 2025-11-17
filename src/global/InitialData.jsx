@@ -2,10 +2,11 @@
 import apiServices from "@/utils/service-calls/apiServices";
 import { useEffect } from "react";
 import { Provider as ReduxProvider } from "react-redux";
+import { ThemeProvider } from "@/global/ThemeProvider";
 import { reduxStore } from "../store/index";
 import { Geist, Geist_Mono } from "next/font/google";
 
-const InitialProvider = ({ children }) => {
+const GlobalProvider = ({ children }) => {
   const dispatch = reduxStore.dispatch;
   const isPortfolioExist = reduxStore.getState()?.portfolioState;
 
@@ -13,10 +14,14 @@ const InitialProvider = ({ children }) => {
     if (!isPortfolioExist) getPortfolioDetails(dispatch);
   }, []);
 
-  return <ReduxProvider store={reduxStore}>{children}</ReduxProvider>;
+  return (
+    <ReduxProvider store={reduxStore}>
+      <ThemeProvider>{children}</ThemeProvider>
+    </ReduxProvider>
+  );
 };
 
-export default InitialProvider;
+export default GlobalProvider;
 
 const getPortfolioDetails = (dispatch) => {
   apiServices.getPortfolioDetails().then((res) => {

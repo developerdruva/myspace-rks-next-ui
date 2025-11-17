@@ -14,7 +14,7 @@
 .dark-theme {
     background-color: rgba(3, 16, 28, 0.9) !important;
     color: #9dbadf !important;
-    /* border-color: #444 !important; */
+    border-color: #444 !important;
 }
 
 .mui-toolbar {

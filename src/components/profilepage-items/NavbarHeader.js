@@ -1,79 +1,85 @@
 "use client";
+import { useThemeMode } from "@/global/ThemeProvider";
 import {
   AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
   Box,
-  useTheme,
-  useMediaQuery,
-  Slide,
+  Button,
   Container,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Slide,
+  Toolbar,
   Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import { MdLightMode, MdNightlight } from "react-icons/md";
-import { BsPersonCircle } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import "./CSS/navbarheader.css"; // 👈 External styles updated for enhanced look
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { BsPersonCircle } from "react-icons/bs";
+import { MdClose, MdLightMode, MdMenu, MdNightlight } from "react-icons/md";
+import "./CSS/navbarheader.css";
 
 const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
-  const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const router = useRouter();
-  const theme = useTheme();
-  const isLight = theme.palette.mode == "light";
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const { theme, toggleTheme } = useThemeMode();
+  const muiTheme = useTheme();
 
-  const toggleTheme = () => {
-    dispatch({ type: "TOGGLE_THEME_MODE" });
-  };
+  const isLight = theme == "light" ? true : false;
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => setDrawerOpen((prev) => !prev);
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("md"));
 
   return (
-    <Slide in direction="down" timeout={500}>
+    <Slide in direction="down" timeout={400}>
       <AppBar
-        color={isLight ? "default" : "primary"}
-        position="sticky"
-        elevation={4}
+        position="fixed"
+        component="nav"
+        color="default"
+        elevation={3}
         className={`mui-navbar ${isLight ? "light-theme" : "dark-theme"}`}
-        // key={isLight ? "light" : "dark"}
         sx={{
-          transition: "background-color 0.3s ease",
-          backdropFilter: "blur(8px)",
+          backdropFilter: "blur(10px)",
+          backgroundColor: isLight
+            ? "rgba(255,255,255,0.8)"
+            : "rgba(15,15,15,0.6)",
+          transition: "all 0.3s ease",
         }}
       >
-        <Container maxWidth="xl" style={{ background: "inherit" }}>
-          <Toolbar
-            className="mui-toolbar"
-            sx={{ justifyContent: "space-between" }}
-          >
+        <Container maxWidth="xl">
+          <Toolbar sx={{ justifyContent: "space-between" }}>
             {/* Logo */}
             <Typography
               variant="h6"
-              className="mui-logo"
               sx={{
-                fontWeight: 600,
-                letterSpacing: 1,
                 cursor: "pointer",
+                fontWeight: 700,
+                letterSpacing: 1.2,
                 textTransform: "uppercase",
-                fontSize: { xs: "1rem", sm: "1.25rem" },
               }}
               onClick={() => router.push("/")}
             >
-              {logoTitle}
+              {logoTitle.split(".")[0]}.
+              <span
+                style={{
+                  fontSize: "0.8rem",
+                  textTransform: "lowercase",
+                  letterSpacing: 2,
+                }}
+              >
+                {logoTitle.split(".")[1]}
+              </span>
             </Typography>
 
-            {/* Navbar Items */}
-            <Box
-              className="mui-nav-items"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: { xs: 1, sm: 1, md: 3 },
-              }}
-            >
-              {!isMobile &&
-                navbarItems?.map((item, index) => {
+            {/* Desktop Navbar Items */}
+            {!isMobile && (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+                {navbarItems?.map((item, index) => {
                   const isActive = activeSection === item.path.split("#")[1];
 
                   if (item.type === "link") {
@@ -81,15 +87,28 @@ const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
                       <Box
                         key={index}
                         component="button"
-                        className={`mui-link ${isActive ? "active" : ""}`}
                         onClick={() => scrollTo(item.path.split("#")[1])}
+                        className={`mui-link ${isActive ? "active" : ""}`}
                         sx={{
                           border: "none",
                           background: "transparent",
-                          fontSize: "0.75rem",
+                          fontSize: "0.9rem",
                           fontWeight: isActive ? 600 : 400,
                           cursor: "pointer",
-                          transition: "color 0.3s",
+                          position: "relative",
+                          "&::after": {
+                            content: '""',
+                            position: "absolute",
+                            bottom: -2,
+                            left: 0,
+                            height: "2px",
+                            width: isActive ? "100%" : 0,
+                            background: "",
+                            transition: "all 0.3s ease",
+                          },
+                          "&:hover::after": {
+                            width: "100%",
+                          },
                         }}
                       >
                         {item.label}
@@ -97,44 +116,21 @@ const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
                     );
                   }
 
-                  if (item.type === "navlink") {
-                    return (
-                      <NavLink
-                        key={index}
-                        to={item.path}
-                        className={`mui-link ${isActive ? "active" : ""}`}
-                        style={{
-                          textDecoration: "none",
-                          fontSize: "0.95rem",
-                          fontWeight: isActive ? 600 : 400,
-                          transition: "color 0.3s",
-                        }}
-                      >
-                        {item.label}
-                      </NavLink>
-                    );
-                  }
-
                   if (item.type === "admin") {
                     return (
-                      <Tooltip title="Admin Panel" arrow key={index}>
+                      <Tooltip key={index} title="Admin Panel" arrow>
                         <IconButton
                           onClick={() =>
-                            router.push(
-                              localStorage.getItem("token")
-                                ? "/adminboard"
-                                : "/login"
-                            )
+                            router.push(token ? "/adminboard" : "/login")
                           }
-                          className="mui-admin-icon"
                           sx={{
                             transition: "color 0.3s",
                             "&:hover": {
-                              color: theme.palette.primary.main,
+                              color: "theme.palette.primary.main,",
                             },
                           }}
                         >
-                          <BsPersonCircle size={20} />
+                          <BsPersonCircle size={22} />
                         </IconButton>
                       </Tooltip>
                     );
@@ -143,25 +139,99 @@ const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
                   return null;
                 })}
 
-              {/* Theme Toggle */}
-              <Tooltip title="Toggle Theme" arrow>
-                <IconButton
-                  onClick={toggleTheme}
-                  className="mui-theme-toggle"
-                  sx={{
-                    transition: "color 0.3s",
-                  }}
-                >
-                  {isLight ? (
-                    <MdNightlight size={18} />
-                  ) : (
-                    <MdLightMode size={18} />
-                  )}
+                {/* Theme Toggle */}
+                <Tooltip title="Toggle Theme">
+                  <IconButton onClick={toggleTheme}>
+                    {isLight ? (
+                      <MdNightlight size={20} />
+                    ) : (
+                      <MdLightMode color={"aliceblue"} size={20} />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            )}
+
+            {/* Mobile Icons */}
+            {isMobile && (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Tooltip title="Toggle Theme">
+                  <IconButton onClick={toggleTheme}>
+                    {isLight ? (
+                      <MdNightlight size={20} />
+                    ) : (
+                      <MdLightMode size={20} />
+                    )}
+                  </IconButton>
+                </Tooltip>
+
+                <IconButton onClick={toggleDrawer}>
+                  <MdMenu
+                    color={isLight ? "#1f1f1f" : "aliceblue"}
+                    cursor={"pointer"}
+                    size={25}
+                  />
                 </IconButton>
-              </Tooltip>
-            </Box>
+              </Box>
+            )}
           </Toolbar>
         </Container>
+
+        {/* Mobile Drawer */}
+        <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
+          <Box sx={{ textAlign: "left", paddingTop: 2 }}>
+            <Button onClick={toggleDrawer}>
+              <MdClose size={20} />
+            </Button>
+          </Box>
+          <Box sx={{ width: 250, paddingTop: 2 }}>
+            <List>
+              {navbarItems?.map((item, index) => {
+                const isActive = activeSection === item.path.split("#")[1];
+
+                if (item.type === "link") {
+                  return (
+                    <ListItem key={index} disablePadding>
+                      <ListItemButton
+                        onClick={() => {
+                          scrollTo(item.path.split("#")[1]);
+                          toggleDrawer();
+                        }}
+                      >
+                        <ListItemText
+                          primary={item.label}
+                          primaryTypographyProps={{
+                            fontWeight: isActive ? 700 : 400,
+                            color: isActive
+                              ? "theme.palette.primary.main"
+                              : "inherit",
+                          }}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                }
+
+                if (item.type === "admin") {
+                  return (
+                    <ListItem key={index} disablePadding>
+                      <ListItemButton
+                        onClick={() => {
+                          router.push(token ? "/adminboard" : "/login");
+                          toggleDrawer();
+                        }}
+                      >
+                        <ListItemText primary="Admin Panel" />
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                }
+
+                return null;
+              })}
+            </List>
+          </Box>
+        </Drawer>
       </AppBar>
     </Slide>
   );
