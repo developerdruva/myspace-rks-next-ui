@@ -20,7 +20,7 @@ const Skills = () => {
   return (
     <div className={classes.box} id="skills">
       <h1 className={classes.head}>MY SKILLS</h1>
-      {/* <EchartsBarWithBg
+      <EchartsBarWithBg
         xAxisValues={mySkills?.map((item) => item?.skill_name)}
         actualValues={mySkills?.map((item) => ({
           value: item?.skill_value,
@@ -28,16 +28,16 @@ const Skills = () => {
             color: item?.skill_style,
           },
         }))}
-      /> */}
-      {/* <SkillsByCategoryView emailId={emailId} /> */}
+      />
+      <SkillsByCategoryView emailId={emailId} />
     </div>
   );
 };
 
 export default Skills;
 
-
-   {/* <div className="row">
+{
+  /* <div className="row">
         {skillSetKeys?.map((skillKey, skillIndex) => (
           <div className="col-md-4   mt-5">
             <div
@@ -76,4 +76,5 @@ export default Skills;
             </div>
           </div>
         ))}
-      </div> */}
+      </div> */
+}

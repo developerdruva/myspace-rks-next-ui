@@ -65,59 +65,59 @@ const LandingPage = () => {
         scrollTo={scrollTo}
         activeSection={activeSection}
       />
-      <div>
-        <Container>
-          {portfolioDetails?.personDetails[0]?.welcome_text && (
-            <div className="m-0 p-0 welcometext">
-              <span>{portfolioDetails?.personDetails[0]?.welcome_text}</span>
-            </div>
-          )}
 
-          {portfolioDetails ? (
-            <>
-              <section id="home">
-                <HomePage />
-              </section>
-              <section id="experience">
-                <Experience />
-              </section>
-              <section id="skills">
-                <Skills />
-              </section>
-              <section id="certifications">
-                <Certify />
-              </section>
-              <section id="pocProjects">
-                <PocProjects />
-              </section>
-              <section id="education">
-                <Education />
-              </section>
-              <section id="about">
-                <Aboutme />
-              </section>
-              <section id="interests">
-                <Interest />
-              </section>
-            </>
-          ) : (
-            <LoadingSpinner stateFronLocal={true} />
-          )}
-
-          <div>
-            <button
-              onClick={() => (document.documentElement.scrollTop = 0)}
-              className="scrollToTopFloatBtn"
-              id="scrollToTopFloatBtn"
-            >
-              Scroll Top
-            </button>
+      <Container maxWidth={"xl"} style={{ padding: 0 }}>
+        {portfolioDetails?.personDetails[0]?.welcome_text && (
+          <div className="m-0 p-0 welcometext">
+            <span>{portfolioDetails?.personDetails[0]?.welcome_text}</span>
           </div>
-          <BlogFeedback />
-        </Container>
+        )}
 
-        <FeedbackModel isShow={isShow} setIsShow={setIsShow} feedBack={{}} />
-      </div>
+        {portfolioDetails ? (
+          <>
+            <section id="home">
+              <HomePage />
+            </section>
+            <section id="experience">
+              <Experience />
+            </section>
+            <section id="skills">
+              <Skills />
+            </section>
+            <section id="certifications">
+              <Certify />
+            </section>
+            <section id="pocProjects">
+              <PocProjects />
+            </section>
+            <section id="education">
+              <Education />
+            </section>
+            <section id="about">
+              <Aboutme />
+            </section>
+            <section id="interests">
+              <Interest />
+            </section>
+          </>
+        ) : (
+          <LoadingSpinner stateFronLocal={true} />
+        )}
+
+        {/* <div>
+          <button
+            onClick={() => (document.documentElement.scrollTop = 0)}
+            className="scrollToTopFloatBtn"
+            id="scrollToTopFloatBtn"
+          >
+            Scroll Top
+          </button>
+        </div> */}
+        <BlogFeedback />
+      </Container>
+
+      <FeedbackModel isShow={isShow} setIsShow={setIsShow} feedBack={{}} />
+
       <FooterPage />
     </div>
   );

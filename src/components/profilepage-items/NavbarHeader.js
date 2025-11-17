@@ -36,204 +36,210 @@ const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
   const isMobile = useMediaQuery(muiTheme.breakpoints.down("md"));
 
   return (
-    <Slide in direction="down" timeout={400}>
-      <AppBar
-        position="fixed"
-        component="nav"
-        color="default"
-        elevation={3}
-        className={`mui-navbar ${isLight ? "light-theme" : "dark-theme"}`}
+    <AppBar
+      position="fixed"
+      component="nav"
+      color="default"
+      elevation={3}
+      className={`mui-navbar ${isLight ? "light-theme" : "dark-theme"}`}
+      sx={{
+        backdropFilter: "blur(10px)",
+        backgroundColor: isLight
+          ? "rgba(255,255,255,0.8)"
+          : "rgba(15,15,15,0.6)",
+        transition: "all 0.3s ease",
+      }}
+    >
+      <Container
+        maxWidth="xl"
         sx={{
-          backdropFilter: "blur(10px)",
-          backgroundColor: isLight
-            ? "rgba(255,255,255,0.8)"
-            : "rgba(15,15,15,0.6)",
-          transition: "all 0.3s ease",
+          padding: "0 !important",
+          margin: "auto",
         }}
       >
-        <Container maxWidth="xl">
-          <Toolbar sx={{ justifyContent: "space-between" }}>
-            {/* Logo */}
-            <Typography
-              variant="h6"
-              sx={{
-                cursor: "pointer",
-                fontWeight: 700,
-                letterSpacing: 1.2,
-                textTransform: "uppercase",
+        <Toolbar
+          sx={{ justifyContent: "space-between", padding: "0 !important" }}
+        >
+          {/* Logo */}
+          <Typography
+            variant="h6"
+            sx={{
+              cursor: "pointer",
+              fontWeight: 700,
+              letterSpacing: 1.2,
+              textTransform: "uppercase",
+            }}
+            onClick={() => router.push("/")}
+          >
+            {logoTitle.split(".")[0]}.
+            <span
+              style={{
+                fontSize: "0.8rem",
+                textTransform: "lowercase",
+                letterSpacing: 2,
               }}
-              onClick={() => router.push("/")}
             >
-              {logoTitle.split(".")[0]}.
-              <span
-                style={{
-                  fontSize: "0.8rem",
-                  textTransform: "lowercase",
-                  letterSpacing: 2,
-                }}
-              >
-                {logoTitle.split(".")[1]}
-              </span>
-            </Typography>
+              {logoTitle.split(".")[1]}
+            </span>
+          </Typography>
 
-            {/* Desktop Navbar Items */}
-            {!isMobile && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-                {navbarItems?.map((item, index) => {
-                  const isActive = activeSection === item.path.split("#")[1];
-
-                  if (item.type === "link") {
-                    return (
-                      <Box
-                        key={index}
-                        component="button"
-                        onClick={() => scrollTo(item.path.split("#")[1])}
-                        className={`mui-link ${isActive ? "active" : ""}`}
-                        sx={{
-                          border: "none",
-                          background: "transparent",
-                          fontSize: "0.9rem",
-                          fontWeight: isActive ? 600 : 400,
-                          cursor: "pointer",
-                          position: "relative",
-                          "&::after": {
-                            content: '""',
-                            position: "absolute",
-                            bottom: -2,
-                            left: 0,
-                            height: "2px",
-                            width: isActive ? "100%" : 0,
-                            background: "",
-                            transition: "all 0.3s ease",
-                          },
-                          "&:hover::after": {
-                            width: "100%",
-                          },
-                        }}
-                      >
-                        {item.label}
-                      </Box>
-                    );
-                  }
-
-                  if (item.type === "admin") {
-                    return (
-                      <Tooltip key={index} title="Admin Panel" arrow>
-                        <IconButton
-                          onClick={() =>
-                            router.push(token ? "/adminboard" : "/login")
-                          }
-                          sx={{
-                            transition: "color 0.3s",
-                            "&:hover": {
-                              color: "theme.palette.primary.main,",
-                            },
-                          }}
-                        >
-                          <BsPersonCircle size={22} />
-                        </IconButton>
-                      </Tooltip>
-                    );
-                  }
-
-                  return null;
-                })}
-
-                {/* Theme Toggle */}
-                <Tooltip title="Toggle Theme">
-                  <IconButton onClick={toggleTheme}>
-                    {isLight ? (
-                      <MdNightlight size={20} />
-                    ) : (
-                      <MdLightMode color={"aliceblue"} size={20} />
-                    )}
-                  </IconButton>
-                </Tooltip>
-              </Box>
-            )}
-
-            {/* Mobile Icons */}
-            {isMobile && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <Tooltip title="Toggle Theme">
-                  <IconButton onClick={toggleTheme}>
-                    {isLight ? (
-                      <MdNightlight size={20} />
-                    ) : (
-                      <MdLightMode size={20} />
-                    )}
-                  </IconButton>
-                </Tooltip>
-
-                <IconButton onClick={toggleDrawer}>
-                  <MdMenu
-                    color={isLight ? "#1f1f1f" : "aliceblue"}
-                    cursor={"pointer"}
-                    size={25}
-                  />
-                </IconButton>
-              </Box>
-            )}
-          </Toolbar>
-        </Container>
-
-        {/* Mobile Drawer */}
-        <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
-          <Box sx={{ textAlign: "left", paddingTop: 2 }}>
-            <Button onClick={toggleDrawer}>
-              <MdClose size={20} />
-            </Button>
-          </Box>
-          <Box sx={{ width: 250, paddingTop: 2 }}>
-            <List>
+          {/* Desktop Navbar Items */}
+          {!isMobile && (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
               {navbarItems?.map((item, index) => {
                 const isActive = activeSection === item.path.split("#")[1];
 
                 if (item.type === "link") {
                   return (
-                    <ListItem key={index} disablePadding>
-                      <ListItemButton
-                        onClick={() => {
-                          scrollTo(item.path.split("#")[1]);
-                          toggleDrawer();
-                        }}
-                      >
-                        <ListItemText
-                          primary={item.label}
-                          primaryTypographyProps={{
-                            fontWeight: isActive ? 700 : 400,
-                            color: isActive
-                              ? "theme.palette.primary.main"
-                              : "inherit",
-                          }}
-                        />
-                      </ListItemButton>
-                    </ListItem>
+                    <Box
+                      key={index}
+                      component="button"
+                      onClick={() => scrollTo(item.path.split("#")[1])}
+                      className={`mui-link ${isActive ? "active" : ""}`}
+                      sx={{
+                        border: "none",
+                        background: "transparent",
+                        fontSize: "0.9rem",
+                        fontWeight: isActive ? 600 : 400,
+                        cursor: "pointer",
+                        position: "relative",
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          bottom: -2,
+                          left: 0,
+                          height: "2px",
+                          width: isActive ? "100%" : 0,
+                          background: "",
+                          transition: "all 0.3s ease",
+                        },
+                        "&:hover::after": {
+                          width: "100%",
+                        },
+                      }}
+                    >
+                      {item.label}
+                    </Box>
                   );
                 }
 
                 if (item.type === "admin") {
                   return (
-                    <ListItem key={index} disablePadding>
-                      <ListItemButton
-                        onClick={() => {
-                          router.push(token ? "/adminboard" : "/login");
-                          toggleDrawer();
+                    <Tooltip key={index} title="Admin Panel" arrow>
+                      <IconButton
+                        onClick={() =>
+                          router.push(token ? "/adminboard" : "/login")
+                        }
+                        sx={{
+                          transition: "color 0.3s",
+                          "&:hover": {
+                            color: "theme.palette.primary.main,",
+                          },
                         }}
                       >
-                        <ListItemText primary="Admin Panel" />
-                      </ListItemButton>
-                    </ListItem>
+                        <BsPersonCircle size={22} />
+                      </IconButton>
+                    </Tooltip>
                   );
                 }
 
                 return null;
               })}
-            </List>
-          </Box>
-        </Drawer>
-      </AppBar>
-    </Slide>
+
+              {/* Theme Toggle */}
+              <Tooltip title="Toggle Theme">
+                <IconButton onClick={toggleTheme}>
+                  {isLight ? (
+                    <MdNightlight size={20} />
+                  ) : (
+                    <MdLightMode color={"aliceblue"} size={20} />
+                  )}
+                </IconButton>
+              </Tooltip>
+            </Box>
+          )}
+
+          {/* Mobile Icons */}
+          {isMobile && (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Tooltip title="Toggle Theme">
+                <IconButton onClick={toggleTheme}>
+                  {isLight ? (
+                    <MdNightlight size={20} />
+                  ) : (
+                    <MdLightMode size={20} />
+                  )}
+                </IconButton>
+              </Tooltip>
+
+              <IconButton onClick={toggleDrawer}>
+                <MdMenu
+                  color={isLight ? "#1f1f1f" : "aliceblue"}
+                  cursor={"pointer"}
+                  size={25}
+                />
+              </IconButton>
+            </Box>
+          )}
+        </Toolbar>
+      </Container>
+
+      {/* Mobile Drawer */}
+      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
+        <Box sx={{ textAlign: "left", paddingTop: 2 }}>
+          <Button onClick={toggleDrawer}>
+            <MdClose size={20} />
+          </Button>
+        </Box>
+        <Box sx={{ width: 250, paddingTop: 2 }}>
+          <List>
+            {navbarItems?.map((item, index) => {
+              const isActive = activeSection === item.path.split("#")[1];
+
+              if (item.type === "link") {
+                return (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton
+                      onClick={() => {
+                        scrollTo(item.path.split("#")[1]);
+                        toggleDrawer();
+                      }}
+                    >
+                      <ListItemText
+                        primary={item.label}
+                        primaryTypographyProps={{
+                          fontWeight: isActive ? 700 : 400,
+                          color: isActive
+                            ? "theme.palette.primary.main"
+                            : "inherit",
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              }
+
+              if (item.type === "admin") {
+                return (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton
+                      onClick={() => {
+                        router.push(token ? "/adminboard" : "/login");
+                        toggleDrawer();
+                      }}
+                    >
+                      <ListItemText primary="Admin Panel" />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              }
+
+              return null;
+            })}
+          </List>
+        </Box>
+      </Drawer>
+    </AppBar>
   );
 };
 

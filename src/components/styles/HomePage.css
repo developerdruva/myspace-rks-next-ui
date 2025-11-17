@@ -1,5 +1,7 @@
 .headerText {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    font-style: italic;
 }
 
 .subHeadText {
@@ -15,8 +17,8 @@
     color: rgba(9, 82, 131, 0.8);
 }
 
-.subHeadText h1 {
-    font-size: calc(5rem + 1.5vw) !important;
+.subHeadText p {
+    font-size: calc(6rem + 1.5vw) !important;
     font-family: 'darlington', cursive;
 }
 
@@ -31,8 +33,21 @@
 .designationText {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: 200;
+    padding: 1rem 0rem 1rem 0rem;
+}
+.typingtext{
+    color: rgb(45, 87, 126) !important;
 }
 
+
+.personPhoto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 1rem; */
+    height: 100%;
+    width: 100%;
+}
 
 .personPhoto img:hover {
     transform: scale(1.1);

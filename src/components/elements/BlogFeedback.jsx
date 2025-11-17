@@ -100,68 +100,66 @@ export default function BlogFeedback() {
           </IconButton>
         </Box>
 
-       {
-        typeof window !== 'undefined' && 
-        <div>
+        {typeof window !== "undefined" && (
+          <div>
+            {localStorage?.getItem("like") || localStorage.getItem("unlike") ? (
+              <div className="text-success">
+                you already given feedback. Thank you!
+              </div>
+            ) : (
+              <>
+                <Box display="flex" justifyContent="center" mt={2} gap={2}>
+                  <IconButton
+                    onClick={() => {
+                      setLike(true);
+                      setUnlike(false);
+                    }}
+                    sx={{
+                      color: like ? "green" : "gray",
+                      "&:hover": { color: "green" },
+                    }}
+                  >
+                    <FaThumbsUp />
+                  </IconButton>
 
-           {localStorage?.getItem("like") || localStorage.getItem("unlike") ? (
-          <div className="text-success">
-            you already given feedback. Thank you!
+                  <IconButton
+                    onClick={() => {
+                      setLike(false);
+                      setUnlike(true);
+                    }}
+                    sx={{
+                      color: unlike ? "red" : "gray",
+                      "&:hover": { color: "red" },
+                    }}
+                  >
+                    <FaThumbsDown />
+                  </IconButton>
+                </Box>
+
+                <TextField
+                  fullWidth
+                  multiline
+                  minRows={2}
+                  label="Optional feedback"
+                  value={feedbackDesc}
+                  onChange={(e) => setFeedbackDesc(e.target.value)}
+                  sx={{ mt: 2 }}
+                />
+
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  sx={{ mt: 2 }}
+                  onClick={handleSubmit}
+                  disabled={submitted || (!like && !unlike && !feedbackDesc)}
+                >
+                  {submitted ? "Thank you!" : "Submit"}
+                </Button>
+              </>
+            )}
           </div>
-        ) : (
-          <>
-            <Box display="flex" justifyContent="center" mt={2} gap={2}>
-              <IconButton
-                onClick={() => {
-                  setLike(true);
-                  setUnlike(false);
-                }}
-                sx={{
-                  color: like ? "green" : "gray",
-                  "&:hover": { color: "green" },
-                }}
-              >
-                <FaThumbsUp />
-              </IconButton>
-
-              <IconButton
-                onClick={() => {
-                  setLike(false);
-                  setUnlike(true);
-                }}
-                sx={{
-                  color: unlike ? "red" : "gray",
-                  "&:hover": { color: "red" },
-                }}
-              >
-                <FaThumbsDown />
-              </IconButton>
-            </Box>
-
-            <TextField
-              fullWidth
-              multiline
-              minRows={2}
-              label="Optional feedback"
-              value={feedbackDesc}
-              onChange={(e) => setFeedbackDesc(e.target.value)}
-              sx={{ mt: 2 }}
-            />
-
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              sx={{ mt: 2 }}
-              onClick={handleSubmit}
-              disabled={submitted || (!like && !unlike && !feedbackDesc)}
-            >
-              {submitted ? "Thank you!" : "Submit"}
-            </Button>
-          </>
         )}
-        </div>
-       }
       </Popover>
     </>
   );

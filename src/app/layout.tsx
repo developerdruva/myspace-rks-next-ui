@@ -1,5 +1,6 @@
 import GlobalProvider, { geistMono, geistSans } from "@/global/InitialData";
 import "@/styles/globals.css";
+import "@/styles/fonts.css";
 
 export const metadata = {
   title: "MySpace - RKS ",

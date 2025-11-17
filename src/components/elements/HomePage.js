@@ -5,84 +5,94 @@ import { MdDownload, MdKeyboardArrowDown } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { TypeAnimation } from "react-type-animation";
 import "../styles/HomePage.css";
+import { useThemeMode } from "@/global/ThemeProvider";
 
 const HomePage = () => {
-  const theme = useTheme();
-  const portfolioDetails = useSelector((state) => state?.portfolioState);
-  const personDetails = portfolioDetails?.personDetails[0];
+  const personDetails = useSelector(
+    (state) => state?.portfolioState?.personDetails?.[0]
+  );
+  const { theme, toggleTheme } = useThemeMode();
+  const muiTheme = useTheme();
+
+  const isLight = theme == "light" ? true : false;
+
   const [showScrollIcon, setShowScrollIcon] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollIcon(window.scrollY < 50);
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (!personDetails) return null;
 
   return (
     <Box
       sx={{
-        height: "90vh",
+        height: "100vh",
         display: "grid",
         alignItems: "center",
         position: "relative",
-        color: theme.palette.text.primary,
+        color: muiTheme.palette.text.primary,
       }}
     >
       <Grid container>
-        <Grid item xs={12} sm={12} md={12} lg={5} xl={5} xxl={5}>
-          <Box
-            className="d-flex justify-content-center personPhoto"
-            sx={{ width: "100%", height: "100%" }}
-          >
+        <Grid item size={{ xs: 12, sm: 12, md: 12, lg: 5, xl: 5 }}>
+          <Box className=" personPhoto">
             <img
-              src={personDetails?.profile_pic}
-              alt="personPhoto"
+              src={personDetails.profile_pic || "/default-avatar.png"}
+              alt="person"
               style={{
                 display: "block",
                 alignSelf: "center",
+                width: "65%",
+                height: "25rem",
               }}
             />
           </Box>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={7} xl={7} xxl={7}>
-          <Box>
-            <Box className="d-flex justify-content-start">
-              <div className="display-6 headerText">
-                I'm, <span className="fw-bold"></span>
-              </div>
-            </Box>
-            <Box className="d-flex justify-content-start">
+
+        <Grid item size={{ xs: 12, sm: 12, md: 12, lg: 7, xl: 7 }}>
+          <Box sx={{ padding: 5 }}>
+            <Box className="">
               <div
-                className="subHeadText"
-                style={{ color: theme.palette.primary.main }}
+                className=" headerText"
+                style={{ color: isLight ? "black" : "aliceblue" }}
               >
-                <h1>{personDetails?.first_name}</h1>
+                I'm,
               </div>
             </Box>
 
-            <Box className="d-flex designationText">
+            <Box
+              className=" subHeadText"
+              sx={{ color: muiTheme.palette.primary.main }}
+            >
+              <p>{personDetails.first_name}</p>
+            </Box>
+
+            <Box className="designationText">
               <TypeAnimation
-                sequence={[`${personDetails?.person_designation}`, 500]}
+                sequence={[personDetails.person_designation, 500]}
                 speed={20}
                 style={{
                   fontSize: "2rem",
                   fontWeight: "lighter",
-                  color: theme.palette.text.primary + " !important",
                 }}
                 repeat={Infinity}
+                className={"typingtext"}
               />
             </Box>
 
-            <Box className="d-flex m-0 mt-2">
+            <Box paddingTop={2}>
               <Button
                 variant="contained"
-                color="warning"
+                color={isLight ? "warning" : "info"}
                 size="small"
-                onClick={() => window.open(personDetails?.resume, "_blank")}
-                startIcon={<MdDownload className="me-2" />}
-                className="btn btn-warning btn-sm"
+                onClick={() => window.open(personDetails.resume, "_blank")}
+                startIcon={<MdDownload />}
               >
                 Resume
               </Button>
@@ -91,16 +101,15 @@ const HomePage = () => {
         </Grid>
       </Grid>
 
-      {/* Floating Scroll Icon */}
       <Fade in={showScrollIcon}>
         <Box
           className="scrollDownIcon"
-          onClick={() => {
+          onClick={() =>
             document
               .getElementById("experience")
-              ?.scrollIntoView({ behavior: "smooth" });
-          }}
-          style={{ color: theme.palette.primary.main }}
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+          sx={{ color: muiTheme.palette.primary.main }}
         >
           <MdKeyboardArrowDown size={38} />
         </Box>

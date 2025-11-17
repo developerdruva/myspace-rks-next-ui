@@ -3,6 +3,7 @@
     transition: all 0.3s ease-in-out !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
     z-index: 1200 !important;
+    padding: 0 !important;
 }
 
 .light-theme {
