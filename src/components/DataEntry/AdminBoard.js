@@ -22,12 +22,12 @@ import EducationView from "../admin/EducationView";
 import SkillsView from "../admin/SkillsView";
 import CertificationsView from "../admin/CertificationsView";
 import PocProjectsView from "../admin/PocProjectsView";
+import ExperianceCalc from "../admin/ExperienceCalc";
 
 import { GiSkills, GiSoapExperiment } from "react-icons/gi";
 import { PiCertificate, PiUserRectangle } from "react-icons/pi";
 import { SiBookstack } from "react-icons/si";
 import { GoProject } from "react-icons/go";
-import ExperianceCalc from "../admin/ExperienceCalc";
 import { BsCalculator } from "react-icons/bs";
 
 const drawerWidth = 240;
@@ -130,7 +130,7 @@ const AdminBoard = () => {
         </List>
       </Drawer>
 
-      {/* Main Content Area */}
+      {/* main content */}
       <Box
         component="main"
         sx={{
@@ -138,14 +138,10 @@ const AdminBoard = () => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        {/* AppBar with Navbar */}
-
         <AuthorizedNavbar
           logoTitle="Profile Blog Dashboard"
           isLightTheme={true}
         />
-
-        {/* Content Area */}
         <Box
           sx={{
             padding: 1,
@@ -158,13 +154,12 @@ const AdminBoard = () => {
               padding: 2,
               borderRadius: 1,
               boxShadow: 1,
-              // border: "1px solid green",
               height: "calc(100vh - 80px)",
               overflowY: "auto",
               scrollBehavior: "smooth",
             }}
           >
-            {renderContent()}
+             {renderContent()} 
           </Box>
         </Box>
       </Box>

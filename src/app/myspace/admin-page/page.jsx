@@ -1,10 +1,11 @@
-import React from 'react'
-import AdminBoard from '../../../components/DataEntry/AdminBoard'
+import AdminBoard from "../../../components/DataEntry/AdminBoard";
 
 const AdminPage = () => {
   return (
-    <div><AdminBoard /></div>
-  )
-}
+    <>
+      <AdminBoard />
+    </>
+  );
+};
 
-export default AdminPage
+export default AdminPage;

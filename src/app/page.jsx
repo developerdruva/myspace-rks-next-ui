@@ -1,10 +1,7 @@
 "use client";
 
+import LandingPage from "@/components/main/LandingPage";
 
-import LandingPage from '@/components/main/LandingPage';
-
-const Home = () =><LandingPage />
-
-
+const Home = () => <LandingPage />;
 
 export default Home;
