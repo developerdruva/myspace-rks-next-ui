@@ -1,6 +1,5 @@
 "use client";
-
-import LandingPage from "@/components/main/LandingPage";
+import LandingPage from "@/components/profilepage-items/LandingPage";
 
 const Home = () => <LandingPage />;
 

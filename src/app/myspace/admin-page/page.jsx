@@ -1,4 +1,4 @@
-import AdminBoard from "../../../components/DataEntry/AdminBoard";
+import AdminBoard from "../../../components/in-taking/AdminBoard";
 
 const AdminPage = () => {
   return (

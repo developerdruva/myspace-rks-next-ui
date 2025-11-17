@@ -11,7 +11,7 @@ import HomePage from "../elements/HomePage";
 import Interest from "../elements/Interest";
 import PocProjects from "../elements/PocProjects";
 import Skills from "../elements/Skills";
-import NavbarHeader from "../main/NavbarHeader";
+import NavbarHeader from "./NavbarHeader";
 import "./CSS/WelcomeStyles.css";
 import { navbarItemsUtils, scrollFunction } from "./NavUtils";
 

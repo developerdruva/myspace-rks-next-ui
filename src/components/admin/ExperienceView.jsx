@@ -18,7 +18,7 @@ import {
 import { MdAddTask, MdDelete, MdEdit } from "react-icons/md";
 import { BsViewList } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import WorkedCompaniesEntry from "../DataEntry/WorkedCompaniesEntry";
+import WorkedCompaniesEntry from "../in-taking/WorkedCompaniesEntry";
 import ProjectsView from "./ProjectsView";
 import apiServices from "@/utils/service-calls/apiServices";
 import { getPortfolioDetails, showAlertNotice } from "@/common/CommonFunction";
@@ -62,10 +62,7 @@ const mapColumnsToMUI = (
           </Tooltip>
 
           <Tooltip title="Delete">
-            <IconButton
-              onClick={() => handleDelete(params.row)}
-              color="error"
-            >
+            <IconButton onClick={() => handleDelete(params.row)} color="error">
               <MdDelete />
             </IconButton>
           </Tooltip>

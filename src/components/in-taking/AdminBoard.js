@@ -15,7 +15,7 @@ import {
   Divider,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import AuthorizedNavbar from "../main/AuthorizedNavbar";
+import AuthorizedNavbar from "../profilepage-items/AuthorizedNavbar";
 import ProfileView from "../admin/ProfileView";
 import ExperienceView from "../admin/ExperienceView";
 import EducationView from "../admin/EducationView";

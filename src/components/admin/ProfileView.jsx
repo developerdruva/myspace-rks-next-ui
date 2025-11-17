@@ -16,7 +16,7 @@ import {
   MdOutlineFileDownload,
   MdEdit,
 } from "react-icons/md";
-import BasicDetails from "../DataEntry/BasicDetails";
+import BasicDetails from "../in-taking/BasicDetails";
 
 const ProfileView = ({ profile, workedCompanies }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

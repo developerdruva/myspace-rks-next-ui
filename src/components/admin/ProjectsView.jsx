@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { colorToRGBA, showApiStatusNotice } from "@/common/CommonFunction";
-import ProjectEntryForm from "../DataEntry/ProjectEntryForm";
+import ProjectEntryForm from "../in-taking/ProjectEntryForm";
 import apiServices from "@/utils/service-calls/apiServices";
 
 const ProjectsDrawer = ({
