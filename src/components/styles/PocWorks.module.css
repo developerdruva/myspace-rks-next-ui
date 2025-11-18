@@ -1,0 +1,56 @@
+.box {
+  margin: 15px;
+  margin-top: 50px;
+  border-radius: 6px;
+}
+
+/* Card Image Wrapper */
+.cardimg {
+  padding: 0;              /* cleaner */
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden;        /* required for clean hover zoom */
+  border-radius: 6px;      /* smooth borders */
+}
+
+/* Actual Image */
+.cardimg img {
+  width: 100%;             /* responsive */
+  height: 15rem;
+  display: block;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+/* Hover Zoom */
+.cardimg img:hover {
+  transform: scale(1.1);
+}
+
+/* Optional polishing below */
+/* Heading */
+.headingForSection {
+  padding: 0px 12px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 30px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  line-height: 1.8;
+}
+
+/* Techs section (your original) */
+.techsDiv {
+  padding: 1rem;
+}
+
+.techsDiv p:nth-child(even) {
+  font-size: 0.6rem;
+  color: steelblue;
+}
+
+.techsDiv p:nth-child(odd) {
+  font-size: 0.75rem !important;
+  color: slategray;
+}

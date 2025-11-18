@@ -1,0 +1,62 @@
+  @font-face {
+      font-family: "allura-regular";
+      /* Change to your font's name. */
+      src: url("/fonts/Allura-Regular.otf");
+      /* Change to match your font file's location. */
+    }
+
+    @font-face {
+      font-family: "welcomefont2";
+      /* Change to your font's name. */
+      src: url("/fonts/Welcome2.ttf");
+      /* Change to match your font file's location. */
+    }
+
+    @font-face {
+      font-family: "welcomefont";
+      /* Change to your font's name. */
+      src: url("/fonts/Welcome.otf");
+      /* Change to match your font file's location. */
+    }
+
+    @font-face {
+      font-family: "cassandra";
+      /* Change to your font's name. */
+      src: url("/fonts/cassandra.ttf");
+      /* Change to match your font file's location. */
+    }
+
+    @font-face {
+      font-family: "darlington";
+      /* Change to your font's name. */
+      src: url("/fonts/darlington.ttf");
+      /* Change to match your font file's location. */
+    }
+
+    @font-face {
+      font-family: "veganstyle";
+      /* Change to your font's name. */
+      src: url("/fonts/veganstyle.ttf");
+      /* Change to match your font file's location. */
+    }
+
+    @font-face {
+      font-family: "ubuntulight";
+      /* Change to your font's name. */
+      src: url("/fonts/Ubuntu-Light.ttf");
+      /* Change to match your font file's location. */
+    }
+
+    @font-face {
+      font-family: "ubuntu";
+      /* Change to your font's name. */
+      src: url("/fonts/Ubuntu-Regular.ttf");
+      /* Change to match your font file's location. */
+    }
+
+    @font-face {
+      font-family: "ubuntudark";
+      /* Change to your font's name. */
+      src: url("/fonts/Ubuntu-Medium.ttf");
+      /* Change to match your font file's location. */
+    }

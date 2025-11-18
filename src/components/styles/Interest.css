@@ -1,0 +1,112 @@
+.box {
+  /* margin: 15px; */
+  margin-top: 50px;
+  /* box-shadow: 10px 10px 20px rgba(244,241,241,1) ; */
+  border-radius: 6px;
+  /* animation-name: text;
+    animation-duration: 7s;
+    animation-timing-function: ease-out; */
+  margin-bottom: 6rem !important;
+}
+
+.Interest {
+  /* background-color:rgba(220, 220,220, 0.3); */
+  border-radius: 3px;
+  /* margin-left: 20px; */
+  /* margin-top: 45px; */
+  padding: 2rem 0rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.Interest div:hover {
+  box-shadow: 0 8px 24px rgba(44, 152, 240, 0.15), 0 1.5px 4px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px) scale(1.01);
+  background-color: #f8fafc;
+}
+
+.head {
+  display: inline-block;
+  /* padding: 0px 12px; */
+  color: rgb(85, 85, 85);
+  /* margin-bottom: 20px; */
+  margin-left: 30px;
+  letter-spacing: 5px;
+  font-size: 1.2rem;
+}
+
+.heading {
+  padding: 0px 12px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 30px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  line-height: 1.8;
+}
+
+div>h3 {
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  /* margin: 20px 0 30px 0; */
+}
+
+div>p {
+  font-size: 15px;
+}
+
+.web {
+  /* height: 100%; */
+  height: 15rem;
+  border: 1px rgb(26, 34, 104);
+  border-bottom: 2px solid #2c98f0;
+  text-align: center;
+  padding: 1.2rem;
+  box-shadow: 0px 0px 56px -8px rgba(0, 0, 0, 0.17);
+  transition: transform 0.5s;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.app {
+  height: 15rem;
+  border: 1px black;
+  border-bottom: 2px solid #f9bf3f;
+  text-align: center;
+  box-shadow: 0px 0px 56px -8px rgba(0, 0, 0, 0.17);
+  position: relative;
+  transition: transform 0.5s;
+  overflow: hidden;
+  object-fit: cover;
+  padding: 1.2rem;
+}
+
+.other {
+  height: 15rem;
+  border: 1px black;
+  padding: 1.2rem;
+  border-bottom: 2px solid #2fa499;
+  text-align: center;
+  box-shadow: 0px 0px 56px -8px rgba(0, 0, 0, 0.17);
+  transition: transform 0.5s;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+/* .web:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.app:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.box:hover {
+  transform: scale(1.1);
+  z-index: 2;
+} */

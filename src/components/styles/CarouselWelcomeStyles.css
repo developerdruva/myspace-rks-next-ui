@@ -1,0 +1,74 @@
+.nameStyle {
+    font-family: "", cursive;
+    animation-name: text;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-out;
+    position: relative;
+    top: -300px;
+    left: 400px !important;
+    color: rgba(9, 82, 131, 0.8);
+  }
+  
+  .welcomeText {
+    font-family: "", cursive;
+    animation-name: text;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-out;
+    position: relative;
+    top: -300px;
+    left: 400px !important;
+    color: rgba(9, 82, 131, 0.8);
+  }
+  .cv {
+    color: rgba(50, 53, 204, 0.8);
+    font-size: 0.9rem;
+    font-family: "ubuntu";
+    animation-name: text;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    position: relative;
+    top: -650px;
+    right: -270px;
+    color: rgba(234, 236, 250, 0.8);
+    padding: 9px 15px;
+    box-shadow: 0px 10px 30px 0px rgba(21, 10, 82, 0.35);
+    border-radius: 15px;
+    background-image: linear-gradient(
+      to left,
+      rgba(14, 100, 199, 0.8),
+      rgba(4, 35, 71, 0.6)
+    );
+    text-decoration: none;
+  }
+  
+  @keyframes text {
+    from {
+      transform: translateY(20px);
+      opacity: 0.2;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .image {
+      height: 600px;
+    }
+    .h1 a {
+      width: 120px;
+      font-size: 0.8rem;
+      margin: 20px;
+      padding: 9px 18px;
+    }
+    .h2 a {
+      width: 120px;
+      font-size: 0.8rem;
+      margin: 20px;
+      padding: 9px 18px;
+      position: relative;
+      top: 20px;
+      left: 17px;
+    }
+  }
+  

@@ -1,0 +1,244 @@
+.headerText {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: clamp(1.2rem, 2rem + 1vw, 2.5rem);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .headerText {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .headerText {
+        font-size: 1.2rem;
+    }
+}
+
+.subHeadText {
+    /* border: 1px solid green; */
+    font-family: "", cursive;
+    animation-name: text;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-out;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    position: relative;
+    /* top: -100px; */
+    /* left: 100px !important; */
+    color: rgba(9, 82, 131, 0.8);
+}
+
+.subHeadText p {
+    font-size: clamp(2rem, 6rem + 1.5vw, 8rem) !important;
+    font-family: 'darlington', cursive;
+    line-height: 1.2;
+}
+
+@media (max-width: 1024px) {
+    .subHeadText p {
+        font-size: 4rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .subHeadText p {
+        font-size: 3rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .subHeadText p {
+        font-size: 2rem !important;
+    }
+}
+
+.titleCol {
+    display: block;
+    height: calc(10rem + 50vh);
+    align-items: center;
+    justify-content: center;
+    padding-top: 6rem;
+}
+
+.designationText {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 200;
+    padding: 1rem 0rem 1rem 0rem;
+}
+
+.designationText .typingtext {
+    font-size: clamp(1rem, 2rem, 2.5rem);
+}
+
+@media (max-width: 768px) {
+    .designationText {
+        padding: 0.5rem 0rem 0.5rem 0rem;
+    }
+    .designationText .typingtext {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .designationText {
+        padding: 0.5rem 0rem 0.5rem 0rem;
+    }
+    .designationText .typingtext {
+        font-size: 1rem;
+    }
+}
+
+
+.personPhoto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 1rem; */
+    height: 100%;
+    width: 100%;
+}
+
+.personPhoto img:hover {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.personPhoto img {
+    display: inline-block;
+    width: clamp(8rem, 18rem, 20rem);
+    height: clamp(8rem, 18rem, 20rem);
+    border-radius: 50%;
+    transition: transform 0.5s;
+    overflow: hidden;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+@media (max-width: 1024px) {
+    .personPhoto img {
+        width: 14rem;
+        height: 14rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .personPhoto img {
+        width: 12rem;
+        height: 12rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .personPhoto img {
+        width: 10rem;
+        height: 10rem;
+    }
+}
+
+
+.developmentsCard {
+    font-size: 0.7rem;
+}
+
+.eachCard {
+    transition: transform 0.5s;
+    overflow: hidden;
+    object-fit: cover;
+
+}
+
+.eachCard:hover {
+    background-color: rgb(94, 138, 173);
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.card-title {
+    font-size: 1rem;
+    padding: 1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.card-title a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.card-title a:hover {
+    text-decoration: none;
+    color: darkslategrey;
+
+}
+
+.scrollDownIcon {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    z-index: 10;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: all 0.3s ease-in-out;
+    animation: bounce 2s infinite, pulseGlow 3s infinite;
+}
+
+.scrollDownIcon:hover {
+    transform: translateX(-50%) scale(1.15);
+    color: #000;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+
+.scrollDownIcon::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 193, 7, 0.1);
+    border-radius: 50%;
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: ringPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes ringPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+    }
+}
+
+
+@keyframes text {
+    from {
+        transform: translateY(20px);
+        opacity: 0.2;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

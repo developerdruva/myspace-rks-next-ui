@@ -1,0 +1,13 @@
+.card1 {
+  border-left: 3px solid blueviolet;
+  border-radius: 2px;
+  border-style: dotted;
+  transition: 0.5s;
+  transform-box: 0.5s;
+  box-shadow: 1px 2px 5px 1px #ddd5d5;
+}
+
+.card1:hover {
+  top: -1px;
+  box-shadow: 2px 3px 15px 3px #ddd5d5;
+}

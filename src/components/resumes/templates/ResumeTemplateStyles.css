@@ -1,0 +1,64 @@
+.fdiv {
+    /* width: 200px;
+    height: 200px; */
+    display: block;
+    position: relative;
+}
+
+.fdiv::after {
+    content: "";
+    background: url('/public/icons/Rletter.png');
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* height: 200px; */
+    position: absolute;
+    /* background-position-x: center; */
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: 60%;
+}
+
+.blckDiv1,
+.blckDiv2,
+.blckDiv3 {
+    border-bottom: 1px solid #f1f1f1;
+    border-right: 1px solid #f1f1f1;
+    transform: rotate(40deg);
+    box-shadow: 1px 1px 5px 2px lightgrey;
+    display: block;
+    height: 60px;
+    width: 60px;
+    z-index: 10 !important;
+    position: relative;
+    float: right;
+    /* left: 10px; */
+    /* right: 20px; */
+    /* top: -40px; */
+    overflow-y: hidden;
+    overflow: hidden;
+    top: -30px;
+}
+
+.blckDiv1::after {
+    overflow: hidden;
+    z-index: 10;
+
+}
+
+.blckDiv4,
+.blckDiv5,
+.blckDiv6 {
+    /* border-bottom: 1px solid #f1f1f1; */
+    /* border-right: 1px solid #f1f1f1; */
+    transform: rotate(40deg);
+    box-shadow: 1px 1px 5px 2px lightgrey;
+    display: block;
+    height: 80px;
+    width: 80px;
+    bottom: -150px;
+    left: -50px;
+    position: relative;
+}

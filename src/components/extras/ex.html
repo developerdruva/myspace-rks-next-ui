@@ -1,0 +1,32 @@
+<html>
+  <body>
+    <div
+      id="content"
+      ondrop="dropElement(event)"
+      ondragover="enableDrop(event)"
+    ></div>
+
+    <h1 id="header" ondragstart="dragstart(event)" draggable="true">Hello!!</h1>
+
+    <script>
+      function dragstart(event) {
+        console.log("drag start called");
+        console.log(event.target.id);
+        event.dataTransfer.setData("h", event.target.id);
+      }
+
+      function enableDrop(event) {
+        console.log("i m in");
+        event.preventDefault();
+      }
+
+      function dropElement(event) {
+        console.log("drop");
+        console.log(event.dataTransfer.getData("h"));
+        event.target.appendChild(
+          document.getElementById(event.dataTransfer.getData("h"))
+        );
+      }
+    </script>
+  </body>
+</html>

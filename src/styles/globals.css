@@ -1,0 +1,85 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+   --bg: #ffffff;
+  --text: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+[data-theme="dark"] {
+  --bg: #0e1117;
+  --text: steelblue;
+}
+
+
+html, 
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: var(--background) 0.3s ease, color 0.3s ease;
+   max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* div, */
+p, span, h1, h2, h3, h4, h5, h6, ul, li, button, input, textarea, section, header, footer, nav {
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+.card {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.light-theme {
+    background-color: rgb(255, 255, 255) ;
+    color: #071533 ;
+    border-color: #e0e0e0 ;
+}
+
+.dark-theme {
+    background-color: rgba(3, 16, 28, 0.9) ;
+    color: #9dbadf ;
+    /* border-color: #444 ; */
+}
+
+.headingForSection {
+  text-align: center;
+    margin: 1rem 0rem 4rem 0rem !important;
+  color: rgb(85, 85, 85);
+  margin-bottom: 20px;
+  /* margin-left: 30px; */
+  letter-spacing: 5px;
+  font-size: 1.2rem;
+  /* border: 1px solid red; */
+  display: inline-block;
+}
