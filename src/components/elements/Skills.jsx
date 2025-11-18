@@ -19,7 +19,7 @@ const Skills = () => {
   }
   return (
     <div className={classes.box} id="skills">
-      <h1 className={classes.head}>MY SKILLS</h1>
+      <h1 className={"headingForSection"}>MY SKILLS</h1>
       <EchartsBarWithBg
         xAxisValues={mySkills?.map((item) => item?.skill_name)}
         actualValues={mySkills?.map((item) => ({

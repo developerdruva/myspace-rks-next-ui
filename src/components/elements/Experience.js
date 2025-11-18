@@ -1,25 +1,21 @@
 "use client";
 import { colorToRGBA, dateFormat } from "@/common/CommonFunction";
 import SideScrolling from "@/components/scrolling/SideScrolling";
+import { useThemeMode } from "@/global/ThemeProvider";
+import { Chip } from "@mui/material";
 import { MdWork } from "react-icons/md";
 import { useSelector } from "react-redux";
 import ProjectCard from "../cards/ProjectCard";
 import classes from "../styles/Experience.module.css";
-import { Chip } from "@mui/material";
-import { useThemeMode } from "@/global/ThemeProvider";
-import { useEffect } from "react";
 
 const Experience = () => {
   const portfolioDetails = useSelector((state) => state?.portfolioState);
   const theme = useThemeMode();
   const isLight = theme.theme == "light" ? true : false;
-  useEffect(() => {
-    console.log("theme ", theme.theme, isLight);
-  }, [theme]);
 
   return (
     <div className={classes.box}>
-      <span className={classes.head}>MY WORK EXPERIENCE</span>
+      <span className={"headingForSection"}>MY WORK EXPERIENCE</span>
       <div className={classes.timeline_centered}>
         {portfolioDetails?.workedCompanies?.map((comp, compIndex) => {
           return (
@@ -35,7 +31,7 @@ const Experience = () => {
               <div
                 className={`${classes.mainCard}`}
                 style={{
-                  backgroundColor: isLight ? "#f2f3f7" : "#1B2631",
+                  // backgroundColor: isLight ? "#f2f3f7" : "#1B2631",
                   color: isLight ? "black" : "lightblue",
                 }}
               >
@@ -60,7 +56,10 @@ const Experience = () => {
                   </div>
                   <Chip
                     variant="filled"
-                    sx={{ backgroundColor: colorToRGBA(comp?.color_code, 0.2) }}
+                    sx={{
+                      backgroundColor: colorToRGBA(comp?.color_code, 0.2),
+                      color: isLight ? comp?.color_code : "lightblue",
+                    }}
                     label={
                       <span>
                         {" "}
@@ -88,6 +87,7 @@ const Experience = () => {
                         techstack={item?.tech_stack}
                         colorcode={comp?.color_code}
                         key={index}
+                        isLight={isLight}
                       />
                     ))}
                 />

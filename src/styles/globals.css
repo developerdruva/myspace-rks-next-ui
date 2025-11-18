@@ -67,3 +67,15 @@ a {
     color: #9dbadf ;
     /* border-color: #444 ; */
 }
+
+.headingForSection {
+  text-align: center;
+    margin: 1rem 0rem 1rem 0rem !important;
+  color: rgb(85, 85, 85);
+  margin-bottom: 20px;
+  /* margin-left: 30px; */
+  letter-spacing: 5px;
+  font-size: 1.2rem;
+  /* border: 1px solid red; */
+  display: inline-block;
+}

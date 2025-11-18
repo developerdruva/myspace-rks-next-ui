@@ -75,13 +75,13 @@ const LandingPage = () => {
 
         {portfolioDetails ? (
           <>
-            {/* <section id="home">
+            <section id="home">
               <HomePage />
-            </section> */}
+            </section>
             <section id="experience">
               <Experience />
             </section>
-            {/* <section id="skills">
+            <section id="skills">
               <Skills />
             </section>
             <section id="certifications">
@@ -98,7 +98,7 @@ const LandingPage = () => {
             </section>
             <section id="interests">
               <Interest />
-            </section> */}
+            </section>
           </>
         ) : (
           <LoadingSpinner stateFronLocal={true} />

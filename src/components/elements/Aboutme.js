@@ -1,6 +1,5 @@
 "use client";
-import classes from "../styles/About.module.css";
-import {Typography,  Box, useTheme, useMediaQuery } from "@mui/material";
+import { Typography, Box, useTheme, useMediaQuery } from "@mui/material";
 
 import { useSelector } from "react-redux";
 
@@ -42,19 +41,7 @@ const Aboutme = () => {
         mt: 6,
       }}
     >
-      {/* {JSON.stringify(currentCompany)} */}
-      <Typography
-        className={classes.head}
-        sx={{
-          fontWeight: 700,
-          color: theme.palette.primary.main,
-          textAlign: isMobile ? "center" : "left",
-          mb: 1,
-          letterSpacing: 2,
-        }}
-      >
-        ABOUT ME
-      </Typography>
+      <span className={"headingForSection"}>ABOUT ME</span>
 
       <Box sx={{ mt: 2 }}>
         <div

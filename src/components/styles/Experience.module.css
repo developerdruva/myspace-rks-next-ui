@@ -4,7 +4,7 @@
 }
 
 .head {
-  display: inline-block;
+  /* display: inline-block; */
   padding: 0px 12px;
   color: rgb(85, 85, 85);
   margin-bottom: 20px;
@@ -110,31 +110,41 @@
 } */
 .mainCard {
   position: relative;
+  /* padding: 1rem 1rem; */
+  margin: 1rem 0rem 2rem 1.5rem;
   /* background: #233788; */
-  padding: 1.5em;
-  margin-left: 60px;
+  /* padding: 1.5em; */
+  /* margin-left: 60px; */
   /* border: 1px solid green; */
   /* border-radius: 1rem 1rem; */
   /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); */
 
 }
-
+/* 
 .mainCard h2 {
   font-size: 1.2rem;
   font-family: "Quicksand", Arial, sans-serif;
   font-weight: 600;
-  /* margin: 0 0 30px 0; */
+  margin: 0 0 3rem 0;
   color: #000;
+} */
+ 
+.mainCardHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  /* border: 1px solid red; */
+  padding: 0.2rem 0rem 0rem 1rem;
 }
-
-.mainCard span {
+/* .mainCard span {
   -webkit-opacity: 0.4;
   -moz-opacity: 0.4;
   opacity: 0.6;
   -ms-filter: alpha(opacity=40);
   filter: alpha(opacity=40);
   font-size: 0.72rem;
-}
+} */
 
 .propsOfProject {
   font-size: 0.72rem;
@@ -198,7 +208,7 @@ a:hover {
   color: rgb(17, 72, 4);
   background-color: rgba(135, 147, 112, 0.4);
   font-weight: bold;
-  padding: 0.2rem 0.8rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 0.5rem;
 }
 

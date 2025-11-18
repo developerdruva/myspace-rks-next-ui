@@ -18,9 +18,18 @@ const ProjectCard = ({
   shortname,
   techstack,
   colorcode,
+  isLight,
 }) => {
   return (
-    <div className={styles.projectCard}>
+    <div
+      className={styles.projectCard}
+      style={{
+        color: isLight ? "#333" : "white",
+        backgroundColor: isLight
+          ? "rgba(255, 255, 255, 0.85)"
+          : "rgba(0, 0, 0, 0.6)",
+      }}
+    >
       <div className={styles.itemCard}>
         <Tooltip title="Project" placement="left">
           <FaProjectDiagram size={20} color={colorcode} />
