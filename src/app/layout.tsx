@@ -1,6 +1,7 @@
 import GlobalProvider, { geistMono, geistSans } from "@/global/InitialData";
 import "@/styles/globals.css";
 import "@/styles/fonts.css";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "MySpace - RKS ",
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <GlobalProvider>{children}</GlobalProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <GlobalProvider>{children}</GlobalProvider>
+        </Suspense>
       </body>
     </html>
   );

@@ -53,7 +53,7 @@ const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
       <Container
         maxWidth="xl"
         sx={{
-          padding: "0 !important",
+          padding: "1 2",
           margin: "auto",
         }}
       >
@@ -185,7 +185,16 @@ const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
       </Container>
 
       {/* Mobile Drawer */}
-      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={toggleDrawer}
+        sx={{
+          "& .MuiDrawer-paper": {
+            backgroundColor: isLight ? "#f9f9f9" : "#121212",
+          },
+        }}
+      >
         <Box sx={{ textAlign: "left", paddingTop: 2 }}>
           <Button onClick={toggleDrawer}>
             <MdClose size={20} />
@@ -236,6 +245,18 @@ const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
 
               return null;
             })}
+            <ListItem>
+              {/* Theme Toggle */}
+              <Tooltip title="Toggle Theme">
+                <IconButton onClick={toggleTheme}>
+                  {isLight ? (
+                    <MdNightlight size={20} />
+                  ) : (
+                    <MdLightMode color={"aliceblue"} size={20} />
+                  )}
+                </IconButton>
+              </Tooltip>
+            </ListItem>
           </List>
         </Box>
       </Drawer>

@@ -40,13 +40,15 @@
   overflow: inherit;
   object-fit: cover;
   /* transform-style: flat; */
+
 }
 
 .cardimg img:hover {
   /* background: aliceblue; */
-  /* opacity: 0.4;   */
+  opacity: 0.8;  
   transform: scale(1.1);
   z-index: 2;
+  cursor: pointer;
 }
 
 /* .cardimg img:hover+.hide {

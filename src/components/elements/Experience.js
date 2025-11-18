@@ -10,6 +10,7 @@ import classes from "../styles/Experience.module.css";
 
 const Experience = () => {
   const portfolioDetails = useSelector((state) => state?.portfolioState);
+
   const theme = useThemeMode();
   const isLight = theme.theme == "light" ? true : false;
 

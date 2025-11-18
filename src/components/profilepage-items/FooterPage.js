@@ -11,10 +11,15 @@ const FooterPage = () => {
 
   return (
     <footer className={`footerWrapper `}>
-      <Container
-       maxWidth="xl">
-        <div className="footerMainRow">
-          <div className="footerSection">
+      <Container maxWidth="xl">
+        <div
+          className="footerMainRow"
+          // style={{ color: "aliceblue !important" }}
+        >
+          <div
+            className="footerSection"
+            style={{ color: "aliceblue !important" }}
+          >
             <h5 className="footerTitle" align="left">
               About This Site
             </h5>

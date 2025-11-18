@@ -1,4 +1,5 @@
 "use client";
+import { useThemeMode } from "@/global/ThemeProvider";
 import { Typography, Box, useTheme, useMediaQuery } from "@mui/material";
 
 import { useSelector } from "react-redux";
@@ -22,15 +23,17 @@ const Aboutme = () => {
     (state) => state?.themeModeState?.themeMode
   );
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const themeMui = useTheme();
+  const isMobile = useMediaQuery(themeMui.breakpoints.down("sm"));
+  const theme = useThemeMode();
+  const isLight = theme.theme == "light" ? true : false;
 
   const textColor = themeModeFrmRdx ? "black" : "aliceblue";
   return (
     <Box
       id="about"
       sx={{
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: isLight ? "white" : "inherit",
         color: textColor,
         // px: { xs: 2, md: 6 },
         py: { xs: 4, md: 6 },
@@ -51,7 +54,13 @@ const Aboutme = () => {
             borderRadius: "12px",
           }}
         >
-          <div style={{ fontSize: "16px", lineHeight: 1.8 }}>
+          <div
+            style={{
+              fontSize: "16px",
+              lineHeight: 3,
+              color: isLight ? "#444" : "steelblue",
+            }}
+          >
             Hi there! I am{" "}
             <span style={{ color: "#1677ff", fontWeight: 600 }}>
               {personDetails?.first_name} {personDetails?.last_name}
@@ -81,7 +90,13 @@ const Aboutme = () => {
             {highestQualification?.study_location}.
           </div>
 
-          <div style={{ fontSize: "16px", lineHeight: 1.8 }}>
+          <div
+            style={{
+              fontSize: "16px",
+              lineHeight: 3,
+              color: isLight ? "#444" : "steelblue",
+            }}
+          >
             I’m passionate about continuous learning, exploring new
             technologies, and solving real-world problems through code. I enjoy
             working with diverse tech stacks and have hands-on experience with

@@ -32,7 +32,8 @@ const HomePage = () => {
   return (
     <Box
       sx={{
-        height: "100vh",
+        height: { xs: "auto", sm: "auto", md: "100vh" },
+        minHeight: { xs: "100vh", sm: "100vh" },
         display: "grid",
         alignItems: "center",
         position: "relative",
@@ -45,18 +46,12 @@ const HomePage = () => {
             <img
               src={personDetails.profile_pic || "/default-avatar.png"}
               alt="person"
-              style={{
-                display: "block",
-                alignSelf: "center",
-                width: "65%",
-                height: "25rem",
-              }}
             />
           </Box>
         </Grid>
 
         <Grid item size={{ xs: 12, sm: 12, md: 12, lg: 7, xl: 7 }}>
-          <Box sx={{ padding: 5 }}>
+          <Box sx={{ padding: { xs: 2, sm: 3, md: 5 } }}>
             <Box className="">
               <div
                 className=" headerText"
@@ -78,7 +73,7 @@ const HomePage = () => {
                 sequence={[personDetails.person_designation, 500]}
                 speed={20}
                 style={{
-                  fontSize: "2rem",
+                  fontSize: "clamp(1rem, 2rem, 2.5rem)",
                   fontWeight: "lighter",
                 }}
                 repeat={Infinity}

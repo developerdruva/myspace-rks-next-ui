@@ -1,48 +1,58 @@
 "use client";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Grid,
+} from "@mui/material";
 import { Fragment } from "react";
-import myspaceimg from "../images/myspace.png";
-import streamlineimg from "../images/streamline.png";
-import sudoshopimg from "../images/sudoshop.png";
-import styles from "../styles/PocWorks.module.css";
 import { useSelector } from "react-redux";
+import styles from "../styles/PocWorks.module.css";
+import { useThemeMode } from "@/global/ThemeProvider";
 
 const PocProjects = () => {
   const portfolioDetails = useSelector((state) => state?.portfolioState);
   const pocProjects = portfolioDetails?.pocProjects;
   const usedTechsOfPoc = portfolioDetails?.usedTechsOfPoc;
+  const theme = useThemeMode();
+  const isLight = theme.theme == "light" ? true : false;
 
   return (
     <Fragment>
       <div className={styles.box} id="works">
         <span className={"headingForSection"}>MY POC PROJECT WORKS </span>
-        <div className="row  ">
-          {pocProjects?.map((pocItem, pocIndex) => {
-            return (
-              <div className="col-md-4">
-                <div className={`card text-secondary border-0`}>
-                  <div className={`card-body ${styles.cardimg}`}>
-                    <img
-                      className={`card-img-top btn `}
-                      src={pocItem?.img_url}
-                      alt="Card cap"
-                      onClick={() =>
-                        window?.open(pocItem?.project_url, "_blank")
-                      }
-                    ></img>
-                  </div>
-                  <div className="card-heading">
-                    <p className="text-info text-center">
+        <Grid container spacing={2}>
+          {pocProjects?.map((pocItem, pocIndex) => (
+            <Grid
+              item
+              size={{ xs: 12, sm: 6, md: 4, lg: 4 }}
+              key={pocItem?.title + "-" + pocIndex}
+            >
+              <Card
+                sx={{ backgroundColor: isLight ? "white" : "#121212" }}
+                key={pocItem?.title + "-" + pocIndex}
+              >
+                <CardContent className={styles.cardimg}>
+                  <img
+                    src={pocItem?.img_url}
+                    alt="Card cap"
+                    onClick={() => window?.open(pocItem?.project_url, "_blank")}
+                  />
+                </CardContent>
+
+                <CardHeader
+                  sx={{ justifyContent: "center" }}
+                  title={
+                    <p style={{ fontSize: "0.8rem", textAlign: "center" }}>
                       {pocItem?.title}{" "}
-                      <span
-                        className="text-primary"
-                        style={{ fontSize: "0.65rem" }}
-                      >
+                      <span style={{ fontSize: "0.65rem" }}>
                         ({pocItem?.project_type})
                       </span>
                     </p>
-                  </div>
-                </div>
-                {
+                  }
+                />
+                <CardActions>
                   <div className="">
                     <p
                       className="m-0 p-0 lead fs-6 text-decoration-underline"
@@ -58,8 +68,10 @@ const PocProjects = () => {
                         {usedTechsOfPoc
                           ?.filter((item) => item?.poc_name === pocItem?.title)
                           ?.filter((item) => item?.tech_for === "Design")
-                          .map((item) => (
-                            <span>{item?.tech_name},&nbsp;</span>
+                          .map((item, index) => (
+                            <span key={`design-${pocIndex}-${index}`}>
+                              {item?.tech_name},&nbsp;
+                            </span>
                           ))}
                       </p>
                       <p align="justify" className="m-0 lead fs-6 fw-bold">
@@ -69,8 +81,10 @@ const PocProjects = () => {
                         {usedTechsOfPoc
                           ?.filter((item) => item?.poc_name === pocItem?.title)
                           ?.filter((item) => item?.tech_for === "Develope")
-                          .map((item) => (
-                            <span>{item?.tech_name},&nbsp;</span>
+                          .map((item, index) => (
+                            <span key={`dev-${pocIndex}-${index}`}>
+                              {item?.tech_name},&nbsp;
+                            </span>
                           ))}
                       </p>
                       <p align="justify" className="m-0 lead fs-6 fw-bold">
@@ -80,8 +94,10 @@ const PocProjects = () => {
                         {usedTechsOfPoc
                           ?.filter((item) => item?.poc_name === pocItem?.title)
                           ?.filter((item) => item?.tech_for === "Database")
-                          .map((item) => (
-                            <span>{item?.tech_name},&nbsp;</span>
+                          .map((item, index) => (
+                            <span key={`db-${pocIndex}-${index}`}>
+                              {item?.tech_name},&nbsp;
+                            </span>
                           ))}
                       </p>
                       <p align="justify" className="m-0 lead fs-6 fw-bold">
@@ -93,8 +109,10 @@ const PocProjects = () => {
                           ?.filter(
                             (item) => item?.tech_for === "Tools & Frameworks"
                           )
-                          .map((item) => (
-                            <span>{item?.tech_name},&nbsp;</span>
+                          .map((item, index) => (
+                            <span key={`tools-${pocIndex}-${index}`}>
+                              {item?.tech_name},&nbsp;
+                            </span>
                           ))}
                       </p>
                       <p align="justify" className="m-0 lead fs-6 fw-bold">
@@ -106,17 +124,19 @@ const PocProjects = () => {
                           ?.filter(
                             (item) => item?.tech_for === "Deploy & Cloud:"
                           )
-                          .map((item) => (
-                            <span>{item?.tech_name},&nbsp;</span>
+                          .map((item, index) => (
+                            <span key={`cloud-${pocIndex}-${index}`}>
+                              {item?.tech_name},&nbsp;
+                            </span>
                           ))}
                       </p>
                     </div>
                   </div>
-                }
-              </div>
-            );
-          })}
-        </div>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </div>
     </Fragment>
   );

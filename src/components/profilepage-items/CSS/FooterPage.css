@@ -68,14 +68,14 @@
 .footerWrapper {
   padding: 2.5rem 1rem 1.5rem 1rem !important;
   background-color: #1b1f2b;
-  color: #e2e8f0;
+  color: #8faed8;
   font-family: 'Segoe UI', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .footerWrapper.light {
   background-color: #f7fafc;
-  color: #2d3748;
+  color: #304d80;
 }
 
 .footerMainRow {
@@ -109,6 +109,7 @@
   font-size: 0.6rem;
   line-height: 1.7;
   justify-content: space-evenly;
+  color: lightslategray
 }
 
 .footerList {
@@ -124,6 +125,8 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: color 0.3s ease;
+    color: lightslategray
+
 }
 
 .footerList li:hover {
@@ -165,4 +168,6 @@
 .footerCopyright {
   font-size: 0.85rem;
   opacity: 0.75;
+    color: lightslategray;
+
 }

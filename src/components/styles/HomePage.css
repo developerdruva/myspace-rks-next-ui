@@ -1,7 +1,19 @@
 .headerText {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 2rem + 1vw, 2.5rem);
     font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .headerText {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .headerText {
+        font-size: 1.2rem;
+    }
 }
 
 .subHeadText {
@@ -18,8 +30,27 @@
 }
 
 .subHeadText p {
-    font-size: calc(6rem + 1.5vw) !important;
+    font-size: clamp(2rem, 6rem + 1.5vw, 8rem) !important;
     font-family: 'darlington', cursive;
+    line-height: 1.2;
+}
+
+@media (max-width: 1024px) {
+    .subHeadText p {
+        font-size: 4rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .subHeadText p {
+        font-size: 3rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .subHeadText p {
+        font-size: 2rem !important;
+    }
 }
 
 .titleCol {
@@ -35,8 +66,27 @@
     font-weight: 200;
     padding: 1rem 0rem 1rem 0rem;
 }
-.typingtext{
-    color: rgb(45, 87, 126) !important;
+
+.designationText .typingtext {
+    font-size: clamp(1rem, 2rem, 2.5rem);
+}
+
+@media (max-width: 768px) {
+    .designationText {
+        padding: 0.5rem 0rem 0.5rem 0rem;
+    }
+    .designationText .typingtext {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .designationText {
+        padding: 0.5rem 0rem 0.5rem 0rem;
+    }
+    .designationText .typingtext {
+        font-size: 1rem;
+    }
 }
 
 
@@ -56,8 +106,8 @@
 
 .personPhoto img {
     display: inline-block;
-    width: 18rem;
-    height: 18rem;
+    width: clamp(8rem, 18rem, 20rem);
+    height: clamp(8rem, 18rem, 20rem);
     border-radius: 50%;
     transition: transform 0.5s;
     overflow: hidden;
@@ -65,6 +115,27 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+}
+
+@media (max-width: 1024px) {
+    .personPhoto img {
+        width: 14rem;
+        height: 14rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .personPhoto img {
+        width: 12rem;
+        height: 12rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .personPhoto img {
+        width: 10rem;
+        height: 10rem;
+    }
 }
 
 

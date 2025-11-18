@@ -14,7 +14,7 @@
 
 [data-theme="dark"] {
   --bg: #0e1117;
-  --text: #ffffff;
+  --text: steelblue;
 }
 
 
@@ -51,6 +51,10 @@ a {
 }
 
 /* div, */
+p, span, h1, h2, h3, h4, h5, h6, ul, li, button, input, textarea, section, header, footer, nav {
+  color: var(--text);
+  transition: color 0.3s ease;
+}
 .card {
   background: var(--bg);
   color: var(--text);
@@ -70,7 +74,7 @@ a {
 
 .headingForSection {
   text-align: center;
-    margin: 1rem 0rem 1rem 0rem !important;
+    margin: 1rem 0rem 4rem 0rem !important;
   color: rgb(85, 85, 85);
   margin-bottom: 20px;
   /* margin-left: 30px; */

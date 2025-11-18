@@ -8,6 +8,7 @@ import { navbarItemsUtils } from "./NavUtils";
 import FeedbackModel from "@/common/CommonModels/FeedbackModel";
 import BlogFeedback from "@/components/elements/BlogFeedback";
 import LoadingSpinner from "@/common/commonComps/LoadingSpinner";
+import Loading from "@/common/commonComps/Loader";
 import { Container } from "@mui/material";
 import HomePage from "@/components/elements/HomePage";
 import Experience from "@/components/elements/Experience";
@@ -64,17 +65,16 @@ const LandingPage = () => {
         logoTitle={"myspace.developerprofile"}
         scrollTo={scrollTo}
         activeSection={activeSection}
-      />
+      />{" "}
+      {portfolioDetails ? (
+        <>
+          <Container maxWidth={"xl"} sx={{ padding: 2 }}>
+            {portfolioDetails?.personDetails[0]?.welcome_text && (
+              <div className="m-0 p-0 welcometext">
+                <span>{portfolioDetails?.personDetails[0]?.welcome_text}</span>
+              </div>
+            )}
 
-      <Container maxWidth={"xl"} style={{ padding: 0 }}>
-        {portfolioDetails?.personDetails[0]?.welcome_text && (
-          <div className="m-0 p-0 welcometext">
-            <span>{portfolioDetails?.personDetails[0]?.welcome_text}</span>
-          </div>
-        )}
-
-        {portfolioDetails ? (
-          <>
             <section id="home">
               <HomePage />
             </section>
@@ -99,26 +99,19 @@ const LandingPage = () => {
             <section id="interests">
               <Interest />
             </section>
-          </>
-        ) : (
-          <LoadingSpinner stateFronLocal={true} />
-        )}
+            <BlogFeedback />
+            <FeedbackModel
+              isShow={isShow}
+              setIsShow={setIsShow}
+              feedBack={{}}
+            />
+          </Container>
 
-        {/* <div>
-          <button
-            onClick={() => (document.documentElement.scrollTop = 0)}
-            className="scrollToTopFloatBtn"
-            id="scrollToTopFloatBtn"
-          >
-            Scroll Top
-          </button>
-        </div> */}
-        <BlogFeedback />
-      </Container>
-
-      <FeedbackModel isShow={isShow} setIsShow={setIsShow} feedBack={{}} />
-
-      <FooterPage />
+          <FooterPage />
+        </>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 };

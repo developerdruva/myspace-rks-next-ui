@@ -1,10 +1,16 @@
 "use client";
 import {
   Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
 } from "@mui/material";
 import { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
@@ -19,38 +25,39 @@ const Certify = () => {
   return (
     <Fragment>
       <div className={styles.box} id="certify">
-        <span className={"headingForSection"}>
-          CERTIFICATIONS OF COURSE COMPLETION
-        </span>
-        <div className="mt-3">
-          <div className="d-flex justify-content-center row p-5 pt-0">
-            {certifications?.map((certItem, certIndex) => (
-              <div className="col-md-4 mt-3" key={certIndex}>
-                <div className={`card text-secondary border-0`}>
-                  <div
-                    className={`card-body ${styles.cardimg}`}
-                    onClick={() => {
-                      setIsModal(true);
-                      setCertify({
-                        name: certItem?.certify_name,
-                        image: certItem?.certify_url,
-                      });
-                    }}
-                  >
-                    <img
-                      className={`card-img-top `}
-                      src={certItem?.certify_url}
-                      alt={`Certification - ${certIndex + 1}`}
-                    ></img>
-                    <div className={`card-img-overlay ${styles.hide} `}>
-                      {/* <button className='btn btn-info ' >View</button> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <span className={"headingForSection"}>COURSES & CERTIFICATES</span>
+        <Grid container spacing={2}>
+          {certifications?.map((certItem, certIndex) => (
+            <Grid item size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={certIndex}>
+              <Card>
+                <CardContent
+                  sx={{ padding: 0 }}
+                  className={`${styles.cardimg}`}
+                  onClick={() => {
+                    setIsModal(true);
+                    setCertify({
+                      name: certItem?.certify_name,
+                      image: certItem?.certify_url,
+                    });
+                  }}
+                >
+                  <img
+                    src={certItem?.certify_url}
+                    alt={`Certification - ${certIndex + 1}`}
+                  ></img>
+                </CardContent>
+                {/* <CardActions sx={{ justifyContent: "center" }}>
+                  <Chip
+                    label={certItem?.certify_type}
+                    variant="outlined"
+                    size="small"
+                    color="default"
+                  />
+                </CardActions> */}
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </div>
       {certify && (
         <Dialog open={isModal} maxWidth="lg" onClose={() => setIsModal(false)}>

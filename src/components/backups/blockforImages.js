@@ -24,3 +24,14 @@
     />
   </div>
 </div>;
+{
+  /* <div>
+          <button
+            onClick={() => (document.documentElement.scrollTop = 0)}
+            className="scrollToTopFloatBtn"
+            id="scrollToTopFloatBtn"
+          >
+            Scroll Top
+          </button>
+        </div> */
+}
