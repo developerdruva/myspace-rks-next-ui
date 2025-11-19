@@ -91,22 +91,45 @@
         opacity: 1;
     }
 }
+.welcometext{
+    /* margin-top: 5rem; */
 
-
-.welcometext span {
-    /* border: 4px solid green; */
-    animation: right_to_left 3s ease;
-    color: steelblue;
-    font-family: cursive;
 }
 
-@keyframes right_to_left {
+.welcometext {
+    /* border: 4px solid green; */
+    /* animation: left_to_right 3s ease; */
+    color: steelblue !important;
+    font-family: cursive;
+    z-index: 10;
+    float: right;
+    /* margin-top: 5rem;   */
+    position: absolute;
+    top: 15%;
+    right: 25%;
+    display: flex;
+    letter-spacing: 0.25rem;
+    /* padding: 0.5rem; */
+
+    justify-content: end;
+}
+
+@keyframes right_to_left { 
     from {
         margin-left: 100%;
     }
 
     to {
         margin-left: 0;
+    }
+}
+@keyframes left_to_right {
+    from {
+        margin-right: 100%;
+    }
+
+    to {
+        margin-right: 10%;
     }
 }
 

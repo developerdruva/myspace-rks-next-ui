@@ -51,10 +51,10 @@ const NavbarHeader = ({ navbarItems, logoTitle, activeSection, scrollTo }) => {
       }}
     >
       <Container
-        maxWidth="xl"
+        maxWidth="lg"
         sx={{
-          padding: "1 2",
-          margin: "auto",
+          px: { xs: 1, sm: 2, md: 3, lg: 4 }, // horizontal padding adjusts by screen
+          // py: { xs: 1, sm: 2, md: 3 }, // vertical padding adjusts by screen
         }}
       >
         <Toolbar
