@@ -29,6 +29,7 @@ import { PiCertificate, PiUserRectangle } from "react-icons/pi";
 import { SiBookstack } from "react-icons/si";
 import { GoProject } from "react-icons/go";
 import { BsCalculator } from "react-icons/bs";
+import { useThemeMode } from "@/global/ThemeProvider";
 
 const drawerWidth = 240;
 
@@ -36,31 +37,26 @@ const AdminBoard = () => {
   const portfolioDetails =
     useSelector((state) => state?.portfolioState) || null;
   const [selectedKey, setSelectedKey] = useState("1");
-  const emailId = portfolioDetails?.personDetails[0]?.email_id || "";
+  const person = portfolioDetails?.personDetails[0] || {};
+  const { theme } = useThemeMode();
+  const isLight = theme === "light" ? true : false;
 
   const renderContent = () => {
     switch (selectedKey) {
       case "1":
-        return (
-          <ProfileView profile={portfolioDetails?.personDetails[0] || ""} />
-        );
+        return <ProfileView profile={person} />;
       case "2":
-        return (
-          <ExperienceView
-            workedCompanies={portfolioDetails?.workedCompanies}
-            workedProjects={portfolioDetails?.workedProjects}
-          />
-        );
+        return <ExperienceView />;
       case "3":
         return <EducationView />;
       case "4":
-        return <SkillsView emailId={emailId} />;
+        return <SkillsView emailId={person?.emailId} />;
       case "5":
-        return <CertificationsView emailId={emailId} />;
+        return <CertificationsView emailId={person?.emailId} />;
       case "6":
-        return <PocProjectsView emailId={emailId} />;
-      case '7': 
-        return <ExperianceCalc />
+        return <PocProjectsView emailId={person?.emailId} />;
+      case "7":
+        return <ExperianceCalc />;
       default:
         return null;
     }
@@ -73,8 +69,11 @@ const AdminBoard = () => {
     { key: "4", label: "Skills", icon: <GiSkills size={20} /> },
     { key: "5", label: "Certifications", icon: <PiCertificate size={20} /> },
     { key: "6", label: "POC Projects", icon: <GoProject size={20} /> },
-    { key: "7", label: "Experiance Calculation", icon: <BsCalculator size={20} /> },
-
+    {
+      key: "7",
+      label: "Experiance Calculator",
+      icon: <BsCalculator size={20} />,
+    },
   ];
 
   return (
@@ -93,7 +92,7 @@ const AdminBoard = () => {
             width: drawerWidth,
             boxSizing: "border-box",
             backgroundColor: "#001529",
-            color: "#fff",
+            color: isLight ? "#345d79ff" : "#352d79ff",
           },
         }}
       >
@@ -159,7 +158,7 @@ const AdminBoard = () => {
               scrollBehavior: "smooth",
             }}
           >
-             {renderContent()} 
+            {renderContent()}
           </Box>
         </Box>
       </Box>
