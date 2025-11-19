@@ -9,7 +9,7 @@ import FeedbackModel from "@/common/CommonModels/FeedbackModel";
 import BlogFeedback from "@/components/elements/BlogFeedback";
 import LoadingSpinner from "@/common/commonComps/LoadingSpinner";
 import Loading from "@/common/commonComps/Loader";
-import { Container } from "@mui/material";
+import { Chip, Container } from "@mui/material";
 import HomePage from "@/components/elements/HomePage";
 import Experience from "@/components/elements/Experience";
 import Skills from "@/components/elements/Skills";
@@ -23,6 +23,7 @@ const LandingPage = () => {
     useSelector((state) => state?.portfolioState) || null;
   const [isShow, setIsShow] = useState(false);
   const [activeSection, setActiveSection] = useState("home"); // Default section to home
+  const person = portfolioDetails?.personDetails?.[0] || null;
 
   const handleScroll = () => {
     const sections = document.querySelectorAll("section");
@@ -62,18 +63,27 @@ const LandingPage = () => {
     <div>
       <NavbarHeader
         navbarItems={navbarItemsUtils}
-        logoTitle={"myspace.developerprofile"}
+        logoTitle={"myspace.profile"}
         scrollTo={scrollTo}
         activeSection={activeSection}
       />{" "}
       {portfolioDetails ? (
         <>
-          <Container maxWidth={"xl"} sx={{ padding: 2 }}>
-            {portfolioDetails?.personDetails[0]?.welcome_text && (
-              <div className="m-0 p-0 welcometext">
-                <span>{portfolioDetails?.personDetails[0]?.welcome_text}</span>
-              </div>
-            )}
+          <Container
+            maxWidth="lg"
+            sx={{
+              px: { xs: 1, sm: 2, md: 3, lg: 4 }, // horizontal padding adjusts by screen
+              py: { xs: 1, sm: 2, md: 3 }, // vertical padding adjusts by screen
+            }}
+          >
+            <Chip
+              className="welcometext"
+              label={person?.welcome_text + "rajesh.thedeveloper"}
+              variant="filled"
+              size="small"
+              color="default"
+              component={"div"}
+            ></Chip>
 
             <section id="home">
               <HomePage />
@@ -99,6 +109,7 @@ const LandingPage = () => {
             <section id="interests">
               <Interest />
             </section>
+
             <BlogFeedback />
             <FeedbackModel
               isShow={isShow}
