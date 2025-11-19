@@ -1,10 +1,10 @@
 "use client";
-import LandingPage from "@/components/profilepage-items/LandingPage";
+import LandingPage from "@/components/landing/Landing";
 import { Suspense } from "react";
 
 const Home = () => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <LandingPage />/
+  <Suspense fallback={<h1 color="red">Loading...</h1>}>
+    <LandingPage />
   </Suspense>
 );
 

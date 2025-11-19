@@ -1,24 +1,24 @@
 "use client";
+import Loading from "@/common/commonComps/Loader";
+import FeedbackModel from "@/common/CommonModels/FeedbackModel";
+import Aboutme from "@/components/elements/Aboutme";
+import BlogFeedback from "@/components/elements/BlogFeedback";
+import Certify from "@/components/elements/Certify";
+import Education from "@/components/elements/Education";
+import Experience from "@/components/elements/Experience";
+import HomePage from "@/components/elements/HomePage";
+import Interest from "@/components/elements/Interest";
+import PocProjects from "@/components/elements/PocProjects";
+import Skills from "@/components/elements/Skills";
+import { Chip, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./CSS/WelcomeStyles.css";
 import FooterPage from "./FooterPage";
 import NavbarHeader from "./NavbarHeader";
 import { navbarItemsUtils } from "./NavUtils";
-import FeedbackModel from "@/common/CommonModels/FeedbackModel";
-import BlogFeedback from "@/components/elements/BlogFeedback";
-import LoadingSpinner from "@/common/commonComps/LoadingSpinner";
-import Loading from "@/common/commonComps/Loader";
-import { Chip, Container } from "@mui/material";
-import HomePage from "@/components/elements/HomePage";
-import Experience from "@/components/elements/Experience";
-import Skills from "@/components/elements/Skills";
-import Certify from "@/components/elements/Certify";
-import PocProjects from "@/components/elements/PocProjects";
-import Education from "@/components/elements/Education";
-import Aboutme from "@/components/elements/Aboutme";
-import Interest from "@/components/elements/Interest";
-const LandingPage = () => {
+
+const ProfileSection = () => {
   const portfolioDetails =
     useSelector((state) => state?.portfolioState) || null;
   const [isShow, setIsShow] = useState(false);
@@ -127,4 +127,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default ProfileSection;
