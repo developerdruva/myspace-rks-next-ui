@@ -148,14 +148,20 @@ const ProfileView = ({ profile, workedCompanies }) => {
       >
         <Box
           sx={{
-            width: { xs: "90%", md: 800 },
+            width: {
+              xs: "95%", // mobile
+              sm: "90%", // small screens
+              md: 700, // medium devices
+              lg: "85%", // large screens
+              xl: "60%", // extra large screens
+            },
             maxHeight: "90vh",
             overflowY: "auto",
             bgcolor: "background.paper",
             borderRadius: 2,
-            p: 3,
+            p: { xs: 2, sm: 3 }, // responsive padding
             mx: "auto",
-            my: "5%",
+            my: { xs: "4%", md: "5%" }, // responsive top/bottom margin
             boxShadow: 24,
           }}
         >
