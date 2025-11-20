@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import {
   Box,
@@ -12,18 +11,18 @@ import {
   ListItemText,
   Toolbar,
   Typography,
+  AppBar,
   Divider,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import AuthorizedNavbar from "../profilepage-items/AuthorizedNavbar";
-
 import ProfileView from "../admin/ProfileView";
 import ExperienceView from "../admin/ExperienceView";
 import EducationView from "../admin/EducationView";
 import SkillsView from "../admin/SkillsView";
 import CertificationsView from "../admin/CertificationsView";
 import PocProjectsView from "../admin/PocProjectsView";
-import ExperienceCalc from "../admin/ExperienceCalc";
+import ExperianceCalc from "../admin/ExperienceCalc";
 
 import { GiSkills, GiSoapExperiment } from "react-icons/gi";
 import { PiCertificate, PiUserRectangle } from "react-icons/pi";
@@ -31,36 +30,37 @@ import { SiBookstack } from "react-icons/si";
 import { GoProject } from "react-icons/go";
 import { BsCalculator } from "react-icons/bs";
 
-import { useThemeMode } from "@/global/ThemeProvider";
-
 const drawerWidth = 240;
 
 const AdminBoard = () => {
   const portfolioDetails =
     useSelector((state) => state?.portfolioState) || null;
-
   const [selectedKey, setSelectedKey] = useState("1");
-
-  const person = portfolioDetails?.personDetails[0] || {};
-  const { theme } = useThemeMode();
-  const isLight = theme === "light" ? true : false;
+  const emailId = portfolioDetails?.personDetails[0]?.email_id || "";
 
   const renderContent = () => {
     switch (selectedKey) {
       case "1":
-        return <ProfileView profile={person} />;
+        return (
+          <ProfileView profile={portfolioDetails?.personDetails[0] || ""} />
+        );
       case "2":
-        return <ExperienceView />;
+        return (
+          <ExperienceView
+            workedCompanies={portfolioDetails?.workedCompanies}
+            workedProjects={portfolioDetails?.workedProjects}
+          />
+        );
       case "3":
         return <EducationView />;
       case "4":
-        return <SkillsView emailId={person?.emailId} />;
+        return <SkillsView emailId={emailId} />;
       case "5":
-        return <CertificationsView emailId={person?.emailId} />;
+        return <CertificationsView emailId={emailId} />;
       case "6":
-        return <PocProjectsView emailId={person?.emailId} />;
-      case "7":
-        return <ExperienceCalc />;
+        return <PocProjectsView emailId={emailId} />;
+      case '7': 
+        return <ExperianceCalc />
       default:
         return null;
     }
@@ -73,23 +73,17 @@ const AdminBoard = () => {
     { key: "4", label: "Skills", icon: <GiSkills size={20} /> },
     { key: "5", label: "Certifications", icon: <PiCertificate size={20} /> },
     { key: "6", label: "POC Projects", icon: <GoProject size={20} /> },
-    {
-      key: "7",
-      label: "Experience Calculator",
-      icon: <BsCalculator size={20} />,
-    },
+    { key: "7", label: "Experiance Calculation", icon: <BsCalculator size={20} /> },
+
   ];
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        minHeight: "100vh",
-      }}
+      sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f5f5f5" }}
     >
       <CssBaseline />
 
-      {/* Sidebar */}
+      {/* Sidebar Drawer */}
       <Drawer
         variant="permanent"
         sx={{
@@ -98,42 +92,28 @@ const AdminBoard = () => {
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
             boxSizing: "border-box",
-            backgroundColor: isLight ? "#0B1A2A" : "#151B2F",
-            borderRight: "none",
-            boxShadow: "2px 0 6px rgba(0, 0, 0, 0.15)",
+            backgroundColor: "#001529",
+            color: "#fff",
           },
         }}
       >
-        <Toolbar sx={{ justifyContent: "center", py: 2 }}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: 600,
-              letterSpacing: 0.5,
-              color: isLight ? "aliceblue" : "steelblue",
-            }}
-          >
+        <Toolbar sx={{ justifyContent: "center", padding: 2 }}>
+          <Typography variant="h6" color="inherit">
             Admin Panel
           </Typography>
         </Toolbar>
-
         <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
-
-        <List sx={{ mt: 1 }}>
+        <List>
           {menuItems.map((item) => (
             <ListItem key={item.key} disablePadding>
               <ListItemButton
                 selected={selectedKey === item.key}
                 onClick={() => setSelectedKey(item.key)}
                 sx={{
-                  color: "#b3c2e7",
-                  "&:hover": {
-                    backgroundColor: "rgba(255,255,255,0.08)",
-                  },
+                  color: "#fff",
                   "&.Mui-selected": {
                     backgroundColor: "#1890ff",
                     color: "#fff",
-                    boxShadow: "inset 0 0 6px rgba(0,0,0,0.2)",
                     "&:hover": {
                       backgroundColor: "#1677cc",
                     },
@@ -143,50 +123,43 @@ const AdminBoard = () => {
                 <ListItemIcon sx={{ color: "inherit", minWidth: 36 }}>
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText
-                  primary={item.label}
-                  sx={{
-                    "& .MuiTypography-root": {
-                      color: isLight ? "aliceblue" : "steelblue",
-                      fontWeight: 200,
-                    },
-                  }}
-                />
+                <ListItemText primary={item.label} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
 
-      {/* Main Content */}
+      {/* main content */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          width: `calc(100% - ${drawerWidth}px)`,
-          display: "flex",
-          flexDirection: "column",
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
         <AuthorizedNavbar
           logoTitle="Profile Blog Dashboard"
           isLightTheme={true}
         />
-
-        <Box sx={{ p: 2 }}>
+        <Box
+          sx={{
+            padding: 1,
+            // minHeight: "calc(100vh)",
+          }}
+        >
           <Box
             sx={{
-              backgroundColor: isLight ? "#fff" : "#1e2335",
-              borderRadius: 2,
-              padding: 3,
-              minHeight: "calc(100vh - 100px)",
-              boxShadow: isLight
-                ? "0 2px 10px rgba(0,0,0,0.08)"
-                : "0 2px 10px rgba(0,0,0,0.4)",
+              backgroundColor: "#fff",
+              padding: 2,
+              borderRadius: 1,
+              boxShadow: 1,
+              height: "calc(100vh - 80px)",
               overflowY: "auto",
+              scrollBehavior: "smooth",
             }}
           >
-            {renderContent()}
+             {renderContent()} 
           </Box>
         </Box>
       </Box>
