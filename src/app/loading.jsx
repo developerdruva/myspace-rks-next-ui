@@ -1,13 +1,7 @@
 "use client";
 import { Box, CircularProgress } from "@mui/material";
-import { useEffect } from "react";
 
 const Loading = () => {
-  useEffect(() => {
-    setTimeout(() => {
-      alert("hi");
-    }, 1000);
-  });
   return (
     <Box
       sx={{
@@ -20,7 +14,6 @@ const Loading = () => {
       }}
     >
       <CircularProgress />
-      hi
     </Box>
   );
 };

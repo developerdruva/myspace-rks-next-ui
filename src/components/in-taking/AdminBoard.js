@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import {
   Box,
@@ -11,24 +12,25 @@ import {
   ListItemText,
   Toolbar,
   Typography,
-  AppBar,
   Divider,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import AuthorizedNavbar from "../profilepage-items/AuthorizedNavbar";
+
 import ProfileView from "../admin/ProfileView";
 import ExperienceView from "../admin/ExperienceView";
 import EducationView from "../admin/EducationView";
 import SkillsView from "../admin/SkillsView";
 import CertificationsView from "../admin/CertificationsView";
 import PocProjectsView from "../admin/PocProjectsView";
-import ExperianceCalc from "../admin/ExperienceCalc";
+import ExperienceCalc from "../admin/ExperienceCalc";
 
 import { GiSkills, GiSoapExperiment } from "react-icons/gi";
 import { PiCertificate, PiUserRectangle } from "react-icons/pi";
 import { SiBookstack } from "react-icons/si";
 import { GoProject } from "react-icons/go";
 import { BsCalculator } from "react-icons/bs";
+
 import { useThemeMode } from "@/global/ThemeProvider";
 
 const drawerWidth = 240;
@@ -36,7 +38,9 @@ const drawerWidth = 240;
 const AdminBoard = () => {
   const portfolioDetails =
     useSelector((state) => state?.portfolioState) || null;
+
   const [selectedKey, setSelectedKey] = useState("1");
+
   const person = portfolioDetails?.personDetails[0] || {};
   const { theme } = useThemeMode();
   const isLight = theme === "light" ? true : false;
@@ -56,7 +60,7 @@ const AdminBoard = () => {
       case "6":
         return <PocProjectsView emailId={person?.emailId} />;
       case "7":
-        return <ExperianceCalc />;
+        return <ExperienceCalc />;
       default:
         return null;
     }
@@ -71,18 +75,21 @@ const AdminBoard = () => {
     { key: "6", label: "POC Projects", icon: <GoProject size={20} /> },
     {
       key: "7",
-      label: "Experiance Calculator",
+      label: "Experience Calculator",
       icon: <BsCalculator size={20} />,
     },
   ];
 
   return (
     <Box
-      sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f5f5f5" }}
+      sx={{
+        display: "flex",
+        minHeight: "100vh",
+      }}
     >
       <CssBaseline />
 
-      {/* Sidebar Drawer */}
+      {/* Sidebar */}
       <Drawer
         variant="permanent"
         sx={{
@@ -91,28 +98,42 @@ const AdminBoard = () => {
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
             boxSizing: "border-box",
-            backgroundColor: "#001529",
-            color: isLight ? "#345d79ff" : "#352d79ff",
+            backgroundColor: isLight ? "#0B1A2A" : "#151B2F",
+            borderRight: "none",
+            boxShadow: "2px 0 6px rgba(0, 0, 0, 0.15)",
           },
         }}
       >
-        <Toolbar sx={{ justifyContent: "center", padding: 2 }}>
-          <Typography variant="h6" color="inherit">
+        <Toolbar sx={{ justifyContent: "center", py: 2 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 600,
+              letterSpacing: 0.5,
+              color: isLight ? "aliceblue" : "steelblue",
+            }}
+          >
             Admin Panel
           </Typography>
         </Toolbar>
+
         <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
-        <List>
+
+        <List sx={{ mt: 1 }}>
           {menuItems.map((item) => (
             <ListItem key={item.key} disablePadding>
               <ListItemButton
                 selected={selectedKey === item.key}
                 onClick={() => setSelectedKey(item.key)}
                 sx={{
-                  color: "#fff",
+                  color: "#b3c2e7",
+                  "&:hover": {
+                    backgroundColor: "rgba(255,255,255,0.08)",
+                  },
                   "&.Mui-selected": {
                     backgroundColor: "#1890ff",
                     color: "#fff",
+                    boxShadow: "inset 0 0 6px rgba(0,0,0,0.2)",
                     "&:hover": {
                       backgroundColor: "#1677cc",
                     },
@@ -122,40 +143,47 @@ const AdminBoard = () => {
                 <ListItemIcon sx={{ color: "inherit", minWidth: 36 }}>
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.label} />
+                <ListItemText
+                  primary={item.label}
+                  sx={{
+                    "& .MuiTypography-root": {
+                      color: isLight ? "aliceblue" : "steelblue",
+                      fontWeight: 200,
+                    },
+                  }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
 
-      {/* main content */}
+      {/* Main Content */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: `calc(100% - ${drawerWidth}px)`,
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <AuthorizedNavbar
           logoTitle="Profile Blog Dashboard"
           isLightTheme={true}
         />
-        <Box
-          sx={{
-            padding: 1,
-            // minHeight: "calc(100vh)",
-          }}
-        >
+
+        <Box sx={{ p: 2 }}>
           <Box
             sx={{
-              backgroundColor: "#fff",
-              padding: 2,
-              borderRadius: 1,
-              boxShadow: 1,
-              height: "calc(100vh - 80px)",
+              backgroundColor: isLight ? "#fff" : "#1e2335",
+              borderRadius: 2,
+              padding: 3,
+              minHeight: "calc(100vh - 100px)",
+              boxShadow: isLight
+                ? "0 2px 10px rgba(0,0,0,0.08)"
+                : "0 2px 10px rgba(0,0,0,0.4)",
               overflowY: "auto",
-              scrollBehavior: "smooth",
             }}
           >
             {renderContent()}

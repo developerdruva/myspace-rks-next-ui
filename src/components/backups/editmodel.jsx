@@ -9,6 +9,7 @@ import {
   CardContent,
   Typography,
   TextField,
+  FormHelperText,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
@@ -58,27 +59,31 @@ const BasicDetails = ({ personDetails }) => {
 
   return (
     <Box sx={{ maxWidth: "1000px", mx: "auto", mt: 4 }}>
-      <Formik
-        initialValues={initialValues}
-        enableReinitialize={true}
-        validationSchema={Yup.object().shape({})}
-        onSubmit={(values, { resetForm }) => submitForm(values, resetForm)}
-      >
-        {({
-          errors,
-          handleChange,
-          setFieldValue,
-          touched,
-          resetForm,
-          handleSubmit,
-          values,
-        }) => (
-          <form onSubmit={handleSubmit} noValidate>
-            <Grid container spacing={3}>
-              {/* LEFT COLUMN */}
-              <Grid item xs={12} md={6}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
+      <Card>
+        <CardContent>
+          <Typography variant="h6" sx={{ mb: 3 }}>
+            Profile Details
+          </Typography>
+
+          <Formik
+            initialValues={initialValues}
+            enableReinitialize={true}
+            validationSchema={Yup.object().shape({})}
+            onSubmit={(values, { resetForm }) => submitForm(values, resetForm)}
+          >
+            {({
+              errors,
+              handleChange,
+              setFieldValue,
+              touched,
+              resetForm,
+              handleSubmit,
+              values,
+            }) => (
+              <form onSubmit={handleSubmit} noValidate>
+                <Grid container spacing={3}>
+                  {/* LEFT COLUMN */}
+                  <Grid item xs={12} md={6}>
                     <TextField
                       fullWidth
                       name="first_name"
@@ -86,66 +91,57 @@ const BasicDetails = ({ personDetails }) => {
                       value={values.first_name}
                       onChange={handleChange}
                     />
-                  </Grid>
 
-                  <Grid item xs={12}>
                     <TextField
                       fullWidth
+                      sx={{ mt: 2 }}
                       name="last_name"
                       label="Last Name"
                       value={values.last_name}
                       onChange={handleChange}
                     />
-                  </Grid>
 
-                  <Grid item xs={12}>
                     <TextField
                       fullWidth
+                      sx={{ mt: 2 }}
                       name="email_id"
                       label="Email"
                       type="email"
                       value={values.email_id}
                       onChange={handleChange}
                     />
-                  </Grid>
 
-                  <Grid item xs={12}>
                     <TextField
                       fullWidth
+                      sx={{ mt: 2 }}
                       name="mobile_no"
                       label="Mobile"
                       type="tel"
                       value={values.mobile_no}
                       onChange={handleChange}
                     />
-                  </Grid>
 
-                  <Grid item xs={12}>
                     <TextField
                       fullWidth
+                      sx={{ mt: 2 }}
                       name="roleof_person"
                       label="Role"
                       value={values.roleof_person}
                       onChange={handleChange}
                     />
-                  </Grid>
 
-                  <Grid item xs={12}>
                     <TextField
                       fullWidth
+                      sx={{ mt: 2 }}
                       name="person_designation"
                       label="Designation"
                       value={values.person_designation}
                       onChange={handleChange}
                     />
                   </Grid>
-                </Grid>
-              </Grid>
 
-              {/* RIGHT COLUMN */}
-              <Grid item xs={12} md={6}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
+                  {/* RIGHT COLUMN */}
+                  <Grid item xs={12} md={6}>
                     <TextField
                       fullWidth
                       name="welcome_text"
@@ -155,62 +151,60 @@ const BasicDetails = ({ personDetails }) => {
                       multiline
                       rows={3}
                     />
-                  </Grid>
 
-                  {/* Profile Pic */}
-                  <Grid item xs={12}>
-                    <Typography variant="body2">
-                      Upload Profile Picture{" "}
-                      {values?.profile_pic && (
-                        <a
-                          href={values?.profile_pic}
-                          target="_blank"
-                          style={{ fontSize: "0.75rem" }}
-                        >
-                          &nbsp;View <BsEye size={12} />
-                        </a>
-                      )}
-                    </Typography>
+                    {/* Profile Pic */}
+                    <Box sx={{ mt: 3 }}>
+                      <Typography variant="body2">
+                        Upload Profile Picture{" "}
+                        {values?.profile_pic && (
+                          <a
+                            href={values?.profile_pic}
+                            target="_blank"
+                            style={{ fontSize: "0.75rem" }}
+                          >
+                            &nbsp;View <BsEye size={12} />
+                          </a>
+                        )}
+                      </Typography>
 
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) =>
-                        setFieldValue("profile_pic", e.target.files[0])
-                      }
-                      style={{ marginTop: "8px" }}
-                    />
-                  </Grid>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          setFieldValue("profile_pic", e.target.files[0])
+                        }
+                        style={{ marginTop: "8px" }}
+                      />
+                    </Box>
 
-                  {/* Resume */}
-                  <Grid item xs={12}>
-                    <Typography variant="body2">
-                      Upload Resume{" "}
-                      {values?.resume && (
-                        <a
-                          href={values?.resume}
-                          target="_blank"
-                          style={{ fontSize: "0.75rem" }}
-                        >
-                          &nbsp;View <BsEye size={12} />
-                        </a>
-                      )}
-                    </Typography>
+                    {/* Resume */}
+                    <Box sx={{ mt: 3 }}>
+                      <Typography variant="body2">
+                        Upload Resume{" "}
+                        {values?.resume && (
+                          <a
+                            href={values?.resume}
+                            target="_blank"
+                            style={{ fontSize: "0.75rem" }}
+                          >
+                            &nbsp;View <BsEye size={12} />
+                          </a>
+                        )}
+                      </Typography>
 
-                    <input
-                      type="file"
-                      onChange={(e) =>
-                        setFieldValue("resume", e.target.files[0])
-                      }
-                      style={{ marginTop: "8px" }}
-                    />
-                  </Grid>
+                      <input
+                        type="file"
+                        onChange={(e) =>
+                          setFieldValue("resume", e.target.files[0])
+                        }
+                        style={{ marginTop: "8px" }}
+                      />
+                    </Box>
 
-                  {/* Buttons */}
-                  <Grid item xs={12}>
+                    {/* Buttons */}
                     <Box
                       sx={{
-                        mt: 3,
+                        mt: 4,
                         display: "flex",
                         justifyContent: "center",
                         gap: 2,
@@ -230,11 +224,11 @@ const BasicDetails = ({ personDetails }) => {
                     </Box>
                   </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
-          </form>
-        )}
-      </Formik>
+              </form>
+            )}
+          </Formik>
+        </CardContent>
+      </Card>
     </Box>
   );
 };
