@@ -1,187 +1,242 @@
 "use client";
-import { Field, Formik } from 'formik';
-import { useEffect, useState } from 'react'
-import { Button, Grid } from '@mui/material';
-import { useRouter } from 'next/navigation';
-import * as Yup from 'yup';
-import apiServices from '@/utils/service-calls/apiServices';
-import { showAlertNotice } from '@/common/CommonFunction';
-import { BsEye } from 'react-icons/bs';
+import { Field, Formik } from "formik";
+import { useEffect, useState } from "react";
+import {
+  Button,
+  Grid,
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+} from "@mui/material";
+import { useRouter } from "next/navigation";
+import * as Yup from "yup";
+import apiServices from "@/utils/service-calls/apiServices";
+import { showAlertNotice } from "@/common/CommonFunction";
+import { BsEye } from "react-icons/bs";
 
 const BasicDetails = ({ personDetails }) => {
-    const [isValidUser, setIsValidUser] = useState(false)
-    const [isPasswordOk, setisPasswordOk] = useState(true)
-    const router = useRouter();
-    const [initialValues, setInitialValues] = useState({
-        first_name: '',
-        last_name: '',
-        email_id: '',
-        mobile_no: '',
-        roleof_person: '',
-        person_designation: '',
-        profile_pic: '',
-        person_resume: '',
-        welcome_text: '',
+  const router = useRouter();
+
+  const [initialValues, setInitialValues] = useState({
+    first_name: "",
+    last_name: "",
+    email_id: "",
+    mobile_no: "",
+    roleof_person: "",
+    person_designation: "",
+    profile_pic: "",
+    person_resume: "",
+    welcome_text: "",
+  });
+
+  useEffect(() => {
+    if (personDetails) {
+      setInitialValues(personDetails);
+    }
+  }, []);
+
+  const submitForm = (values, resetForm) => {
+    let formData = new FormData();
+
+    Object.keys(values)?.forEach((key) => {
+      formData.append(key, values[key]);
     });
 
-    useEffect(() => {
-        setInitialValues(personDetails)
-    }, [])
+    apiServices.saveProfileDetails(formData).then((res) => {
+      if (res?.data?.status === "success") {
+        showAlertNotice(res?.data?.message, "success").then(() => {
+          router.push("/");
+          localStorage?.clear();
+        });
+      } else {
+        showAlertNotice(res?.data?.message, "error");
+      }
+    });
+  };
 
-    const submitForm = (values, resetForm) => {
-        console.log('hi in submitform')
-        console.log('values -> ', values)
-        let formData = new FormData();
-        Object.keys(values)?.forEach(key => {
-            formData.append(key, values[key])
-        })
-        apiServices.saveProfileDetails(formData).then(res => {
-            if (res?.data?.status === 'success') {
-                showAlertNotice(res?.data?.message, 'success').then(r => {
-                    router.push('/')
-                    localStorage?.clear()
-                })
-            } else {
-                showAlertNotice(res?.data?.message, 'error')
-            }
-            console.log(' res ', res)
-        })
-    }
-    return (
-        <div className='container '>
-            <Formik
-                initialValues={initialValues} enableReinitialize={true}
-                validationSchema={Yup.object().shape({
-                    // email: Yup.string().required("This field is Required!"),
-                    // password: Yup.string().required("This field is Required!"),
-                    // profile_pic: Yup.mixed().required(),
-                })}
-                onSubmit={(values, { resetForm }) => {
-                    console.log(' hello in on submit', values)
-                    // if(values?.password === values)
-                    submitForm(values, resetForm);
-                }}
-            >
-                {({ errors, handleChange, setFieldValue, touched, resetForm, handleSubmit, values }) => (
-                    <form onSubmit={handleSubmit} noValidate className=" w-100 " >
-                        <div className='row p-2'>
+  return (
+    <Box sx={{ maxWidth: "1000px", mx: "auto", mt: 4 }}>
+      <Formik
+        initialValues={initialValues}
+        enableReinitialize={true}
+        validationSchema={Yup.object().shape({})}
+        onSubmit={(values, { resetForm }) => submitForm(values, resetForm)}
+      >
+        {({
+          errors,
+          handleChange,
+          setFieldValue,
+          touched,
+          resetForm,
+          handleSubmit,
+          values,
+        }) => (
+          <form onSubmit={handleSubmit} noValidate>
+            <Grid container spacing={3}>
+              {/* LEFT COLUMN */}
+              <Grid item xs={12} md={6}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      name="first_name"
+                      label="First Name"
+                      value={values.first_name}
+                      onChange={handleChange}
+                    />
+                  </Grid>
 
-                            <div className='col-md-4 p-2'>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      name="last_name"
+                      label="Last Name"
+                      value={values.last_name}
+                      onChange={handleChange}
+                    />
+                  </Grid>
 
-                                <Row>
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} className="mb-1 ">
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="firstName" >First Name</label>
-                                        </div>
-                                        <Field type="text" className="form-control " name="first_name" placeholder='' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} className="mb-1 ">
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="lastName" >Last Name</label>
-                                        </div>
-                                        <Field type="text" className="form-control " name="last_name" placeholder='' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} >
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="email_id">Email</label>
-                                        </div>
-                                        <Field type="email" className="form-control" name="email_id" />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} className="mb-1 ">
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="mobile_no" >Mobile</label>
-                                        </div>
-                                        <Field type="tel" className="form-control " name="mobile_no" placeholder='' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} className="mb-1 ">
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="city" >Role of Person</label>
-                                        </div>
-                                        <Field type="text" className="form-control " name="roleof_person" placeholder='' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} className="mb-1 ">
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="person_designation" >Person Designation</label>
-                                        </div>
-                                        <Field type="text" className="form-control " name="person_designation" placeholder='' />
-                                    </Col>
-                                </Row>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      name="email_id"
+                      label="Email"
+                      type="email"
+                      value={values.email_id}
+                      onChange={handleChange}
+                    />
+                  </Grid>
 
-                            </div>
-                            <div className='col-md-4 p-2'>
-                                <Row>
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} className="mb-1 ">
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="welcome_text" >Welcome Text</label>
-                                        </div>
-                                        <Field type="text" className="form-control " name="welcome_text" placeholder='' />
-                                    </Col>
-                                </Row>
-                                <Row className="mb-1 ">
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} >
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="profile_pic">Upload Profile Picture&nbsp;&nbsp;
-                                                &nbsp;&nbsp;                                            {
-                                                    values?.profile_pic && <a href={values?.profile_pic} target='_blank' style={{ textDecoration: 'none', fontSize: '0.6rem' }}><span >Existed File<BsEye className='m-1 mb-2' size={12} /></span></a>
-                                                }   </label>
-                                        </div>
-                                        <input type="file" className="form-control" name="profile_pic" accept='image/png, .svg, image/jpeg'
-                                            onChange={(e) => setFieldValue(e?.target?.name, e?.target?.files[0])}
-                                        />
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      name="mobile_no"
+                      label="Mobile"
+                      type="tel"
+                      value={values.mobile_no}
+                      onChange={handleChange}
+                    />
+                  </Grid>
 
-                                    </Col>
-                                </Row>
-                                <Row className="mb-1 ">
-                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} >
-                                        <div className='d-flex justify-content-start'>
-                                            <label htmlFor="">Upload Resume&nbsp;&nbsp;
-                                                &nbsp;&nbsp;                                            {
-                                                    values?.resume && <a href={values?.resume} target='_blank' style={{ textDecoration: 'none', fontSize: '0.6rem' }}><span >Existed File<BsEye className='m-1 mb-2' size={12} /></span></a>
-                                                } </label>
-                                        </div>
-                                        <input type="file" className="form-control" name="resume"
-                                            onChange={(e) => setFieldValue(e?.target?.name, e?.target?.files[0])}
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      name="roleof_person"
+                      label="Role"
+                      value={values.roleof_person}
+                      onChange={handleChange}
+                    />
+                  </Grid>
 
-                                        />
-                                    </Col>
-                                </Row>
-                                <div className='d-flex justify-content-center align-items-center m-5 p-5'>
-                                    <Button type="reset" className='btn btn-warning btn-sm mx-2' onClick={() => { resetForm(); }}>Reset</Button>
-                                    {
-                                        personDetails != '' ?
-                                            <Button type='submit' className='btn btn-sm'  >Update</Button>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      name="person_designation"
+                      label="Designation"
+                      value={values.person_designation}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
 
-                                            :
-                                            <Button type='submit' className='btn btn-sm'  >Submit</Button>
+              {/* RIGHT COLUMN */}
+              <Grid item xs={12} md={6}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      name="welcome_text"
+                      label="Welcome Text"
+                      value={values.welcome_text}
+                      onChange={handleChange}
+                      multiline
+                      rows={3}
+                    />
+                  </Grid>
 
-                                    }
+                  {/* Profile Pic */}
+                  <Grid item xs={12}>
+                    <Typography variant="body2">
+                      Upload Profile Picture{" "}
+                      {values?.profile_pic && (
+                        <a
+                          href={values?.profile_pic}
+                          target="_blank"
+                          style={{ fontSize: "0.75rem" }}
+                        >
+                          &nbsp;View <BsEye size={12} />
+                        </a>
+                      )}
+                    </Typography>
 
-                                </div>
-                            </div>
-                            <div className='col-md-4 '>
-                                {/* {
-                                    Object.keys(values).map(key => (
-                                        <div>{key} &nbsp;<b>{values[key]}</b></div>
-                                    ))
-                                } */}
-                            </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) =>
+                        setFieldValue("profile_pic", e.target.files[0])
+                      }
+                      style={{ marginTop: "8px" }}
+                    />
+                  </Grid>
 
-                        </div>
-                    </form>
-                )}
-            </Formik>
-        </div>
-    )
-}
+                  {/* Resume */}
+                  <Grid item xs={12}>
+                    <Typography variant="body2">
+                      Upload Resume{" "}
+                      {values?.resume && (
+                        <a
+                          href={values?.resume}
+                          target="_blank"
+                          style={{ fontSize: "0.75rem" }}
+                        >
+                          &nbsp;View <BsEye size={12} />
+                        </a>
+                      )}
+                    </Typography>
 
-export default BasicDetails
+                    <input
+                      type="file"
+                      onChange={(e) =>
+                        setFieldValue("resume", e.target.files[0])
+                      }
+                      style={{ marginTop: "8px" }}
+                    />
+                  </Grid>
+
+                  {/* Buttons */}
+                  <Grid item xs={12}>
+                    <Box
+                      sx={{
+                        mt: 3,
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <Button
+                        variant="outlined"
+                        color="warning"
+                        onClick={() => resetForm()}
+                      >
+                        Reset
+                      </Button>
+
+                      <Button variant="contained" type="submit">
+                        {personDetails ? "Update" : "Submit"}
+                      </Button>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </form>
+        )}
+      </Formik>
+    </Box>
+  );
+};
+
+export default BasicDetails;
