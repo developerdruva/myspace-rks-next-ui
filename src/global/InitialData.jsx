@@ -10,7 +10,6 @@ import { CognitoProvider } from "@/global/CognitoProvider";
 const GlobalProvider = ({ children }) => {
   const dispatch = reduxStore.dispatch;
   const isPortfolioExist = reduxStore.getState()?.portfolioState;
-
   useEffect(() => {
     if (!isPortfolioExist) getPortfolioDetails(dispatch);
   }, []);

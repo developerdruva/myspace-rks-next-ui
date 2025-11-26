@@ -12,5 +12,6 @@ const cognitoAuthConfig = {
 };
 
 export function CognitoProvider({ children }) {
+  console.log(" auth ", cognitoAuthConfig);
   return <AuthProvider {...cognitoAuthConfig}>{children}</AuthProvider>;
 }
