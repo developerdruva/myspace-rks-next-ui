@@ -5,6 +5,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { ThemeProvider } from "@/global/ThemeProvider";
 import { reduxStore } from "../store/index";
 import { Geist, Geist_Mono } from "next/font/google";
+import { CognitoProvider } from "@/global/CognitoProvider";
 
 const GlobalProvider = ({ children }) => {
   const dispatch = reduxStore.dispatch;
@@ -15,9 +16,11 @@ const GlobalProvider = ({ children }) => {
   }, []);
 
   return (
-    <ReduxProvider store={reduxStore}>
-      <ThemeProvider>{children}</ThemeProvider>
-    </ReduxProvider>
+    <CognitoProvider>
+      <ReduxProvider store={reduxStore}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </ReduxProvider>
+    </CognitoProvider>
   );
 };
 

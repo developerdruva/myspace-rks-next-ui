@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import apiServices from "@/utils/service-calls/apiServices";
+import apiServices from "../../utils/service-calls/apiServices";
 import { showAlertNotice } from "@/common/CommonFunction";
 import { BsEye } from "react-icons/bs";
 
@@ -38,11 +38,22 @@ const BasicDetails = ({ personDetails }) => {
   }, []);
 
   const submitForm = (values, resetForm) => {
+    console.log(" hi in submint form", values);
     let formData = new FormData();
-
-    Object.keys(values)?.forEach((key) => {
-      formData.append(key, values[key]);
+    Object.keys(values).forEach((key) => {
+      if (values[key] instanceof File) {
+        formData.append(key, values[key]);
+      } else {
+        formData.append(key, values[key] ?? "");
+      }
     });
+
+    console.log(formData, " this ");
+
+    // Object.keys(values).forEach((key) => {
+    //   formData.append(key, values[key]);
+    // });
+    // console.log(" form data ", formData.get("profile_pic"));
 
     apiServices.saveProfileDetails(formData).then((res) => {
       if (res?.data?.status === "success") {
@@ -175,9 +186,10 @@ const BasicDetails = ({ personDetails }) => {
                     <input
                       type="file"
                       accept="image/*"
-                      onChange={(e) =>
-                        setFieldValue("profile_pic", e.target.files[0])
-                      }
+                      onChange={(e) => {
+                        console.log(e.target.files[0]);
+                        setFieldValue("profile_pic", e.target.files[0]);
+                      }}
                       style={{ marginTop: "8px" }}
                     />
                   </Grid>

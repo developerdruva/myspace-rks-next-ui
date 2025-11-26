@@ -18,7 +18,7 @@ const ExperienceEntry = ({ workedCompanies }) => {
   const columns = [
     ...workedCompColumns,
     {
-      name: "Project Details",
+      name: "Project Details ",
       cell: (row) => (
         <Space size="small">
           <Button size="small" icon={<BsViewList />} onClick={() => ""}>

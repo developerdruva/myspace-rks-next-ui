@@ -6,7 +6,7 @@ const axiosLoaderCall = axios.create({
   baseURL: API_URL,
   //   withCredentials: true, // Send cookies/auth headers with every request
   headers: {
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
     // Authorization: `Bearer ${"rajesh"}`, // optionally add auth token
   },
 });
