@@ -1,13 +1,16 @@
 import axios from "axios";
 import { reduxStore as store } from "@/store/index.js";
 import { API_URL } from "./apiConfigs";
+import { getAccessToken } from "../service-utils/getAccessToken";
+
+const access_token = getAccessToken();
 
 const axiosLoaderCall = axios.create({
   baseURL: API_URL,
   //   withCredentials: true, // Send cookies/auth headers with every request
   headers: {
     // "Content-Type": "application/json",
-    // Authorization: `Bearer ${"rajesh"}`, // optionally add auth token
+    Authorization: `Bearer ${access_token}`, // optionally add auth token
   },
 });
 
