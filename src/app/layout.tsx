@@ -4,7 +4,7 @@ import "@/styles/fonts.css";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "MySpace - RKS ",
+  title: "mylogr - RKS ",
   description: "Personal portfolio and blog",
   icons: {
     icon: "/r-icon.svg",

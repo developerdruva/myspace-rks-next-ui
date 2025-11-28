@@ -1,8 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Formik, Field } from "formik";
+import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { Button, Grid as GridCol, TextField } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Grid,
+  // TextField,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
+} from "@mui/material";
 import { useSelector } from "react-redux";
 
 // Dummy Companies List (Replace with your API or Redux data)
@@ -86,172 +95,203 @@ const ProjectEntryForm = ({
         values,
         setFieldValue,
       }) => (
-        <Form noValidate onSubmit={handleSubmit}>
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Company Name</Form.Label>
-                <Form.Select
-                  name="company_name"
-                  value={values.company_name}
-                  onChange={(e) => {
-                    handleChange(e);
-                    const selected = companies.find(
-                      (c) => c.name === e.target.value
-                    );
-                    setFieldValue("company_code", selected?.code || "");
-                  }}
-                  disabled
-                >
-                  <option value="">Select Company</option>
-                  {companies.map((company, idx) => (
-                    <option key={idx} value={company.name}>
-                      {company.name}
-                    </option>
-                  ))}
-                </Form.Select>
-                {touched.company_name && errors.company_name && (
-                  <div className="text-danger">{errors.company_name}</div>
-                )}
-              </Form.Group>
+        <div>
+          <Form noValidate onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              {/* LEFT SIDE */}
+              <Grid item xs={12} md={6}>
+                {/* Company Name (disabled dropdown) */}
+                <FormControl fullWidth margin="normal">
+                  <InputLabel>Company Name</InputLabel>
+                  <Select
+                    name="company_name"
+                    label="Company Name"
+                    value={values.company_name}
+                    onChange={(e) => {
+                      handleChange(e);
+                      const selected = companies.find(
+                        (c) => c.name === e.target.value
+                      );
+                      setFieldValue("company_code", selected?.code || "");
+                    }}
+                    disabled
+                  >
+                    <MenuItem value="">Select Company</MenuItem>
+                    {companies.map((company, idx) => (
+                      <MenuItem key={idx} value={company.name}>
+                        {company.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  {touched.company_name && errors.company_name && (
+                    <span style={{ color: "red" }}>{errors.company_name}</span>
+                  )}
+                </FormControl>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Project Name</Form.Label>
-                <Field name="project_name" className="form-control" />
-                {touched.project_name && errors.project_name && (
-                  <div className="text-danger">{errors.project_name}</div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Client Name</Form.Label>
-                <Field name="client_name" className="form-control" />
-                {touched.client_name && errors.client_name && (
-                  <div className="text-danger">{errors.client_name}</div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Project Code</Form.Label>
-                <Field name="project_code" className="form-control" />
-                {touched.project_code && errors.project_code && (
-                  <div className="text-danger">{errors.project_code}</div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Project Short Name</Form.Label>
-                <Field name="project_shortname" className="form-control" />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Project Description</Form.Label>
                 <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Project Name"
+                  name="project_name"
+                  error={touched.project_name && Boolean(errors.project_name)}
+                  helperText={touched.project_name && errors.project_name}
+                />
+
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Client Name"
+                  name="client_name"
+                  error={touched.client_name && Boolean(errors.client_name)}
+                  helperText={touched.client_name && errors.client_name}
+                />
+
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Project Code"
+                  name="project_code"
+                  error={touched.project_code && Boolean(errors.project_code)}
+                  helperText={touched.project_code && errors.project_code}
+                />
+
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Project Short Name"
+                  name="project_shortname"
+                />
+
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Project Description"
                   name="project_desc"
-                  as="textarea"
+                  multiline
                   rows={3}
-                  className="form-control"
+                  error={touched.project_desc && Boolean(errors.project_desc)}
+                  helperText={touched.project_desc && errors.project_desc}
                 />
-                {touched.project_desc && errors.project_desc && (
-                  <div className="text-danger">{errors.project_desc}</div>
-                )}
-              </Form.Group>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Role Name</Form.Label>
-                <Field name="role_name" className="form-control" />
-                {touched.role_name && errors.role_name && (
-                  <div className="text-danger">{errors.role_name}</div>
-                )}
-              </Form.Group>
-            </Col>
-
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Industry Type</Form.Label>
-                <Field name="industry_type" className="form-control" />
-                {touched.industry_type && errors.industry_type && (
-                  <div className="text-danger">{errors.industry_type}</div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Responsibilities</Form.Label>
                 <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Role Name"
+                  name="role_name"
+                  error={touched.role_name && Boolean(errors.role_name)}
+                  helperText={touched.role_name && errors.role_name}
+                />
+              </Grid>
+
+              {/* RIGHT SIDE */}
+              <Grid item xs={12} md={6}>
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Industry Type"
+                  name="industry_type"
+                  error={touched.industry_type && Boolean(errors.industry_type)}
+                  helperText={touched.industry_type && errors.industry_type}
+                />
+
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Responsibilities"
                   name="responsibilities"
-                  as="textarea"
+                  multiline
                   rows={3}
-                  className="form-control"
+                  error={
+                    touched.responsibilities && Boolean(errors.responsibilities)
+                  }
+                  helperText={
+                    touched.responsibilities && errors.responsibilities
+                  }
                 />
-                {touched.responsibilities && errors.responsibilities && (
-                  <div className="text-danger">{errors.responsibilities}</div>
-                )}
-              </Form.Group>
 
-              <Form.Group className="mb-3">
-                <Form.Label>From Date</Form.Label>
-                <Field type="date" name="from_date" className="form-control" />
-                {touched.from_date && errors.from_date && (
-                  <div className="text-danger">{errors.from_date}</div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>To Date</Form.Label>
-                <Field type="date" name="to_date" className="form-control" />
-                {touched.to_date && errors.to_date && (
-                  <div className="text-danger">{errors.to_date}</div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Tech Stack</Form.Label>
-                <Field name="tech_stack" className="form-control" />
-                {touched.tech_stack && errors.tech_stack && (
-                  <div className="text-danger">{errors.tech_stack}</div>
-                )}
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Display No</Form.Label>
                 <Field
-                  name="display_no"
-                  className="form-control"
-                  // value={projects?.length + 1}
+                  as={TextField}
+                  type="date"
+                  fullWidth
+                  margin="normal"
+                  label="From Date"
+                  name="from_date"
+                  InputLabelProps={{ shrink: true }}
+                  error={touched.from_date && Boolean(errors.from_date)}
+                  helperText={touched.from_date && errors.from_date}
                 />
-                {touched.display_no && errors.display_no && (
-                  <div className="text-danger">{errors.display_no}</div>
-                )}
-              </Form.Group>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Project Type</Form.Label>
-                <Field as="select" name="project_type" className="form-control">
-                  <option value="">Select Type</option>
-                  <option value="ui">UI</option>
-                  <option value="fullstack">Fullstack</option>
-                  <option value="testing">Testing</option>
-                  <option value="NA">NA</option>
-                </Field>
-                {touched.project_type && errors.project_type && (
-                  <div className="text-danger">{errors.project_type}</div>
-                )}
-              </Form.Group>
+                <Field
+                  as={TextField}
+                  type="date"
+                  fullWidth
+                  margin="normal"
+                  label="To Date"
+                  name="to_date"
+                  InputLabelProps={{ shrink: true }}
+                  error={touched.to_date && Boolean(errors.to_date)}
+                  helperText={touched.to_date && errors.to_date}
+                />
 
-              {/* Hidden Email Field */}
-              <Field type="hidden" name="email_id" />
-            </Col>
-          </Row>
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Tech Stack"
+                  name="tech_stack"
+                  error={touched.tech_stack && Boolean(errors.tech_stack)}
+                  helperText={touched.tech_stack && errors.tech_stack}
+                />
 
-          <div className="d-flex justify-content-center gap-3">
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Display No"
+                  name="display_no"
+                  error={touched.display_no && Boolean(errors.display_no)}
+                  helperText={touched.display_no && errors.display_no}
+                />
+
+                <FormControl fullWidth margin="normal">
+                  <InputLabel>Project Type</InputLabel>
+                  <Select
+                    name="project_type"
+                    label="Project Type"
+                    value={values.project_type}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="">Select Type</MenuItem>
+                    <MenuItem value="ui">UI</MenuItem>
+                    <MenuItem value="fullstack">Fullstack</MenuItem>
+                    <MenuItem value="testing">Testing</MenuItem>
+                    <MenuItem value="NA">NA</MenuItem>
+                  </Select>
+                  {touched.project_type && errors.project_type && (
+                    <span style={{ color: "red" }}>{errors.project_type}</span>
+                  )}
+                </FormControl>
+
+                {/* hidden */}
+                <Field type="hidden" name="email_id" />
+              </Grid>
+            </Grid>
             <Button type="submit" variant="primary">
               Submit
             </Button>
             <Button type="button" variant="secondary" onClick={onCancel}>
               Cancel
             </Button>
-          </div>
-        </Form>
+          </Form>
+        </div>
       )}
     </Formik>
   );

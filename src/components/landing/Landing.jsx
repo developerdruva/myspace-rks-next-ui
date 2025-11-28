@@ -12,33 +12,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FiLayers, FiBarChart, FiUser, FiClipboard } from "react-icons/fi"; // example icons
 
-const services = [
-  {
-    title: "User Profile",
-    description: "Manage your personal and professional details.",
-    icon: <FiUser size={32} />,
-    path: "/profile/rajesh",
-  },
-  {
-    title: "Daily Tracker",
-    description: "Log routine, food, cravings, and daily activities.",
-    icon: <FiClipboard size={32} />,
-    path: "/daily-tracker",
-  },
-  {
-    title: "Progress & Metrics",
-    description: "Track your health progress and body metrics.",
-    icon: <FiBarChart size={32} />,
-    path: "/metrics",
-  },
-  {
-    title: "Master Data",
-    description: "Configure your dropdowns and master tables.",
-    icon: <FiLayers size={32} />,
-    path: "/master",
-  },
-];
-
 export default function LandingPage() {
   return (
     <Box
@@ -60,7 +33,7 @@ export default function LandingPage() {
             variant="h3"
             sx={{ color: "white", fontWeight: 700, mb: 2 }}
           >
-            Welcome to Fitlogr
+            Welcome to mylogr
           </Typography>
 
           <Typography variant="h6" sx={{ color: "#cbd5e1" }}>
@@ -71,7 +44,7 @@ export default function LandingPage() {
         {/* Services Grid */}
         <Grid container spacing={4}>
           {services.map((service, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item size={{ xs: 2, sm: 2, md: 3, lg: 4, xl: 4 }} key={index}>
               <Link href={service.path} style={{ textDecoration: "none" }}>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -89,7 +62,10 @@ export default function LandingPage() {
                     <CardContent sx={{ textAlign: "center" }}>
                       <Box sx={{ mb: 2 }}>{service.icon}</Box>
 
-                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                      <Typography
+                        variant="h6"
+                        sx={{ fontWeight: 600, mb: 1, color: "steelblue" }}
+                      >
                         {service.title}
                       </Typography>
 
@@ -107,3 +83,31 @@ export default function LandingPage() {
     </Box>
   );
 }
+
+const services = [
+  {
+    title: "User Profile",
+    description: "Manage your personal and professional details.",
+    icon: <FiUser size={32} />,
+    path: "/profile/rajesh",
+  },
+  {
+    title: "Admin Board",
+    description:
+      "dashboard, handle data, manage or maintain sufficient set of data and modifications",
+    icon: <FiClipboard size={32} />,
+    path: "/myspace/admin-page",
+  },
+  {
+    title: "Progress & Metrics",
+    description: "Track and manage financial metrics and remainders",
+    icon: <FiBarChart size={32} />,
+    path: "/metrics",
+  },
+  {
+    title: "Master Data",
+    description: "Configure your dropdowns and master tables.",
+    icon: <FiLayers size={32} />,
+    path: "/master",
+  },
+];
