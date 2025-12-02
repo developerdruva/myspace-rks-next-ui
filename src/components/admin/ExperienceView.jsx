@@ -40,7 +40,19 @@ const mapColumnsToMUI = (
     ...columns,
     {
       field: "duration",
-      headerName: "Duration",
+      headerName: (
+        <div>
+          Duration
+          <div
+            style={{
+              fontSize: "10px",
+              paddingLeft: "1rem",
+            }}
+          >
+            Y:M:D
+          </div>
+        </div>
+      ),
       width: 120,
       renderCell: (params) => {
         let { years, months, days } = getDateDurationbtPeriod(
@@ -48,7 +60,9 @@ const mapColumnsToMUI = (
           params?.row?.to_date
         );
         return (
-          <Tooltip title="{`${years} years, ${months} months, ${days} days`}">{`${years}y ${months}m ${days}d`}</Tooltip>
+          <Tooltip title="{`$years, $months, $days`}">
+            {`${years}:${months}:${days}`}
+          </Tooltip>
         );
       },
     },
@@ -306,7 +320,7 @@ const ExperienceView = () => {
               scrollButtons="auto"
             >
               <Tab label="Worked Companies" />
-              <Tab label="Worked Projects" disabled />
+              {/* <Tab label="Worked Projects" disabled /> */}
             </Tabs>
           </Box>
 
@@ -367,3 +381,14 @@ const ExperienceView = () => {
 };
 
 export default ExperienceView;
+
+// const ColonSVGImage = () => {
+//   return (
+//     <img
+//       src={"/colon-symbol.svg"}
+//       alt="colon"
+//       width={"0.5rem"}
+//       height={"0.5rem"}
+//     />
+//   );
+// };

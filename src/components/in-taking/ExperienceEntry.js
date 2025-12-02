@@ -4,7 +4,7 @@ import DataTable from "react-data-table-component";
 import WorkedCompaniesEntry from "./WorkedCompaniesEntry";
 import { MdAddTask, MdDelete, MdEdit } from "react-icons/md";
 import { BsViewList } from "react-icons/bs";
-import { Modal, Popconfirm, Tooltip, Tabs, Button, Space } from "antd";
+// import { Modal, Popconfirm, Tooltip, Tabs, Button, Space } from "antd";
 import { workedCompColumns } from "./EntryUtilities/DTColumns";
 import apiServices from "../utils/service-calls/apiServices";
 import { getPortfolioDetails, showAlertNotice } from "../common/CommonFunction";
@@ -72,11 +72,6 @@ const ExperienceEntry = ({ workedCompanies }) => {
           setIsCompEdit={setIsCompEdit}
         />
       ),
-    },
-    {
-      key: "2",
-      label: "Worked Projects",
-      children: <></>,
     },
   ];
 

@@ -49,6 +49,8 @@ const ProjectEntryForm = ({
     project_type: "",
     company_code: "",
     email_id: personDetails?.email_id || "",
+    o_from: "",
+    o_to: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -99,7 +101,7 @@ const ProjectEntryForm = ({
           <Form noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               {/* LEFT SIDE */}
-              <Grid item xs={12} md={6}>
+              <Grid item size={{ xs: 2, sm: 2, md: 3, lg: 6, xl: 6 }}>
                 {/* Company Name (disabled dropdown) */}
                 <FormControl fullWidth margin="normal">
                   <InputLabel>Company Name</InputLabel>
@@ -170,53 +172,11 @@ const ProjectEntryForm = ({
                   as={TextField}
                   fullWidth
                   margin="normal"
-                  label="Project Description"
-                  name="project_desc"
-                  multiline
-                  rows={3}
-                  error={touched.project_desc && Boolean(errors.project_desc)}
-                  helperText={touched.project_desc && errors.project_desc}
-                />
-
-                <Field
-                  as={TextField}
-                  fullWidth
-                  margin="normal"
                   label="Role Name"
                   name="role_name"
                   error={touched.role_name && Boolean(errors.role_name)}
                   helperText={touched.role_name && errors.role_name}
                 />
-              </Grid>
-
-              {/* RIGHT SIDE */}
-              <Grid item xs={12} md={6}>
-                <Field
-                  as={TextField}
-                  fullWidth
-                  margin="normal"
-                  label="Industry Type"
-                  name="industry_type"
-                  error={touched.industry_type && Boolean(errors.industry_type)}
-                  helperText={touched.industry_type && errors.industry_type}
-                />
-
-                <Field
-                  as={TextField}
-                  fullWidth
-                  margin="normal"
-                  label="Responsibilities"
-                  name="responsibilities"
-                  multiline
-                  rows={3}
-                  error={
-                    touched.responsibilities && Boolean(errors.responsibilities)
-                  }
-                  helperText={
-                    touched.responsibilities && errors.responsibilities
-                  }
-                />
-
                 <Field
                   as={TextField}
                   type="date"
@@ -239,6 +199,19 @@ const ProjectEntryForm = ({
                   InputLabelProps={{ shrink: true }}
                   error={touched.to_date && Boolean(errors.to_date)}
                   helperText={touched.to_date && errors.to_date}
+                />
+              </Grid>
+
+              {/* RIGHT SIDE */}
+              <Grid item size={{ xs: 2, sm: 2, md: 3, lg: 6, xl: 6 }}>
+                <Field
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  label="Industry Type"
+                  name="industry_type"
+                  error={touched.industry_type && Boolean(errors.industry_type)}
+                  helperText={touched.industry_type && errors.industry_type}
                 />
 
                 <Field
@@ -278,6 +251,52 @@ const ProjectEntryForm = ({
                   {touched.project_type && errors.project_type && (
                     <span style={{ color: "red" }}>{errors.project_type}</span>
                   )}
+                  <Field
+                    as={TextField}
+                    type="date"
+                    fullWidth
+                    margin="normal"
+                    label="Original From"
+                    name="o_from"
+                    InputLabelProps={{ shrink: true }}
+                  />
+
+                  <Field
+                    as={TextField}
+                    type="date"
+                    fullWidth
+                    margin="normal"
+                    label="Original To"
+                    name="o_to"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                  <Field
+                    as={TextField}
+                    fullWidth
+                    margin="normal"
+                    label="Responsibilities"
+                    name="responsibilities"
+                    multiline
+                    rows={3}
+                    error={
+                      touched.responsibilities &&
+                      Boolean(errors.responsibilities)
+                    }
+                    helperText={
+                      touched.responsibilities && errors.responsibilities
+                    }
+                  />
+                  <Field
+                    as={TextField}
+                    fullWidth
+                    margin="normal"
+                    label="Project Description"
+                    name="project_desc"
+                    multiline
+                    rows={3}
+                    error={touched.project_desc && Boolean(errors.project_desc)}
+                    helperText={touched.project_desc && errors.project_desc}
+                  />
                 </FormControl>
 
                 {/* hidden */}
