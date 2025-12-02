@@ -9,14 +9,18 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { MdLightMode, MdNightlight } from "react-icons/md";
+import { MdLightMode, MdNightlight, MdRefresh } from "react-icons/md";
 import ButtonMUI from "../buttons/ButtonMUI";
 import "./CSS/NavbarStyles.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const AuthorizedNavbar = ({ logoTitle, isLightTheme }) => {
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const { toggleTheme, theme } = useThemeMode();
+  const isGlobalRefresh = useSelector(
+    (state) => state?.globalRefresh.isRefresh
+  );
   const handleLogout = () => {
     localStorage.clear();
     router.push("/login");
@@ -42,7 +46,7 @@ const AuthorizedNavbar = ({ logoTitle, isLightTheme }) => {
             fontWeight: 600,
           }}
         >
-          {logoTitle}
+          {logoTitle + isGlobalRefresh}
         </Typography>
 
         {/* Navigation Links */}
@@ -59,6 +63,19 @@ const AuthorizedNavbar = ({ logoTitle, isLightTheme }) => {
               )}
             </IconButton>
           </Tooltip>
+          <ButtonMUI
+            label={"Refresh"}
+            variant="button"
+            color="steelblue"
+            onClick={() =>
+              dispatch({
+                type: "REFRESH_GLOBAL_STATE",
+                payload: !isGlobalRefresh,
+              })
+            }
+            size="small"
+            icon={<MdRefresh />}
+          />
           <ButtonMUI
             label={"Back"}
             variant="button"

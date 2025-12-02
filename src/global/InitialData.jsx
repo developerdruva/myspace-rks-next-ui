@@ -1,18 +1,28 @@
 "use client";
 import apiServices from "@/utils/service-calls/apiServices";
 import { useEffect } from "react";
-import { Provider as ReduxProvider } from "react-redux";
+import {
+  Provider as ReduxProvider,
+  useDispatch,
+  useSelector,
+} from "react-redux";
 import { ThemeProvider } from "@/global/ThemeProvider";
 import { reduxStore } from "../store/index";
 import { Geist, Geist_Mono } from "next/font/google";
 import { CognitoProvider } from "@/global/CognitoProvider";
+import { getPortfolioDetails } from "@/common/CommonFunction";
 
 const GlobalProvider = ({ children }) => {
   const dispatch = reduxStore.dispatch;
   const isPortfolioExist = reduxStore.getState()?.portfolioState;
-  useEffect(() => {
-    if (!isPortfolioExist) getPortfolioDetails(dispatch);
-  }, []);
+
+  // useEffect(() => {
+  //   // if (!isPortfolioExist || isGlobalRefresh) {
+  //   getPortfolioDetails();
+  //   dispatch({ type: "REFRESH_GLOBAL_STATE", payload: !isGlobalRefresh });
+  //   // }
+  //   alert(isGlobalRefresh);
+  // }, [isGlobalRefresh]);
 
   return (
     <CognitoProvider>
@@ -24,17 +34,6 @@ const GlobalProvider = ({ children }) => {
 };
 
 export default GlobalProvider;
-
-const getPortfolioDetails = (dispatch) => {
-  apiServices.getPortfolioDetails().then((res) => {
-    if (res?.data?.status == "success") {
-      dispatch({
-        type: "PORTFOLIO_DETAILS",
-        payload: res?.data?.data,
-      });
-    }
-  });
-};
 
 export const geistSans = Geist({
   variable: "--font-geist-sans",

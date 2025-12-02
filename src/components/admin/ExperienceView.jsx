@@ -21,7 +21,11 @@ import { useSelector } from "react-redux";
 import WorkedCompaniesEntry from "../in-taking/WorkedCompaniesEntry";
 import ProjectsView from "./ProjectsView";
 import apiServices from "@/utils/service-calls/apiServices";
-import { getPortfolioDetails, showAlertNotice } from "@/common/CommonFunction";
+import {
+  getDateDurationbtPeriod,
+  getPortfolioDetails,
+  showAlertNotice,
+} from "@/common/CommonFunction";
 
 // --------------------------------------------------
 // COLUMN BUILDER
@@ -34,6 +38,21 @@ const mapColumnsToMUI = (
 ) => {
   return [
     ...columns,
+    {
+      field: "duration",
+      headerName: "Duration",
+      width: 120,
+      renderCell: (params) => {
+        let { years, months, days } = getDateDurationbtPeriod(
+          params?.row?.from_date,
+          params?.row?.to_date
+        );
+        return (
+          <Tooltip title="{`${years} years, ${months} months, ${days} days`}">{`${years}y ${months}m ${days}d`}</Tooltip>
+        );
+      },
+    },
+
     {
       field: "project",
       headerName: "Projects",
@@ -157,8 +176,7 @@ const ExperienceView = () => {
     [
       { field: "company_name", headerName: "Company Name", width: 200 },
       { field: "designation", headerName: "Designation", width: 160 },
-      { field: "location", headerName: "Location", width: 140 },
-      { field: "duration", headerName: "Duration", width: 120 },
+      { field: "comp_location", headerName: "Location", width: 140 },
     ],
     handleViewProjects,
     handleEdit,

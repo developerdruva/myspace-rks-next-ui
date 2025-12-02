@@ -33,7 +33,7 @@ import { BsCalculator } from "react-icons/bs";
 
 import { useThemeMode } from "@/global/ThemeProvider";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const AdminBoard = () => {
   const portfolioDetails =
@@ -169,7 +169,7 @@ const AdminBoard = () => {
         }}
       >
         <AuthorizedNavbar
-          logoTitle="Profile Blog Dashboard"
+          logoTitle="Profile Blog Dashboard 111"
           isLightTheme={true}
         />
 

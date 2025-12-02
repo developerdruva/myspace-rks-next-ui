@@ -31,7 +31,8 @@ import { MdAdd, MdDelete } from "react-icons/md";
 import styles from "./pocprojectsview.module.css";
 
 const PocProjectsView = ({ emailId }) => {
-  const pocProjects1 = useSelector((state) => state.portfolioState?.pocProjects) || [];
+  const pocProjects1 =
+    useSelector((state) => state.portfolioState?.pocProjects) || [];
   const [pocProjects, setPocProjects] = useState(pocProjects1 || []);
   const [viewMode, setViewMode] = useState("card");
   const [formVisible, setFormVisible] = useState(false);
@@ -40,7 +41,6 @@ const PocProjectsView = ({ emailId }) => {
   const [formValues, setFormValues] = useState({});
   const dispatch = useDispatch();
 
-  // Delete dialog state
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
 
@@ -55,7 +55,10 @@ const PocProjectsView = ({ emailId }) => {
         });
       }
     } catch (err) {
-      showApiStatusNotice(err.message || "Failed to fetch PoC projects", "error");
+      showApiStatusNotice(
+        err.message || "Failed to fetch PoC projects",
+        "error"
+      );
     }
   };
 
@@ -240,43 +243,60 @@ const PocProjectsView = ({ emailId }) => {
       )}
 
       {/* Add/Edit Modal */}
-      <Dialog open={formVisible} onClose={() => setFormVisible(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>{editingProject ? "Edit Project" : "Add Project"}</DialogTitle>
+      <Dialog
+        open={formVisible}
+        onClose={() => setFormVisible(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>
+          {editingProject ? "Edit Project" : "Add Project"}
+        </DialogTitle>
         <DialogContent dividers>
           <TextField
             margin="normal"
             fullWidth
             label="Project Title"
             value={formValues.title || ""}
-            onChange={(e) => setFormValues({ ...formValues, title: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, title: e.target.value })
+            }
           />
           <TextField
             margin="normal"
             fullWidth
             label="Image URL"
             value={formValues.img_url || ""}
-            onChange={(e) => setFormValues({ ...formValues, img_url: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, img_url: e.target.value })
+            }
           />
           <TextField
             margin="normal"
             fullWidth
             label="Project URL"
             value={formValues.project_url || ""}
-            onChange={(e) => setFormValues({ ...formValues, project_url: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, project_url: e.target.value })
+            }
           />
           <TextField
             margin="normal"
             fullWidth
             label="Project Type"
             value={formValues.project_type || ""}
-            onChange={(e) => setFormValues({ ...formValues, project_type: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, project_type: e.target.value })
+            }
           />
           <TextField
             margin="normal"
             fullWidth
             label="Tech Stack"
             value={formValues.title_subdesc || ""}
-            onChange={(e) => setFormValues({ ...formValues, title_subdesc: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, title_subdesc: e.target.value })
+            }
           />
           <TextField
             margin="normal"
@@ -285,7 +305,9 @@ const PocProjectsView = ({ emailId }) => {
             rows={3}
             label="Description"
             value={formValues.project_desc || ""}
-            onChange={(e) => setFormValues({ ...formValues, project_desc: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, project_desc: e.target.value })
+            }
           />
         </DialogContent>
         <DialogActions>
@@ -297,7 +319,11 @@ const PocProjectsView = ({ emailId }) => {
       </Dialog>
 
       {/* Image Preview Modal */}
-      <Dialog open={!!previewUrl} onClose={() => setPreviewUrl(null)} maxWidth="md">
+      <Dialog
+        open={!!previewUrl}
+        onClose={() => setPreviewUrl(null)}
+        maxWidth="md"
+      >
         <CardMedia
           component="img"
           image={previewUrl}
@@ -311,12 +337,18 @@ const PocProjectsView = ({ emailId }) => {
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           <Typography>
-            Are you sure you want to delete <strong>{projectToDelete?.title}</strong>? This action cannot be undone.
+            Are you sure you want to delete{" "}
+            <strong>{projectToDelete?.title}</strong>? This action cannot be
+            undone.
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDeleteDialogClose}>Cancel</Button>
-          <Button onClick={handleDeleteConfirm} color="error" variant="contained">
+          <Button
+            onClick={handleDeleteConfirm}
+            color="error"
+            variant="contained"
+          >
             Delete
           </Button>
         </DialogActions>

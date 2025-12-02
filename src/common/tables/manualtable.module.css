@@ -1,0 +1,30 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d1d1d1;
+  font-size: 14px;
+}
+
+.headerCell {
+  padding: 10px;
+  font-weight: 600;
+  color: #fff;
+  border: 1px solid #c3c3c3;
+  text-align: center;
+}
+
+.rowCell {
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  background: #fafafa;
+}
+
+tbody tr:nth-child(even) .rowCell {
+  background: #f2f7ff;
+}
+
+/* Hover row highlight */
+tbody tr:hover .rowCell {
+  background: #e7f0ff;
+  transition: 0.25s;
+}
