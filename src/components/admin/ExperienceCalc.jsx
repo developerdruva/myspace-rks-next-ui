@@ -2,16 +2,23 @@
 import { getTableCellStyles } from "@/common/CommonFunction";
 import ManualTable from "@/common/tables/ManualTable";
 import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdAddTask } from "react-icons/md";
 import { useSelector } from "react-redux";
 
 const ExperienceCalc = () => {
   const portfolioDetails = useSelector((state) => state.portfolioState);
-  const workedProjects = portfolioDetails?.workedProjects || [];
+  const rows = portfolioDetails?.workedProjects || [];
   const workedCompanies = portfolioDetails?.workedCompanies || [];
 
   const [searchText, setSearchText] = useState("");
+
+  let filterRows = rows.map((item) => {
+    let temp = workedCompanies.find(
+      (it) => it?.company_code === item?.company_code
+    );
+    return { ...item, color_code: temp?.color_code };
+  });
 
   return (
     <Box>
@@ -57,34 +64,18 @@ const ExperienceCalc = () => {
         />
       </Box>
 
-      <ManualTable columns={columns} rows={rows} />
+      <ManualTable columns={columns} rows={filterRows} />
     </Box>
   );
 };
 
 export default ExperienceCalc;
 
-const rows = [
-  {
-    company_name: "Taxilla IT Solutions",
-    project_name: "client1",
-    client_name: "abcd10",
-    from_date: "2021-02-01",
-    to_date: "2021-07-10",
-    display_no: 8,
-    project_type: "ui",
-    original_start: "",
-    original_end: "",
-    duration: "",
-    original_duration: "",
-  },
-];
-
 const columns = [
   {
     label: "Company",
     id: "company_name",
-    colSpan: 2,
+    colSpan: 1,
     styles: { backgroundColor: "CadetBlue", color: "#fff" },
     align: "center",
   },
@@ -111,49 +102,75 @@ const columns = [
     styles: { backgroundColor: "slategrey", color: "#fff" },
     align: "center",
   },
+
   // ORIGINAL
   {
-    label: "Original Start",
-    id: "original_start",
+    label: "O_From",
+    id: "o_from",
     colSpan: 1,
     styles: { backgroundColor: "CadetBlue", color: "#fff" },
+    isDate: true,
     align: "center",
   },
   {
-    label: "Original End",
-    id: "original_end",
+    label: "O_To",
+    id: "o_to",
     colSpan: 1,
     styles: { backgroundColor: "CadetBlue", color: "#fff" },
     align: "center",
+    isDate: true,
   },
   {
-    label: "Original Duration",
-    id: "duration",
+    label: "O_Duration",
+    id: "o_years",
+    colSpan: 2,
+    styles: { backgroundColor: "CadetBlue", color: "#fff" },
+    align: "center",
+    isTenure: true,
+    // isSub: true,
+  },
+  {
+    label: "O_Duration",
+    id: "o_months",
     colSpan: 1,
     styles: { backgroundColor: "CadetBlue", color: "#fff" },
     align: "center",
+    isTenure: true,
+    isSub: true,
   },
 
   // DURATION SIDE
   {
-    label: "Start",
+    label: "From",
     id: "from_date",
     colSpan: 1,
     styles: { backgroundColor: "SteelBlue", color: "#fff" },
+    isDate: true,
     align: "center",
   },
   {
-    label: "End",
+    label: "To",
     id: "to_date",
     colSpan: 1,
     styles: { backgroundColor: "SteelBlue", color: "#fff" },
+    isDate: true,
     align: "center",
   },
   {
     label: "Duration",
-    id: "duration",
-    colSpan: 1,
+    id: "years",
+    colSpan: 2,
     styles: { backgroundColor: "SteelBlue", color: "#fff" },
     align: "center",
+    isTenure: true,
+  },
+  {
+    label: "Duration",
+    id: "months",
+    colSpan: 1,
+    styles: { backgroundColor: "CadetBlue", color: "#fff" },
+    align: "center",
+    isSub: true,
+    isTenure: true,
   },
 ];

@@ -28,3 +28,10 @@ tbody tr:hover .rowCell {
   background: #e7f0ff;
   transition: 0.25s;
 }
+.firstColumn{
+     border: 1px solid #ccc;
+     color: darkolivegreen;
+     font-weight: 650;
+  padding: 8px 10px;
+  /* background: #ee8641; */
+}
