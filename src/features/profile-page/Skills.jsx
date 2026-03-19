@@ -1,8 +1,8 @@
 "use client";
-import classes from "@/components/styles/Skills.module.css";
+import classes from "./CSS/Skills.module.css";
 import { useSelector } from "react-redux";
-import EchartsBarWithBg from "../charts/EchartsBarWithBg";
-import SkillsByCategoryView from "../cards/SkillsViewByCategory";
+import EchartsBarWithBg from "../../components/charts/EchartsBarWithBg";
+import SkillsByCategoryView from "../../components/cards/SkillsViewByCategory";
 
 const Skills = () => {
   const portfolioDetails = useSelector((state) => state?.portfolioState);
@@ -10,7 +10,7 @@ const Skills = () => {
   const skillSetKeys = portfolioDetails?.skillsKeys;
   const mySkills = portfolioDetails?.mySkills;
   const themeModeFrmRdx = useSelector(
-    (state) => state?.themeModeState?.themeMode
+    (state) => state?.themeModeState?.themeMode,
   );
   const emailId = portfolioDetails?.personDetails[0]?.email_id;
 

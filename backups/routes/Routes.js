@@ -6,12 +6,12 @@ import CoverPage from "../main/CoverPage";
 import LandingPage from "../main/LandingPage";
 import ScrollSpy from "../main/scrollspy/ScrollSpy";
 import WelcomePage from "../main/WelcomePage";
-import PDFsample from "../resumes/extras/PDFsample";
-import ResumeTemplateSample from "../resumes/templates/ResumeTemplateSample";
+import PDFsample from "../../src/features/resumes/extras/PDFsample";
+import ResumeTemplateSample from "../../src/features/resumes/templates/ResumeTemplateSample";
 // import Sample from "../tasks/sample";
-import Stopwatch from "../tasks/Stopwatch";
-import TempWatch from "../tasks/TempWatch";
-import Theme from "../tasks/Theme";
+import Stopwatch from "../../src/features/tasks/Stopwatch";
+import TempWatch from "../../src/features/tasks/TempWatch";
+import Theme from "../../src/features/tasks/Theme";
 // import Sample from "../tasks/Sample";
 
 export const CustomRoutes = [

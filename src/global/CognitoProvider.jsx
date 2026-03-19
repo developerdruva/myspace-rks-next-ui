@@ -6,7 +6,7 @@ const cognitoAuthConfig = {
   authority:
     "https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_yOxYQDdhr",
   client_id: "28fkbk0mju1tg6mft3or06h7kh",
-  redirect_uri: "http://localhost:3001/",
+  redirect_uri: "http://localhost:3000/",
   response_type: "code",
   scope: "email openid phone",
 };

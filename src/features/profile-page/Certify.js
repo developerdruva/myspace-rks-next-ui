@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
-import styles from "../styles/Certify.module.css";
+import styles from "./CSS/Certify.module.css";
 
 const Certify = () => {
   const portfolioDetails = useSelector((state) => state?.portfolioState);

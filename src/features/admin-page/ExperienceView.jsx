@@ -18,7 +18,7 @@ import {
 import { MdAddTask, MdDelete, MdEdit } from "react-icons/md";
 import { BsViewList } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import WorkedCompaniesEntry from "../in-taking/WorkedCompaniesEntry";
+import WorkedCompaniesEntry from "../../forms/WorkedCompaniesEntry";
 import ProjectsView from "./ProjectsView";
 import apiServices from "@/utils/service-calls/apiServices";
 import {
@@ -34,7 +34,7 @@ const mapColumnsToMUI = (
   columns,
   handleViewProjects,
   handleEdit,
-  handleDelete
+  handleDelete,
 ) => {
   return [
     ...columns,
@@ -57,7 +57,7 @@ const mapColumnsToMUI = (
       renderCell: (params) => {
         let { years, months, days } = getDateDurationbtPeriod(
           params?.row?.from_date,
-          params?.row?.to_date
+          params?.row?.to_date,
         );
         return (
           <Tooltip title="{`$years, $months, $days`}">
@@ -130,7 +130,7 @@ const ExperienceView = () => {
   // -----------------------------------------------
   const handleViewProjects = (company) => {
     const projects = workedProjects.filter(
-      (proj) => proj.company_code === company.company_code
+      (proj) => proj.company_code === company.company_code,
     );
     setCompanyProjects(projects);
     setSelectedCompany(company);
@@ -179,8 +179,8 @@ const ExperienceView = () => {
   // -----------------------------------------------
   const filteredData = workedCompanies.filter((item) =>
     Object.values(item).some((val) =>
-      String(val).toLowerCase().includes(searchText.toLowerCase())
-    )
+      String(val).toLowerCase().includes(searchText.toLowerCase()),
+    ),
   );
 
   // -----------------------------------------------
@@ -194,7 +194,7 @@ const ExperienceView = () => {
     ],
     handleViewProjects,
     handleEdit,
-    handleDelete
+    handleDelete,
   );
 
   return (

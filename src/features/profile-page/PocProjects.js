@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
-import styles from "../styles/PocWorks.module.css";
+import styles from "./CSS/PocWorks.module.css";
 import { useThemeMode } from "@/global/ThemeProvider";
 
 const PocProjects = () => {
@@ -107,7 +107,7 @@ const PocProjects = () => {
                         {usedTechsOfPoc
                           ?.filter((item) => item?.poc_name === pocItem?.title)
                           ?.filter(
-                            (item) => item?.tech_for === "Tools & Frameworks"
+                            (item) => item?.tech_for === "Tools & Frameworks",
                           )
                           .map((item, index) => (
                             <span key={`tools-${pocIndex}-${index}`}>
@@ -122,7 +122,7 @@ const PocProjects = () => {
                         {usedTechsOfPoc
                           ?.filter((item) => item?.poc_name === pocItem?.title)
                           ?.filter(
-                            (item) => item?.tech_for === "Deploy & Cloud:"
+                            (item) => item?.tech_for === "Deploy & Cloud:",
                           )
                           .map((item, index) => (
                             <span key={`cloud-${pocIndex}-${index}`}>

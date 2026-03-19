@@ -5,8 +5,8 @@ import { useThemeMode } from "@/global/ThemeProvider";
 import { Chip } from "@mui/material";
 import { MdWork } from "react-icons/md";
 import { useSelector } from "react-redux";
-import ProjectCard from "../cards/ProjectCard";
-import classes from "../styles/Experience.module.css";
+import ProjectCard from "../../components/cards/ProjectCard";
+import classes from "./CSS/Experience.module.css";
 
 const Experience = () => {
   const portfolioDetails = useSelector((state) => state?.portfolioState);
@@ -75,7 +75,7 @@ const Experience = () => {
                 <SideScrolling
                   data={portfolioDetails?.workedProjects
                     ?.filter(
-                      (item) => item?.company_code === comp?.company_code
+                      (item) => item?.company_code === comp?.company_code,
                     )
                     ?.map((item, index) => (
                       <ProjectCard

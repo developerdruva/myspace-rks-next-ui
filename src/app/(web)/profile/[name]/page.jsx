@@ -1,4 +1,4 @@
-import ProfileSection from "../../../../components/profilepage-items/ProfileSection";
+import ProfileSection from "../../../../features/profile-page/ProfileSection";
 import { Suspense } from "react";
 
 const ProfilePage = () => {

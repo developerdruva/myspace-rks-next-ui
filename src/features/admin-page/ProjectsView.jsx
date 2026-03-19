@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { colorToRGBA, showApiStatusNotice } from "@/common/CommonFunction";
-import ProjectEntryForm from "../in-taking/ProjectEntryForm";
+import ProjectEntryForm from "../../forms/ProjectEntryForm";
 import apiServices from "@/utils/service-calls/apiServices";
 
 const ProjectsDrawer = ({
@@ -77,7 +77,7 @@ const ProjectsDrawer = ({
     } catch (error) {
       showApiStatusNotice(
         error?.response?.data?.message || error.message,
-        "error"
+        "error",
       );
     }
   };

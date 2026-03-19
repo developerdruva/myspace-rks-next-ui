@@ -1,6 +1,6 @@
 "use client";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import styles from "../styles/Education.module.css";
+import styles from "./CSS/Education.module.css";
 import { useSelector } from "react-redux";
 import parse from "html-react-parser";
 import { useThemeMode } from "@/global/ThemeProvider";

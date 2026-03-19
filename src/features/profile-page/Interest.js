@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { BsFileEarmarkCode } from "react-icons/bs";
 import { RiComputerLine } from "react-icons/ri";
 import { SiCodesandbox } from "react-icons/si";
-import "../styles/Interest.css";
+import "./CSS/Interest.css";
 import { Grid } from "@mui/material";
 
 const Interest = () => {

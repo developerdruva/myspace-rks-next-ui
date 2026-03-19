@@ -8,9 +8,9 @@ import { Suspense } from "react";
 const Home = () => {
   return (
     <Suspense fallback={<h1 color="red">Loading...</h1>}>
-      <RouteProtection>
-        <LandingPage />
-      </RouteProtection>
+      {/* <RouteProtection> */}
+      <LandingPage />
+      {/* </RouteProtection> */}
     </Suspense>
   );
 };

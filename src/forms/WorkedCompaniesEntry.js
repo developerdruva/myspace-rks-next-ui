@@ -4,10 +4,7 @@ import { Button, Grid, TextField, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Formik } from "formik";
 import apiServices from "@/utils/service-calls/apiServices";
-import {
-  getPortfolioDetails,
-  showAlertNotice,
-} from "../../common/CommonFunction";
+import { getPortfolioDetails, showAlertNotice } from "../common/CommonFunction";
 import dayjs from "dayjs";
 
 const WorkedCompaniesEntry = ({

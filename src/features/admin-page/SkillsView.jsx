@@ -25,7 +25,7 @@ import { AiOutlinePlus, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { showApiStatusNotice } from "@/common/CommonFunction";
 import apiServices from "@/utils/service-calls/apiServices";
-import SkillsByCategoryView from "../cards/SkillsViewByCategory";
+import SkillsByCategoryView from "../../components/cards/SkillsViewByCategory";
 
 const SkillsView = ({ emailId }) => {
   const dispatch = useDispatch();
@@ -85,7 +85,10 @@ const SkillsView = ({ emailId }) => {
     try {
       let res;
       if (editingRecord) {
-        res = await apiServices.updateSkillsListDetail(editingRecord.sl_no, values);
+        res = await apiServices.updateSkillsListDetail(
+          editingRecord.sl_no,
+          values,
+        );
       } else {
         res = await apiServices.addSkillsListDetail(values);
       }
@@ -115,7 +118,9 @@ const SkillsView = ({ emailId }) => {
   const handleDeleteConfirm = async () => {
     if (!recordToDelete) return;
     try {
-      const res = await apiServices.deleteSkillsListDetail(recordToDelete.sl_no);
+      const res = await apiServices.deleteSkillsListDetail(
+        recordToDelete.sl_no,
+      );
       if (res?.data?.status === "success") {
         showApiStatusNotice(res.data.message, "success");
         fetchSkills();
@@ -242,7 +247,10 @@ const SkillsView = ({ emailId }) => {
             margin="normal"
             value={formValues.skill_seq}
             onChange={(e) =>
-              setFormValues({ ...formValues, skill_seq: Number(e.target.value) })
+              setFormValues({
+                ...formValues,
+                skill_seq: Number(e.target.value),
+              })
             }
           />
 
@@ -282,13 +290,17 @@ const SkillsView = ({ emailId }) => {
         <DialogContent>
           <DialogContentText id="delete-dialog-description">
             Are you sure you want to delete{" "}
-            <strong>{recordToDelete?.skill_name || ""}</strong>? This action cannot
-            be undone.
+            <strong>{recordToDelete?.skill_name || ""}</strong>? This action
+            cannot be undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDeleteDialogClose}>Cancel</Button>
-          <Button onClick={handleDeleteConfirm} color="error" variant="contained">
+          <Button
+            onClick={handleDeleteConfirm}
+            color="error"
+            variant="contained"
+          >
             Delete
           </Button>
         </DialogActions>

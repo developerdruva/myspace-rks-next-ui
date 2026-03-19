@@ -15,15 +15,15 @@ import {
   Divider,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import AuthorizedNavbar from "../profilepage-items/AuthorizedNavbar";
+import AuthorizedNavbar from "../features/profile-page/AuthorizedNavbar";
 
-import ProfileView from "../admin/ProfileView";
-import ExperienceView from "../admin/ExperienceView";
-import EducationView from "../admin/EducationView";
-import SkillsView from "../admin/SkillsView";
-import CertificationsView from "../admin/CertificationsView";
-import PocProjectsView from "../admin/PocProjectsView";
-import ExperienceCalc from "../admin/ExperienceCalc";
+import ProfileView from "../features/admin-page/ProfileView";
+import ExperienceView from "../features/admin-page/ExperienceView";
+import EducationView from "../features/admin-page/EducationView";
+import SkillsView from "../features/admin-page/SkillsView";
+import CertificationsView from "../features/admin-page/CertificationsView";
+import PocProjectsView from "../features/admin-page/PocProjectsView";
+import ExperienceCalc from "../features/admin-page/ExperienceCalc";
 
 import { GiSkills, GiSoapExperiment } from "react-icons/gi";
 import { PiCertificate, PiUserRectangle } from "react-icons/pi";

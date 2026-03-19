@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { MdLightMode, MdNightlight, MdRefresh } from "react-icons/md";
-import ButtonMUI from "../buttons/ButtonMUI";
+import ButtonMUI from "../../components/buttons/ButtonMUI";
 import "./CSS/NavbarStyles.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,7 +19,7 @@ const AuthorizedNavbar = ({ logoTitle, isLightTheme }) => {
   const dispatch = useDispatch();
   const { toggleTheme, theme } = useThemeMode();
   const isGlobalRefresh = useSelector(
-    (state) => state?.globalRefresh.isRefresh
+    (state) => state?.globalRefresh.isRefresh,
   );
   const handleLogout = () => {
     localStorage.clear();

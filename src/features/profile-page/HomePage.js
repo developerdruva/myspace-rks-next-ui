@@ -4,12 +4,12 @@ import { Grid, Box, Button, Fade, useTheme } from "@mui/material";
 import { MdDownload, MdKeyboardArrowDown } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { TypeAnimation } from "react-type-animation";
-import "../styles/HomePage.css";
+import "./CSS/HomePage.css";
 import { useThemeMode } from "@/global/ThemeProvider";
 
 const HomePage = () => {
   const personDetails = useSelector(
-    (state) => state?.portfolioState?.personDetails?.[0]
+    (state) => state?.portfolioState?.personDetails?.[0],
   );
   const { theme, toggleTheme } = useThemeMode();
   const muiTheme = useTheme();

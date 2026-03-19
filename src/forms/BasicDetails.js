@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import apiServices from "../../utils/service-calls/apiServices";
+import apiServices from "../utils/service-calls/apiServices";
 import { showAlertNotice } from "@/common/CommonFunction";
 import { BsEye } from "react-icons/bs";
 
