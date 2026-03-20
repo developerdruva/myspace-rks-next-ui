@@ -1,4 +1,4 @@
-import CarouselCard from "../../../../backups/extras/CarouselCards";
+import CarouselCard from "../../../../../backups/extras/CarouselCards";
 
 const sampleData = [
   { title: "React", desc: "Frontend library" },
