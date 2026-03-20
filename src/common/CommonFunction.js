@@ -27,20 +27,18 @@ export const getPortfolioDetails = () => {
   });
 };
 export const getDateDurationbtPeriod = (fromDate, toDate) => {
-  if (toDate === "present") {
-    toDate = new Date();
-  }
+  if (toDate === "present") toDate = new Date();
   const start = dayjs(fromDate);
   const end = dayjs(toDate);
-
-  if (end.isBefore(start)) {
-    throw new Error("toDate must be after fromDate");
-  }
+  if (end.isBefore(start)) throw new Error("toDate must be after fromDate");
 
   const totalMonths = end.diff(start, "month");
+  const consolidatedMonths = start.add(totalMonths, "month");
+
   return {
     years: Math.floor(totalMonths / 12),
     months: totalMonths % 12,
+    days: end.diff(consolidatedMonths, "day"),
   };
 };
 
@@ -79,15 +77,22 @@ export const showApiStatusNotice = (message, status) => {
   });
 };
 
-// export const  = (fromDate, toDate) => {
+export const durationByDates = (fromDate, toDate) => {
+  const years = differenceInYears(toDate, fromDate);
+  const afterYears = sub(toDate, { years });
 
-//     const years = differenceInYears(toDate, fromDate);
-//     const afterYears = sub(toDate, { years });
+  const months = differenceInMonths(afterYears, fromDate);
+  const afterMonths = sub(afterYears, { months });
 
-//     const months = differenceInMonths(afterYears, fromDate);
-//     const afterMonths = sub(afterYears, { months });
+  const days = differenceInDays(afterMonths, fromDate);
 
-//     const days = differenceInDays(afterMonths, fromDate);
+  return { years, months, days };
+};
 
-//     return { years, months, days };
-// }
+export const getTableCellStyles = () => {
+  return {
+    border: "1px solid #ccc",
+    padding: "8px 10px",
+    textAlign: "left",
+  };
+};

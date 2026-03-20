@@ -23,7 +23,6 @@ const EchartsBarWithBg = ({ xAxisValues, actualValues }) => {
         formatter: function (params) {
           const item = params[0];
           const index = item.dataIndex;
-          //   const name = customNames[index] || item.name;
           const value = item.value;
           return `<b>${item?.name}: ${value}%</b>`;
         },
