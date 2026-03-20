@@ -3,7 +3,7 @@
 import { Button, Container, Typography, Box, Divider } from "@mui/material";
 import { FaGoogle, FaGithub, FaMicrosoft, FaFacebook } from "react-icons/fa";
 
-export default function LoginPage() {
+export default function Login() {
   const handleSSOLogin = (provider: any) => {
     // Placeholder for SSO login logic
     console.log(`Logging in with ${provider}`);
