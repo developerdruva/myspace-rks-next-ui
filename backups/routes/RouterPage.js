@@ -4,8 +4,9 @@
 // This file is kept for reference but should be refactored to use Next.js routing.
 
 const RouterPage = () => {
-    // Router logic should be moved to Next.js app directory structure
-    return null;
-}
+  // Router logic should be moved to Next.js app directory structure
+  // This component should be removed and routing should be handled by the file system in Next.js
+  return null;
+};
 
-export default RouterPage
+export default RouterPage;
