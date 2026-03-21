@@ -1,21 +1,26 @@
 "use client";
 
-import { useAuth } from "react-oidc-context";
 import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function RouteProtection({ children }) {
-  const auth = useAuth();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
-    if (!auth.isLoading && !auth.isAuthenticated) {
-      auth.signinRedirect();
+    if (status === "loading") return;
+
+    if (!session) {
+      router.push("/");
     }
-  }, [auth]);
+  }, [session, status, router]);
 
-  if (auth.isLoading) return <div>Loading...</div>;
-  if (auth.error) return <div>Error: {auth.error.message}</div>;
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
-  if (!auth.isAuthenticated) return null; // redirect in progress
+  if (!session) return null;
 
   return <>{children}</>;
 }

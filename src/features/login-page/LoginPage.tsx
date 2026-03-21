@@ -1,8 +1,11 @@
 import { Button, Container, Typography, Box, Divider } from "@mui/material";
 import { FaGoogle, FaGithub, FaMicrosoft, FaFacebook } from "react-icons/fa";
+import { useSession, signIn } from "next-auth/react";
 
 const LoginPage = () => {
   const handleSSOLogin = (provider: any) => null;
+  const { data: session } = useSession();
+
   return (
     <Container maxWidth="sm" sx={{ mt: 8, textAlign: "center" }}>
       <Typography variant="h4" component="h1" gutterBottom>
@@ -16,7 +19,7 @@ const LoginPage = () => {
         <Button
           variant="outlined"
           startIcon={<FaGoogle />}
-          onClick={() => handleSSOLogin("Google")}
+          onClick={() => signIn("google", { callbackUrl: "/myspace" })}
           sx={{ justifyContent: "flex-start", py: 1.5 }}
         >
           Continue with Google
@@ -25,7 +28,7 @@ const LoginPage = () => {
         <Button
           variant="outlined"
           startIcon={<FaGithub />}
-          onClick={() => handleSSOLogin("GitHub")}
+          onClick={() => signIn("github", { callbackUrl: "/myspace" })}
           sx={{ justifyContent: "flex-start", py: 1.5 }}
         >
           Continue with GitHub
@@ -37,16 +40,7 @@ const LoginPage = () => {
           onClick={() => handleSSOLogin("Microsoft")}
           sx={{ justifyContent: "flex-start", py: 1.5 }}
         >
-          Continue with Microsoft
-        </Button>
-
-        <Button
-          variant="outlined"
-          startIcon={<FaFacebook />}
-          onClick={() => handleSSOLogin("Facebook")}
-          sx={{ justifyContent: "flex-start", py: 1.5 }}
-        >
-          Continue with Facebook
+          Continue with Microsoft.
         </Button>
       </Box>
 
