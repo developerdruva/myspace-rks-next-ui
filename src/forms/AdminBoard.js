@@ -168,10 +168,10 @@ const AdminBoard = () => {
           flexDirection: "column",
         }}
       >
-        <AuthorizedNavbar
+        {/* <AuthorizedNavbar
           logoTitle="Profile Blog Dashboard 111"
           isLightTheme={true}
-        />
+        /> */}
 
         <Box sx={{ p: 2 }}>
           <Box

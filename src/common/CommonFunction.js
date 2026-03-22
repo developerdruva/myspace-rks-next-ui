@@ -4,6 +4,7 @@ import apiServices from "@/utils/service-calls/apiServices";
 import { reduxStore } from "@/store/index";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import { FIELD_CONFIG } from "@/forms/DynamicForm/formConfig";
 
 dayjs.extend(isSameOrBefore);
 
@@ -95,4 +96,11 @@ export const getTableCellStyles = () => {
     padding: "8px 10px",
     textAlign: "left",
   };
+};
+
+export const getFieldsByCategory = (category) => {
+  return FIELD_CONFIG.filter(
+    (field) =>
+      field.categories.includes("ALL") || field.categories.includes(category),
+  );
 };

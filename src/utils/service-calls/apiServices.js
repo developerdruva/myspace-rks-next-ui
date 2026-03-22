@@ -1,4 +1,5 @@
 import axiosLoaderCall from "../api-utils/axiosLoaderCall";
+
 import {
   CHATBOT_LOGIN,
   DELETE_COMP_RECORD,
@@ -33,7 +34,7 @@ class apiServices {
     return axiosLoaderCall.put(
       UPDATE_TODO_ITEM,
       {},
-      { params: { itemId: itemId, todoDesc: data } }
+      { params: { itemId: itemId, todoDesc: data } },
     );
   }
   getMyDevelopments() {
@@ -57,7 +58,7 @@ class apiServices {
   updateWorkedCompanies(values) {
     return axiosLoaderCall.put(
       UPDATE_WORKED_COMPANIES + "/" + values?.sl_no,
-      values
+      values,
     );
   }
   deleteCompRecord(id) {
@@ -136,6 +137,25 @@ class apiServices {
   getPocProjects(emailId) {
     return axiosLoaderCall.get("/getPocProjects", { params: { emailId } });
   }
+  getParticulars = (workspace_id) => {
+    return axiosLoaderCall.get("/api/particulars", {
+      params: { workspace_id: "0d4f53ac-c506-4121-8fe0-cdcddf4690d4" },
+    });
+  };
+
+  addParticular = (data) => {
+    return axiosLoaderCall.post("/api/particulars", data);
+  };
+
+  markPayment = (data) => {
+    return axiosLoaderCall.post("/api/payments/mark", data);
+  };
+
+  getDashboard = (workspace_id) => {
+    return axiosLoaderCall.get(
+      `/api/partdashboard?workspace_id=${workspace_id}`,
+    );
+  };
 }
 
 export default new apiServices();
