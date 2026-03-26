@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import ParticularForm from "./ParticularForm";
 import apiServices from "@/utils/service-calls/apiServices";
-import PaymentsModal from "./PaymentsModal";
 import {
   Alert,
   Box,
@@ -16,10 +14,14 @@ import {
   Paper,
   Select,
   Stack,
+  Tab,
+  Tabs,
   Typography,
 } from "@mui/material";
+import { FiGrid, FiList } from "react-icons/fi";
 import ParticularsTable from "./ParticularsTable";
 import DynamicForm from "@/forms/DynamicForm/DynamicForm";
+import DashboardView from "./DashboardView";
 
 const dynamicFormCategories = [
   "BANKING",
@@ -36,19 +38,38 @@ export default function ParticularsPage() {
   const [showForm, setShowForm] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [activeTab, setActiveTab] = useState(0);
   const workspace_id = "0d4f53ac-c506-4121-8fe0-cdcddf4690d4";
-  const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("INSURANCE");
+  const [editingItem, setEditingItem] = useState(null);
 
-  const openPayment = (item) => {
-    setSelected(item);
+  const handleEdit = (item) => {
+    setEditingItem(item);
+    setSelectedCategory(item?.category || "INSURANCE");
+    setShowForm(true);
+  };
+
+  const handleDelete = async (id, user_id) => {
+    try {
+      setError("");
+      await apiServices.deleteDocumentParticular(id, user_id);
+      fetchData();
+    } catch (e) {
+      console.log(e);
+      setError("Failed to delete particular");
+    }
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setEditingItem(null);
   };
 
   const fetchData = async () => {
     try {
       setError("");
       setIsLoading(true);
-      const res = await apiServices.getParticulars(workspace_id);
+      const res = await apiServices.getDocumentParticulars();
       setData(res?.data?.data || []);
     } catch (e) {
       console.log(e);
@@ -63,8 +84,8 @@ export default function ParticularsPage() {
   }, []);
 
   return (
-    <Container maxWidth="lg" sx={{ py: { xs: 2, sm: 3, md: 4 } }}>
-      <Stack spacing={2}>
+    <Container maxWidth="xl" sx={{ py: { xs: 2, sm: 3, md: 4 } }}>
+      <Stack spacing={2.5}>
         <Stack
           direction={{ xs: "column", sm: "row" }}
           alignItems={{ xs: "flex-start", sm: "center" }}
@@ -80,24 +101,61 @@ export default function ParticularsPage() {
             </Typography>
           </Box>
 
-          <Button variant="contained" onClick={() => setShowForm(true)}>
+          <Button
+            variant="contained"
+            onClick={() => setShowForm(true)}
+            sx={{ display: activeTab === 1 ? "inline-flex" : "none" }}
+          >
             + Add Particular
           </Button>
         </Stack>
 
-        {error && <Alert severity="error">{error}</Alert>}
+        <Paper sx={{ borderRadius: 3, overflow: "hidden" }}>
+          <Tabs
+            value={activeTab}
+            onChange={(_, value) => setActiveTab(value)}
+            variant="fullWidth"
+            sx={{
+              "& .MuiTab-root": {
+                minHeight: 60,
+                fontWeight: 700,
+                textTransform: "none",
+                gap: 1,
+              },
+            }}
+          >
+            <Tab
+              icon={<FiGrid size={16} />}
+              iconPosition="start"
+              label="Dashboard"
+            />
+            <Tab
+              icon={<FiList size={16} />}
+              iconPosition="start"
+              label="List View"
+            />
+          </Tabs>
+        </Paper>
 
-        {isLoading ? (
+        {activeTab === 1 && error && <Alert severity="error">{error}</Alert>}
+
+        {activeTab === 0 ? (
+          <DashboardView />
+        ) : isLoading ? (
           <Box sx={{ py: 8, display: "grid", placeItems: "center" }}>
             <CircularProgress size={30} />
           </Box>
         ) : (
-          <ParticularsTable rows={data} onMarkPaid={openPayment} />
+          <ParticularsTable
+            rows={data}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
         )}
       </Stack>
 
       {showForm && (
-        <Modal open onClose={() => setShowForm(false)} closeAfterTransition>
+        <Modal open onClose={handleCloseForm} closeAfterTransition>
           <Box
             sx={{
               minHeight: "100vh",
@@ -117,7 +175,7 @@ export default function ParticularsPage() {
               <Stack spacing={2.5}>
                 <Box>
                   <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                    Dynamic Particular Entry Form
+                    {editingItem ? "Edit Particular" : "New Particular"}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     Choose a category to load the relevant form fields.
@@ -130,6 +188,7 @@ export default function ParticularsPage() {
                     width: { xs: "100%", sm: 240 },
                     alignSelf: "flex-start",
                   }}
+                  disabled={!!editingItem}
                 >
                   <InputLabel id="dynamic-form-category-label">
                     Category
@@ -150,21 +209,20 @@ export default function ParticularsPage() {
                   </Select>
                 </FormControl>
 
-                <DynamicForm category={selectedCategory} />
+                <DynamicForm
+                  category={selectedCategory}
+                  editData={editingItem}
+                  workspaceId={workspace_id}
+                  onClose={handleCloseForm}
+                  onSuccess={() => {
+                    handleCloseForm();
+                    fetchData();
+                  }}
+                />
               </Stack>
             </Paper>
           </Box>
         </Modal>
-      )}
-      {selected && (
-        <PaymentsModal
-          particular={selected}
-          onClose={() => setSelected(null)}
-          onSuccess={() => {
-            setSelected(null);
-            fetchData();
-          }}
-        />
       )}
     </Container>
   );

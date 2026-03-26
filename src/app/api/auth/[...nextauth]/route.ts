@@ -7,6 +7,12 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "login",
+          max_age: 50,
+        },
+      },
     }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID!,
@@ -19,20 +25,25 @@ const handler = NextAuth({
   },
 
   callbacks: {
-    async signIn({ user, account }) {
-      const email = user.email;
-      const name = user.name;
-      const picture = user.image;
-      return true;
-    },
-
-    async jwt({ token, user }) {
-      if (user) token.user = user;
+    async jwt({ token, account, profile }) {
+      if (account) {
+        token.email = profile?.email;
+        token.name = profile?.name;
+        token.accessToken = account.access_token;
+        token.idToken = account.id_token;
+      }
       return token;
     },
 
     async session({ session, token }) {
-      session.user = token.user as any;
+      session.user = {
+        email: token.email,
+        name: token.name,
+        image: token.picture || undefined,
+      };
+      session.accessToken = token.accessToken as any;
+      session.idToken = token.idToken as any;
+
       return session;
     },
   },

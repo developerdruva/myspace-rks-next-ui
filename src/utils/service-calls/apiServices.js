@@ -14,6 +14,10 @@ import {
   TODO_ADD,
   UPDATE_TODO_ITEM,
   UPDATE_WORKED_COMPANIES,
+  GET_DOCUMENT_PARTICULARS,
+  CREATE_DOCUMENT_PARTICULAR,
+  UPDATE_DOCUMENT_PARTICULAR,
+  DELETE_DOCUMENT_PARTICULAR,
 } from "./APIUrls";
 
 class apiServices {
@@ -155,6 +159,29 @@ class apiServices {
     return axiosLoaderCall.get(
       `/api/partdashboard?workspace_id=${workspace_id}`,
     );
+  };
+
+  // Document Particulars CRUD
+  getDocumentParticulars = () => {
+    return axiosLoaderCall.get(GET_DOCUMENT_PARTICULARS);
+  };
+
+  getDocumentParticularById = (id) => {
+    return axiosLoaderCall.get(`${GET_DOCUMENT_PARTICULARS}${id}`);
+  };
+
+  createDocumentParticular = (data) => {
+    return axiosLoaderCall.post(CREATE_DOCUMENT_PARTICULAR, data);
+  };
+
+  updateDocumentParticular = (id, data) => {
+    return axiosLoaderCall.put(`${UPDATE_DOCUMENT_PARTICULAR}/${id}`, data);
+  };
+
+  deleteDocumentParticular = (id, user_id) => {
+    return axiosLoaderCall.delete(`${DELETE_DOCUMENT_PARTICULAR}/${id}`, {
+      params: { user_id, id },
+    });
   };
 }
 

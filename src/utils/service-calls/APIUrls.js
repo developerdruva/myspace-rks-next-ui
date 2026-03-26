@@ -13,3 +13,11 @@ export const SAVE_WORKED_COMPANIES = "/saveWorkedCompanies";
 export const UPDATE_WORKED_COMPANIES = "/updateWorkCompanyRecord";
 export const DELETE_COMP_RECORD = "/deleteRecordOnWorkedCompanies";
 export const GET_EXPERIENCE_DETAILS = "/getExperienceDetails";
+
+// Document Particulars
+export const GET_DOCUMENT_PARTICULARS = "/api/document-particulars/";
+export const CREATE_DOCUMENT_PARTICULAR =
+  "/api/document-particulars/create-record";
+export const UPDATE_DOCUMENT_PARTICULAR =
+  "/api/document-particulars/update-record";
+export const DELETE_DOCUMENT_PARTICULAR = "/api/document-particulars/delete";

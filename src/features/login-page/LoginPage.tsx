@@ -19,7 +19,12 @@ const LoginPage = () => {
         <Button
           variant="outlined"
           startIcon={<FaGoogle />}
-          onClick={() => signIn("google", { callbackUrl: "/myspace" })}
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: "/myspace",
+              prompt: "select_account",
+            })
+          }
           sx={{ justifyContent: "flex-start", py: 1.5 }}
         >
           Continue with Google

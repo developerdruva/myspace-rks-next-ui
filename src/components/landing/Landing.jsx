@@ -186,18 +186,18 @@ const features = [
   },
 
   {
-    title: " Particulars / Reminders",
+    title: "Document Particulars",
     description: "Track and manage financial particulars and reminders",
     icon: <FiClipboard size={32} />,
     path: "myspace/particulars",
   },
 
-  {
-    title: " Particulars Dashboard",
-    description: "Track and manage financial particulars and reminders",
-    icon: <FiClipboard size={32} />,
-    path: "myspace/particulars/dashboard",
-  },
+  // {
+  //   title: " Particulars Dashboard",
+  //   description: "Track and manage financial particulars and reminders",
+  //   icon: <FiClipboard size={32} />,
+  //   path: "myspace/particulars/dashboard",
+  // },
   {
     title: "Admin Board",
     description:

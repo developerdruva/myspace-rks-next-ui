@@ -27,7 +27,7 @@ const GlobalProvider = ({ children }) => {
 
   return (
     <CognitoProvider>
-      <SessionProvider>
+      <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
         <ReduxProvider store={reduxStore}>
           <ThemeProvider>{children}</ThemeProvider>
         </ReduxProvider>
