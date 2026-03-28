@@ -18,6 +18,11 @@ import {
   CREATE_DOCUMENT_PARTICULAR,
   UPDATE_DOCUMENT_PARTICULAR,
   DELETE_DOCUMENT_PARTICULAR,
+  MONTHLY_SPENDS_INCOME,
+  MONTHLY_SPENDS_PLANNED,
+  MONTHLY_SPENDS_ACTUAL,
+  MONTHLY_SPENDS_EXPENSES,
+  MONTHLY_SPENDS_EXPENSES_SUMMARY,
 } from "./APIUrls";
 
 class apiServices {
@@ -181,6 +186,90 @@ class apiServices {
   deleteDocumentParticular = (id, user_id) => {
     return axiosLoaderCall.delete(`${DELETE_DOCUMENT_PARTICULAR}/${id}`, {
       params: { user_id, id },
+    });
+  };
+
+  // Monthly Spends - Income CRUD
+  upsertMonthlyIncome = (data) => {
+    return axiosLoaderCall.post(`${MONTHLY_SPENDS_INCOME}/`, data);
+  };
+
+  getMonthlyIncomeByMonth = (month, user_id) => {
+    return axiosLoaderCall.get(`${MONTHLY_SPENDS_INCOME}/${month}`, {
+      params: { user_id },
+    });
+  };
+
+  updateMonthlyIncome = (id, data) => {
+    return axiosLoaderCall.put(`${MONTHLY_SPENDS_INCOME}/${id}`, data);
+  };
+
+  deleteMonthlyIncome = (id) => {
+    return axiosLoaderCall.delete(`${MONTHLY_SPENDS_INCOME}/${id}`);
+  };
+
+  // Monthly Spends - Planned CRUD
+  createMonthlyPlanned = (data) => {
+    return axiosLoaderCall.post(`${MONTHLY_SPENDS_PLANNED}/`, data);
+  };
+
+  getMonthlyPlannedByMonth = (month, user_id) => {
+    return axiosLoaderCall.get(`${MONTHLY_SPENDS_PLANNED}/${month}`, {
+      params: { user_id },
+    });
+  };
+
+  updateMonthlyPlanned = (id, data) => {
+    return axiosLoaderCall.put(`${MONTHLY_SPENDS_PLANNED}/${id}`, data);
+  };
+
+  deleteMonthlyPlanned = (id) => {
+    return axiosLoaderCall.delete(`${MONTHLY_SPENDS_PLANNED}/${id}`);
+  };
+
+  // Monthly Spends - Actual CRUD
+  createMonthlyActual = (data) => {
+    return axiosLoaderCall.post(`${MONTHLY_SPENDS_ACTUAL}/`, data);
+  };
+
+  getMonthlyActualByMonth = (month, user_id) => {
+    return axiosLoaderCall.get(`${MONTHLY_SPENDS_ACTUAL}/${month}`, {
+      params: { user_id },
+    });
+  };
+
+  updateMonthlyActual = (id, data) => {
+    return axiosLoaderCall.put(`${MONTHLY_SPENDS_ACTUAL}/${id}`, data);
+  };
+
+  deleteMonthlyActual = (id) => {
+    return axiosLoaderCall.delete(`${MONTHLY_SPENDS_ACTUAL}/${id}`);
+  };
+
+  // Monthly Spends - Expenses
+  getMonthlyExpenses = (month, user_id) => {
+    return axiosLoaderCall.get(MONTHLY_SPENDS_EXPENSES, {
+      params: { user_id, month },
+    });
+  };
+
+  getMonthlyExpensesSummary = (month, user_id, refreshKey) => {
+    return axiosLoaderCall.get(MONTHLY_SPENDS_EXPENSES_SUMMARY, {
+      params: { user_id, month },
+    });
+  };
+
+  createMonthlyExpense = (data) => {
+    return axiosLoaderCall.post(MONTHLY_SPENDS_EXPENSES, data);
+  };
+
+  updateMonthlyExpense = (id, data) => {
+    return axiosLoaderCall.put(`${MONTHLY_SPENDS_EXPENSES}/${id}`, data);
+  };
+
+  deleteMonthlyExpense = (id, deleted_by) => {
+    return axiosLoaderCall.delete(`${MONTHLY_SPENDS_EXPENSES}/${id}`, {
+      data: { deleted_by },
     });
   };
 }

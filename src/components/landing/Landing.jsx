@@ -192,6 +192,13 @@ const features = [
     path: "myspace/particulars",
   },
 
+  {
+    title: "Monthly Spends",
+    description: "Manage month-wise income, planned, and actual spends",
+    icon: <FiBarChart size={32} />,
+    path: "myspace/monthly-spends",
+  },
+
   // {
   //   title: " Particulars Dashboard",
   //   description: "Track and manage financial particulars and reminders",

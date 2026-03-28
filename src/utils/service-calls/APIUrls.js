@@ -21,3 +21,17 @@ export const CREATE_DOCUMENT_PARTICULAR =
 export const UPDATE_DOCUMENT_PARTICULAR =
   "/api/document-particulars/update-record";
 export const DELETE_DOCUMENT_PARTICULAR = "/api/document-particulars/delete";
+
+// Monthly Spends - Income
+export const MONTHLY_SPENDS_INCOME = "/api/monthly-spends/income";
+
+// Monthly Spends - Planned
+export const MONTHLY_SPENDS_PLANNED = "/api/monthly-spends/planned";
+
+// Monthly Spends - Actual
+export const MONTHLY_SPENDS_ACTUAL = "/api/monthly-spends/actual";
+
+// Monthly Spends - Expenses
+export const MONTHLY_SPENDS_EXPENSES = "/api/monthly-spends/expenses";
+export const MONTHLY_SPENDS_EXPENSES_SUMMARY =
+  "/api/monthly-spends/expenses/summary";

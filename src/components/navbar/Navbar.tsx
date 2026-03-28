@@ -51,19 +51,9 @@ export default function Navbar() {
   };
 
   const handleLogoutClick = async () => {
-    // (await cookies()).delete("next-auth.session-token", { path: "/" });
-    // const res = await fetch("/api/logout", { method: "GET" });
-
-    // await signOut({ redirect: false });
-    // // 2. Then force delete cookies
-    // const res = await fetch("/api/logout", { cache: "no-store" });
-    // console.log("Logout response: ", res);
-    // // 3. Hard reload (VERY IMPORTANT)
-    // window.location.href = "/";
     sessionStorage.setItem("logout", "true");
     await signOut({ callbackUrl: "/myspace/logout" });
 
-    // prevent re-fetch race
     await new Promise((r) => setTimeout(r, 3000));
 
     await fetch("/api/logout");
