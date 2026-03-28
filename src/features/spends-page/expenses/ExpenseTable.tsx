@@ -198,7 +198,7 @@ export default function ExpenseTable({
           <Typography className={styles.cardTitle}>
             Expense Records{" "}
             <span className={styles.cardSubTitle}>
-              Estimated vs actual with payment status
+              Estimated vs actual with payment status.
             </span>
           </Typography>
         </Box>

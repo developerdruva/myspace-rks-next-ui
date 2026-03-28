@@ -255,7 +255,11 @@ class apiServices {
 
   getMonthlyExpensesSummary = (month, user_id, refreshKey) => {
     return axiosLoaderCall.get(MONTHLY_SPENDS_EXPENSES_SUMMARY, {
-      params: { user_id, month },
+      params: {
+        user_id,
+        month,
+        ...(refreshKey ? { refreshKey } : {}),
+      },
     });
   };
 

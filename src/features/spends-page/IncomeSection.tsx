@@ -37,7 +37,7 @@ export default function IncomeSection({
       setRows(normalizeIncomeRows(apiData));
     } catch (error) {
       console.error("Income fetch error:", error);
-      onErrorRef.current?.("Unable to fetch income records");
+      onErrorRef.current?.("Unable to fetch income records.");
       setRows([]);
     } finally {
       setLoading(false);
