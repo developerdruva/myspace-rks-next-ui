@@ -96,7 +96,7 @@ export default function ExpenseCreateDialog({
       notes: form.notes?.trim() || null,
       user_id: "user_1",
       month: form.expense_date.slice(0, 7),
-      status: form.payment_status ? "paid" : "pending",
+      status: form.payment_status ? "completed" : "planned",
     };
 
     try {

@@ -100,7 +100,7 @@ export default function ExpenseTable({
       notes: row?.notes ?? null,
       user_id: row?.user_id || "user_1",
       month: monthValue,
-      status: nextPaidStatus ? "paid" : "pending",
+      status: nextPaidStatus ? "completed" : "planned",
     };
   };
 
@@ -176,7 +176,7 @@ export default function ExpenseTable({
       notes: notes?.trim() || null,
       user_id: "user_1",
       month: expenseDate.slice(0, 7),
-      status: paymentStatus ? "paid" : "pending",
+      status: paymentStatus ? "completed" : "planned",
     };
 
     try {
@@ -255,7 +255,7 @@ export default function ExpenseTable({
                       onClick={() => handleTogglePaid(expense)}
                       disabled={togglingId === expense.id}
                     >
-                      {getPaidStatus(expense) ? "✅ Paid" : "❌ Not Paid"}
+                      {getPaidStatus(expense) ? "✅ Completed" : "❌ Planned"}
                     </Button>
                   </TableCell>
                   <TableCell>{getExpenseDate(expense)}</TableCell>

@@ -42,7 +42,7 @@ type IncomeTableProps = {
   onDelete: (id: string) => Promise<any>;
 };
 
-const USER_ID = "user_1";
+const USER_ID = "0c155db9-5cc7-4775-8621-3d9203381a56";
 
 export default function IncomeTable({
   rows,

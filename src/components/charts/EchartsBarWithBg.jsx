@@ -9,6 +9,8 @@ const EchartsBarWithBg = ({ xAxisValues, actualValues }) => {
 
   useEffect(() => {
     const chartDom = chartRef.current;
+    if (!chartDom) return;
+
     const myChart = echarts.init(chartDom, null, {
       renderer: "canvas",
       useDirtyRect: false,
@@ -79,7 +81,7 @@ const EchartsBarWithBg = ({ xAxisValues, actualValues }) => {
       window.removeEventListener("resize", handleResize);
       myChart.dispose();
     };
-  }, []);
+  }, [xAxisValues, actualValues]);
 
   return <div ref={chartRef} style={{ width: "100%", height: "400px" }} />;
 };

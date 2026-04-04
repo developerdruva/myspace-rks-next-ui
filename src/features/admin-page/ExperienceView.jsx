@@ -24,6 +24,7 @@ import apiServices from "@/utils/service-calls/apiServices";
 import {
   getDateDurationbtPeriod,
   getPortfolioDetails,
+  getTotalExperience,
   showAlertNotice,
 } from "@/common/CommonFunction";
 
@@ -59,6 +60,10 @@ const mapColumnsToMUI = (
           params?.row?.from_date,
           params?.row?.to_date,
         );
+        if (days > 15) {
+          months += 1;
+          days = 0;
+        }
         return (
           <Tooltip title="{`$years, $months, $days`}">
             {`${years}:${months}:${days}`}
@@ -109,8 +114,14 @@ const ExperienceView = () => {
   const portfolioDetails = useSelector((state) => state.portfolioState);
   const workedCompanies = portfolioDetails?.workedCompanies || [];
   const workedProjects = portfolioDetails?.workedProjects || [];
+  const totalExperience = getTotalExperience(
+    workedProjects,
+    "from_date",
+    "to_date",
+  );
 
   const [showAddModal, setShowAddModal] = useState(false);
+
   const [isCompEdit, setIsCompEdit] = useState(false);
   const [compEditRecord, setCompEditRecord] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -213,7 +224,10 @@ const ExperienceView = () => {
         <Typography variant="h6" fontWeight="bold">
           Worked Companies and Projects
         </Typography>
-
+        <Typography variant="subtitle2">
+          Total Experience : {totalExperience.years} years{" "}
+          {totalExperience.months} months
+        </Typography>
         <Tooltip title="Add Company">
           <Button
             variant="contained"
