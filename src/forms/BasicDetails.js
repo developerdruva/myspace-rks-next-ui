@@ -50,11 +50,6 @@ const BasicDetails = ({ personDetails }) => {
 
     console.log(formData, " this ");
 
-    // Object.keys(values).forEach((key) => {
-    //   formData.append(key, values[key]);
-    // });
-    // console.log(" form data ", formData.get("profile_pic"));
-
     apiServices.saveProfileDetails(formData).then((res) => {
       if (res?.data?.status === "success") {
         showAlertNotice(res?.data?.message, "success").then(() => {

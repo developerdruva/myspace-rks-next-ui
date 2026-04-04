@@ -1,5 +1,9 @@
 "use client";
-import { getTableCellStyles } from "@/common/CommonFunction";
+import {
+  getDateDurationbtPeriod,
+  getTableCellStyles,
+  getTotalExperience,
+} from "@/common/CommonFunction";
 import ManualTable from "@/common/tables/ManualTable";
 import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -15,14 +19,13 @@ const ExperienceCalc = () => {
 
   let filterRows = rows.map((item) => {
     let temp = workedCompanies.find(
-      (it) => it?.company_code === item?.company_code
+      (it) => it?.company_code === item?.company_code,
     );
     return { ...item, color_code: temp?.color_code };
   });
 
   return (
     <Box>
-      {/* HEADER */}
       <Box
         sx={{
           display: "flex",
@@ -47,12 +50,11 @@ const ExperienceCalc = () => {
               setIsCompEdit(false);
             }}
           >
-            Add
+            Create New
           </Button>
         </Tooltip>
       </Box>
 
-      {/* SEARCH */}
       <Box mb={2}>
         <TextField
           fullWidth
@@ -63,13 +65,71 @@ const ExperienceCalc = () => {
           onChange={(e) => setSearchText(e.target.value)}
         />
       </Box>
-
+      <SummaryTable
+        columns={columns}
+        rows={filterRows}
+        companies={workedCompanies}
+      />
       <ManualTable columns={columns} rows={filterRows} />
     </Box>
   );
 };
 
 export default ExperienceCalc;
+
+const SummaryTable = ({ columns, rows, companies }) => {
+  const totalExperience = getTotalExperience(rows, "o_from", "o_to");
+  const totalExperienceCalc = getTotalExperience(rows, "from_date", "to_date");
+  return (
+    <Box
+      sx={{
+        overflowX: "auto",
+        justifyContent: "space-between",
+        display: "flex",
+      }}
+    >
+      <div>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          mb={1}
+          display="block"
+        >
+          Total Companies: {companies?.length || 0} | Total Projects:{" "}
+          {rows?.length || 0}
+        </Typography>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          mb={2}
+          display="block"
+        >
+          * Durations are calculated based on project start and end dates.
+        </Typography>
+      </div>
+      <div>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          mb={1}
+          display="block"
+        >
+          Total Experience : {totalExperience.years} years{" "}
+          {totalExperience.months} months
+        </Typography>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          mb={2}
+          display="block"
+        >
+          Total Calculated Experience: {totalExperienceCalc.years} years{" "}
+          {totalExperienceCalc.months} months
+        </Typography>
+      </div>
+    </Box>
+  );
+};
 
 const columns = [
   {

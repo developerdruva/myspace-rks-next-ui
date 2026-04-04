@@ -31,7 +31,7 @@ const ManualTable = ({ columns, rows }) => {
                 >
                   {col.label}
                 </th>
-              )
+              ),
             )}
           </tr>
         </thead>
@@ -85,7 +85,7 @@ const getRowSpanRecord = (
   checkedRows,
   setCheckedRows,
   rowChecks,
-  rowIndex
+  rowIndex,
 ) => {
   console.log(" checked rows  rowIndex", checkedRows, rowIndex);
 
@@ -105,7 +105,7 @@ const getFilteredField = (col, row) => {
   }
 };
 
-const getSwitchCase = (col, row) => {
+export const getSwitchCase = (col, row) => {
   switch (col.id) {
     case "o_years":
       return (

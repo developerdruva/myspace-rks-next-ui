@@ -1,0 +1,77 @@
+.sectionStack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.summaryCard {
+    padding: 14px;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.summaryLabel {
+    color: #64748b;
+    font-size: 0.82rem;
+}
+
+.summaryValue {
+    color: #0f172a;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.filterCard {
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 14px;
+}
+
+.card {
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.cardHeader {
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.cardTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+.cardSubTitle {
+    font-size: 0.82rem;
+    color: #64748b;
+}
+
+.tableWrap {
+    height: 250px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+    .filterCard {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cardHeader {
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

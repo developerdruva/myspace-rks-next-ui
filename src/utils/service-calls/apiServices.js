@@ -1,4 +1,5 @@
 import axiosLoaderCall from "../api-utils/axiosLoaderCall";
+
 import {
   CHATBOT_LOGIN,
   DELETE_COMP_RECORD,
@@ -13,6 +14,15 @@ import {
   TODO_ADD,
   UPDATE_TODO_ITEM,
   UPDATE_WORKED_COMPANIES,
+  GET_DOCUMENT_PARTICULARS,
+  CREATE_DOCUMENT_PARTICULAR,
+  UPDATE_DOCUMENT_PARTICULAR,
+  DELETE_DOCUMENT_PARTICULAR,
+  MONTHLY_SPENDS_INCOME,
+  MONTHLY_SPENDS_PLANNED,
+  MONTHLY_SPENDS_ACTUAL,
+  MONTHLY_SPENDS_EXPENSES,
+  MONTHLY_SPENDS_EXPENSES_SUMMARY,
 } from "./APIUrls";
 
 class apiServices {
@@ -33,7 +43,7 @@ class apiServices {
     return axiosLoaderCall.put(
       UPDATE_TODO_ITEM,
       {},
-      { params: { itemId: itemId, todoDesc: data } }
+      { params: { itemId: itemId, todoDesc: data } },
     );
   }
   getMyDevelopments() {
@@ -57,7 +67,7 @@ class apiServices {
   updateWorkedCompanies(values) {
     return axiosLoaderCall.put(
       UPDATE_WORKED_COMPANIES + "/" + values?.sl_no,
-      values
+      values,
     );
   }
   deleteCompRecord(id) {
@@ -136,6 +146,136 @@ class apiServices {
   getPocProjects(emailId) {
     return axiosLoaderCall.get("/getPocProjects", { params: { emailId } });
   }
+  getParticulars = (workspace_id) => {
+    return axiosLoaderCall.get("/api/particulars", {
+      params: { workspace_id: "0d4f53ac-c506-4121-8fe0-cdcddf4690d4" },
+    });
+  };
+
+  addParticular = (data) => {
+    return axiosLoaderCall.post("/api/particulars", data);
+  };
+
+  markPayment = (data) => {
+    return axiosLoaderCall.post("/api/payments/mark", data);
+  };
+
+  getDashboard = (workspace_id) => {
+    return axiosLoaderCall.get(
+      `/api/partdashboard?workspace_id=${workspace_id}`,
+    );
+  };
+
+  // Document Particulars CRUD
+  getDocumentParticulars = () => {
+    return axiosLoaderCall.get(GET_DOCUMENT_PARTICULARS);
+  };
+
+  getDocumentParticularById = (id) => {
+    return axiosLoaderCall.get(`${GET_DOCUMENT_PARTICULARS}${id}`);
+  };
+
+  createDocumentParticular = (data) => {
+    return axiosLoaderCall.post(CREATE_DOCUMENT_PARTICULAR, data);
+  };
+
+  updateDocumentParticular = (id, data) => {
+    return axiosLoaderCall.put(`${UPDATE_DOCUMENT_PARTICULAR}/${id}`, data);
+  };
+
+  deleteDocumentParticular = (id, user_id) => {
+    return axiosLoaderCall.delete(`${DELETE_DOCUMENT_PARTICULAR}/${id}`, {
+      params: { user_id, id },
+    });
+  };
+
+  // Monthly Spends - Income CRUD
+  upsertMonthlyIncome = (data) => {
+    return axiosLoaderCall.post(`${MONTHLY_SPENDS_INCOME}/`, data);
+  };
+
+  getMonthlyIncomeByMonth = (month, user_id) => {
+    return axiosLoaderCall.get(`${MONTHLY_SPENDS_INCOME}/${month}`, {
+      params: { user_id },
+    });
+  };
+
+  updateMonthlyIncome = (id, data) => {
+    return axiosLoaderCall.put(`${MONTHLY_SPENDS_INCOME}/${id}`, data);
+  };
+
+  deleteMonthlyIncome = (id) => {
+    return axiosLoaderCall.delete(`${MONTHLY_SPENDS_INCOME}/${id}`);
+  };
+
+  // Monthly Spends - Planned CRUD
+  createMonthlyPlanned = (data) => {
+    return axiosLoaderCall.post(`${MONTHLY_SPENDS_PLANNED}/`, data);
+  };
+
+  getMonthlyPlannedByMonth = (month, user_id) => {
+    return axiosLoaderCall.get(`${MONTHLY_SPENDS_PLANNED}/${month}`, {
+      params: { user_id },
+    });
+  };
+
+  updateMonthlyPlanned = (id, data) => {
+    return axiosLoaderCall.put(`${MONTHLY_SPENDS_PLANNED}/${id}`, data);
+  };
+
+  deleteMonthlyPlanned = (id) => {
+    return axiosLoaderCall.delete(`${MONTHLY_SPENDS_PLANNED}/${id}`);
+  };
+
+  // Monthly Spends - Actual CRUD
+  createMonthlyActual = (data) => {
+    return axiosLoaderCall.post(`${MONTHLY_SPENDS_ACTUAL}/`, data);
+  };
+
+  getMonthlyActualByMonth = (month, user_id) => {
+    return axiosLoaderCall.get(`${MONTHLY_SPENDS_ACTUAL}/${month}`, {
+      params: { user_id },
+    });
+  };
+
+  updateMonthlyActual = (id, data) => {
+    return axiosLoaderCall.put(`${MONTHLY_SPENDS_ACTUAL}/${id}`, data);
+  };
+
+  deleteMonthlyActual = (id) => {
+    return axiosLoaderCall.delete(`${MONTHLY_SPENDS_ACTUAL}/${id}`);
+  };
+
+  // Monthly Spends - Expenses
+  getMonthlyExpenses = (month, user_id) => {
+    return axiosLoaderCall.get(MONTHLY_SPENDS_EXPENSES, {
+      params: { user_id, month },
+    });
+  };
+
+  getMonthlyExpensesSummary = (month, user_id, refreshKey) => {
+    return axiosLoaderCall.get(MONTHLY_SPENDS_EXPENSES_SUMMARY, {
+      params: {
+        user_id,
+        month,
+        ...(refreshKey ? { refreshKey } : {}),
+      },
+    });
+  };
+
+  createMonthlyExpense = (data) => {
+    return axiosLoaderCall.post(MONTHLY_SPENDS_EXPENSES, data);
+  };
+
+  updateMonthlyExpense = (id, data) => {
+    return axiosLoaderCall.put(`${MONTHLY_SPENDS_EXPENSES}/${id}`, data);
+  };
+
+  deleteMonthlyExpense = (id, deleted_by) => {
+    return axiosLoaderCall.delete(`${MONTHLY_SPENDS_EXPENSES}/${id}`, {
+      data: { deleted_by },
+    });
+  };
 }
 
 export default new apiServices();

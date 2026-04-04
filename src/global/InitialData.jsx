@@ -11,6 +11,7 @@ import { reduxStore } from "../store/index";
 import { Geist, Geist_Mono } from "next/font/google";
 import { CognitoProvider } from "@/global/CognitoProvider";
 import { getPortfolioDetails } from "@/common/CommonFunction";
+import { SessionProvider } from "next-auth/react";
 
 const GlobalProvider = ({ children }) => {
   const dispatch = reduxStore.dispatch;
@@ -26,9 +27,11 @@ const GlobalProvider = ({ children }) => {
 
   return (
     <CognitoProvider>
-      <ReduxProvider store={reduxStore}>
-        <ThemeProvider>{children}</ThemeProvider>
-      </ReduxProvider>
+      <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
+        <ReduxProvider store={reduxStore}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </ReduxProvider>
+      </SessionProvider>
     </CognitoProvider>
   );
 };

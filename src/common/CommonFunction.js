@@ -4,6 +4,7 @@ import apiServices from "@/utils/service-calls/apiServices";
 import { reduxStore } from "@/store/index";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import { FIELD_CONFIG } from "@/forms/DynamicForm/formConfig";
 
 dayjs.extend(isSameOrBefore);
 
@@ -26,6 +27,21 @@ export const getPortfolioDetails = () => {
     }
   });
 };
+export const getTotalExperience = (experienceList, from, to) => {
+  return experienceList.reduce(
+    (total, exp) => {
+      const { months, years } = getDurationByMonths(exp[from], exp[to]);
+      total.years += years;
+      total.months += months;
+      if (total.months >= 12) {
+        total.years += Math.floor(total.months / 12);
+        total.months = total.months % 12;
+      }
+      return total;
+    },
+    { years: 0, months: 0, days: 0 },
+  );
+};
 export const getDateDurationbtPeriod = (fromDate, toDate) => {
   if (toDate === "present") toDate = new Date();
   const start = dayjs(fromDate);
@@ -39,6 +55,26 @@ export const getDateDurationbtPeriod = (fromDate, toDate) => {
     years: Math.floor(totalMonths / 12),
     months: totalMonths % 12,
     days: end.diff(consolidatedMonths, "day"),
+  };
+};
+
+export const getDurationByMonths = (fromDate, toDate) => {
+  if (toDate === "present") toDate = new Date();
+  const start = dayjs(fromDate);
+  const end = dayjs(toDate);
+  if (end.isBefore(start)) throw new Error("toDate must be after fromDate");
+
+  const totalDays = end.diff(start, "days");
+  console.log("total days ", totalDays);
+  let months = Math.floor(totalDays / 30);
+  const remainingDays = totalDays % 30;
+
+  if (remainingDays > 21) {
+    months += 1;
+  }
+  return {
+    years: Math.floor(months / 12),
+    months: months % 12,
   };
 };
 
@@ -95,4 +131,11 @@ export const getTableCellStyles = () => {
     padding: "8px 10px",
     textAlign: "left",
   };
+};
+
+export const getFieldsByCategory = (category) => {
+  return FIELD_CONFIG.filter(
+    (field) =>
+      field.categories.includes("ALL") || field.categories.includes(category),
+  );
 };
