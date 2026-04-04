@@ -204,12 +204,6 @@ const features = [
   },
 
   {
-    title: " Particulars Dashboard",
-    description: "Track and manage financial particulars and reminders",
-    icon: <FiClipboard size={22} />,
-    path: "myspace/particulars/dashboard",
-  },
-  {
     title: "Expenses Dashboard",
     description: "View and manage your monthly expenses",
     icon: <FiBarChart size={22} />,
